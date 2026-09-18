@@ -9,7 +9,22 @@
 
 与相邻库的关系：`syntaxflow` 依赖 `ssa`（提供编译后的程序），查询结果经 `sfreport` 出报告、`risk` 记录代码风险，构成完整的代码审计流水线。
 
-> 共 32 个函数
+> 共 41 个函数、10 个实例
+
+## 实例
+
+|实例名|类型|说明|
+|:--|:--|:--|
+| SSAMode | `string` | &#34;ssa&#34; |
+| SourceMode | `string` | &#34;source&#34; |
+| StructMode | `string` | &#34;struct&#34; |
+| stageAnalyze | `syntaxflow_scan.ProductStage` | &#34;analyze&#34; |
+| stageCollect | `syntaxflow_scan.ProductStage` | &#34;collect&#34; |
+| stageCompile | `syntaxflow_scan.ProductStage` | &#34;compile&#34; |
+| stageInspect | `syntaxflow_scan.ProductStage` | &#34;inspect&#34; |
+| stageReview | `syntaxflow_scan.ProductStage` | &#34;review&#34; |
+| stageStatusFailed | `syntaxflow_scan.StageStatus` | &#34;failed&#34; |
+| stageStatusSucceeded | `syntaxflow_scan.StageStatus` | &#34;succeeded&#34; |
 
 ## 函数索引
 
@@ -18,6 +33,7 @@
 | [syntaxflow.GetScanStatus](#getscanstatus) | `ctx context.Context, taskId string, callback ProcessCallback` | `error` | 查询扫描任务的当前状态 |
 | [syntaxflow.MergeBeautificationResults](#mergebeautificationresults) | `descMap any, alertMap any, ruleContent string` | `string, error` | MergeBeautificationResultsForYak 将 AI 生成的描述信息与告警信息合并回 SyntaxFlow 规则内容 |
 | [syntaxflow.RunSyntaxFlowProjectScanCheck](#runsyntaxflowprojectscancheck) | `programHint string, scanOnly bool, limit int` | `*SyntaxFlowProjectScanCheckResult, error` | 查询某个程序的 SyntaxFlow 扫描任务并汇总核对结果 |
+| [syntaxflow.stageName](#stagename) | `s string` | `string` |  |
 
 ## 可变参数函数索引
 
@@ -26,6 +42,8 @@
 | [syntaxflow.ExecRule](#execrule) | `r *schema.SyntaxFlowRule, prog *ssaapi.Program, opts ...ssaapi.QueryOption` | `*ssaapi.SyntaxFlowResult, error` | 在已编译的程序上执行一条 SyntaxFlow 规则（导出名为 syntaxflow.ExecRule） |
 | [syntaxflow.QuerySyntaxFlowRules](#querysyntaxflowrules) | `name string, opts ...QueryRulesOption` | `chan *schema.SyntaxFlowRule` | 按规则名模糊查询内置/已保存的 SyntaxFlow 规则（导出名为 syntaxflow.QuerySyntaxFlowRules） |
 | [syntaxflow.ResumeScan](#resumescan) | `ctx context.Context, taskId string, opts ...ssaconfig.Option` | `error` | 恢复之前暂停的扫描任务 |
+| [syntaxflow.ScanProject](#scanproject) | `ctx context.Context, opts ...ssaconfig.Option` | `ProjectResult, error` | is the product pipeline for CLI and yak scripts. |
+| [syntaxflow.ScanProjectFromJSON](#scanprojectfromjson) | `ctx context.Context, raw string, extra ...ssaconfig.Option` | `ProjectResult, error` | is the script/platform entry: one ssaconfig JSON blob |
 | [syntaxflow.StartScan](#startscan) | `ctx context.Context, opts ...ssaconfig.Option` | `error` | 启动新的SyntaxFlow扫描任务，使用options模式配置扫描参数 |
 
 ## 函数详情
@@ -143,6 +161,28 @@ dump(result)
 
 ---
 
+### stageName {#stagename}
+
+```go
+stageName(s string) string
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` |  |
+
+---
+
 ## 可变参数函数详情
 
 ### ExecRule {#execrule}
@@ -245,7 +285,7 @@ ResumeScan(ctx context.Context, taskId string, opts ...ssaconfig.Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 18 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -273,6 +313,83 @@ die(err)
 
 ---
 
+### ScanProject {#scanproject}
+
+```go
+ScanProject(ctx context.Context, opts ...ssaconfig.Option) (ProjectResult, error)
+```
+
+is the product pipeline for CLI and yak scripts.
+
+	cli/script → syntaxflow-scan → (ssa-compile → yak 编译脚本 | syntaxflow)
+
+gRPC SyntaxFlowScan stays on Scan: the frontend compiles first, then scans.
+
+code-scan runs all three modes by default:
+  - source: live local FS (-t) or IrSource snapshot (-p)
+  - struct: compile-time unit scan (-t) or intra application/library scan (-p, no compile)
+  - ssa: always on a DB-loaded program (-t reloads after SaveToDatabase)
+
+Stages: 收集代码 → 代码检测 → 语义检测 → 深度分析.
+Mode is selected by WithMode (stacked). An empty mode list is compile-only:
+it persists IR, reports StageCompile, and skips every rule set so platforms
+can reuse the program later. Callers that want rule sets (code-scan, gRPC)
+pass the modes they need explicitly.
+
+It returns either the terminal ProjectResult (what ran, per-stage status,
+metrics, aggregate success) or an error. A run whose useful stages succeeded
+returns a result with Succeeded=true even when a sibling stage failed, so
+callers render the outcome instead of re-deriving success from job state.
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| ctx | `context.Context` |  |
+
+**可选参数**
+
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ProjectResult` |  |
+| r2 | `error` |  |
+
+---
+
+### ScanProjectFromJSON {#scanprojectfromjson}
+
+```go
+ScanProjectFromJSON(ctx context.Context, raw string, extra ...ssaconfig.Option) (ProjectResult, error)
+```
+
+is the script/platform entry: one ssaconfig JSON blob
+plus optional callbacks. CLI and gRPC parse their inputs into the same
+JSON/options and call ScanProject. It returns the same ProjectResult.
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| ctx | `context.Context` |  |
+| raw | `string` |  |
+
+**可选参数**
+
+可作为可变参数 `extra ...ssaconfig.Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ProjectResult` |  |
+| r2 | `error` |  |
+
+---
+
 ### StartScan {#startscan}
 
 ```go
@@ -289,7 +406,7 @@ StartScan(ctx context.Context, opts ...ssaconfig.Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 18 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -344,18 +461,23 @@ die(err)
 
 ### 1. 类型：Option {#option-option}
 
-涉及到的函数有：[syntaxflow.ResumeScan](#resumescan)、[syntaxflow.StartScan](#startscan)
+涉及到的函数有：[syntaxflow.ResumeScan](#resumescan)、[syntaxflow.ScanProject](#scanproject)、[syntaxflow.ScanProjectFromJSON](#scanprojectfromjson)、[syntaxflow.StartScan](#startscan)
 
 |选项函数|参数|返回值|说明|
 |:--|:--|:--|:--|
+| `syntaxflow.withCompiledSource` | `value TValue` | `Option` |  |
+| `syntaxflow.withMode` | `modes ...string` | `ssaconfig.Option` | selects product scan stages. Values stack: calling it again or |
 | `syntaxflow.withProcessRuleDetail` | `value TValue` | `Option` |  |
+| `syntaxflow.withProjectResultCallback` | `callback ProjectResultCallback` | `ssaconfig.Option` | reports the terminal ProjectResult of a ScanProject |
 | `syntaxflow.withReporter` | `value TValue` | `Option` |  |
 | `syntaxflow.withRuleFilter` | `filter *ypb.SyntaxFlowRuleFilter` | `Option` | 设置规则过滤器 |
 | `syntaxflow.withRuleFilterGroupNames` | `groupNames ...string` | `Option` | 设置规则过滤器组名 |
 | `syntaxflow.withRuleFilterKeyword` | `keyword string` | `Option` | 设置规则过滤器关键字 |
 | `syntaxflow.withRuleFilterLibRuleKind` | `kind string` | `Option` | 设置规则过滤器库规则类型 |
-| `syntaxflow.withRuleFilterMode` | `mode ...string` | `Option` | 设置规则执行模式过滤器（source \| ssa），对应 DB mode 列。 |
+| `syntaxflow.withRuleFilterMode` | `mode ...string` | `Option` | 设置规则执行模式过滤器（source \| ssa \| struct），对应 DB mode 列。 |
 | `syntaxflow.withRuleFilterTag` | `tag ...string` | `Option` | 设置规则过滤器标签 |
+| `syntaxflow.withRuleInput` | `input *ypb.SyntaxFlowRuleInput` | `Option` |  |
+| `syntaxflow.withRuleInputRaw` | `raw string` | `Option` |  |
 | `syntaxflow.withScanConcurrency` | `concurrency uint32` | `Option` | 设置扫描并发数 |
 | `syntaxflow.withScanProcessCallback` | `callback ProcessCallback` | `ssaconfig.Option` | WithProcessCallback 设置扫描进度回调 |
 | `syntaxflow.withScanPrograms` | `progs ssaapi.Programs` | `ssaconfig.Option` | withPrograms 指定本次扫描要覆盖的程序集合 |
@@ -366,6 +488,7 @@ die(err)
 | `syntaxflow.withScanRuleWorkLimitDefault` | `limit int64` | `Option` | sets the per-rule work budget only when the |
 | `syntaxflow.withScanSourceDir` | `name string, targetDir string` | `ssaconfig.Option` | WithSourceDir loads a local directory (filtered) as a no-SSA source scan target. |
 | `syntaxflow.withScanSourceFiles` | `name string, files map[string]string` | `ssaconfig.Option` | WithSourceFiles runs mode=source rules against path→content without SSA compile. |
+| `syntaxflow.withStageCallback` | `callback StageCallback` | `ssaconfig.Option` | reports collect / inspect / review / analyze progress |
 
 ### 2. 类型：QueryOption {#option-queryoption}
 

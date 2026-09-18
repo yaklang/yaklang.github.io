@@ -10,7 +10,7 @@
 
 与相邻库的关系：`pcapx` 是底层数据包能力，`synscan`/`finscan` 在其之上做端口扫描，`netstack`/`netutils` 处理路由；分析 TLS 指纹可结合 `ja3`。
 
-> 共 61 个函数、66 个实例
+> 共 64 个函数、66 个实例
 
 ## 实例
 
@@ -1621,7 +1621,7 @@ OpenPcapFile(filename string, opts ...CaptureOption) error
 
 **可选参数**
 
-可作为可变参数 `opts ...CaptureOption` 传入选项；共 11 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
+可作为可变参数 `opts ...CaptureOption` 传入选项；共 14 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
 
 **返回值**
 
@@ -1698,7 +1698,7 @@ StartSniff(iface string, opts ...CaptureOption) error
 
 **可选参数**
 
-可作为可变参数 `opts ...CaptureOption` 传入选项；共 11 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
+可作为可变参数 `opts ...CaptureOption` 传入选项；共 14 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
 
 **返回值**
 
@@ -1773,4 +1773,7 @@ println(len(raw))
 | `pcapx.pcap_onHTTPFlow` | `h func(flow *TrafficFlow, req *http.Request, rsp *http.Response)` | `CaptureOption` | 注册一个回调，当从流量中解析出完整的 HTTP 请求-响应对时触发 |
 | `pcapx.pcap_onHTTPRequest` | `h func(flow *TrafficFlow, req *http.Request)` | `CaptureOption` | 注册一个回调，当从流量中解析出 HTTP 请求时触发 |
 | `pcapx.pcap_onTLSClientHello` | `h func(flow *TrafficFlow, hello *tlsutils.HandshakeClientHello)` | `CaptureOption` | 注册一个回调，当捕获到 TLS ClientHello 报文时触发 |
+| `pcapx.pcap_tcpReassemblyStats` | `h func(TCPReassemblyStats)` | `CaptureOption` | WithTCPReassemblyStats reports the final, drained multi-worker counters. |
+| `pcapx.pcap_tcpReassemblyStream` | `chunkBytes int` | `CaptureOption` | WithTCPReassemblyStream enables bounded data callbacks for very large flows. |
+| `pcapx.pcap_tcpReassemblyWorkers` | `workers int` | `CaptureOption` | WithTCPReassemblyWorkers opts into concurrent callbacks across flows. Data |
 

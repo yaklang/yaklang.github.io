@@ -10,7 +10,7 @@
 
 与相邻库的关系：`crawler` 走 HTTP 层，`crawlerx` 走真实浏览器（适合强 JS 站点）；爬到的请求常交给 `poc`/`fuzz` 做进一步测试，或经 `hook` 插件链路处理。
 
-> 共 52 个函数
+> 共 53 个函数
 
 ## 函数索引
 
@@ -58,6 +58,7 @@
 | [crawler.exactOrigins](#exactorigins) | `enable ...bool` | `ConfigOpt` | WithExactOrigins disables the crawler&#39;s historical automatic www seed |
 | [crawler.jsParser](#jsparser) | `enable ...bool` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时是否进行对于JS的代码解析。 |
 | [crawler.proxy](#proxy) | `proxies ...string` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的代理 |
+| [crawler.urlScope](#urlscope) | `prefixes ...string` | `ConfigOpt, error` | WithURLScope restricts scheduling and redirects to explicit HTTP(S) origins |
 
 ## 函数详情
 
@@ -1163,6 +1164,31 @@ proxy(proxies ...string) ConfigOpt
 ``````````````yak
 crawler.Start("https://example.com", crawler.proxy("http://127.0.0.1:8080"))
 ``````````````
+
+---
+
+### urlScope {#urlscope}
+
+```go
+urlScope(prefixes ...string) (ConfigOpt, error)
+```
+
+WithURLScope restricts scheduling and redirects to explicit HTTP(S) origins
+and path subtrees. It intersects the existing hostname scope; candidates
+outside this scope can still be reported as discovered, without fetching.
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| prefixes | `...string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` |  |
+| r2 | `error` |  |
 
 ---
 

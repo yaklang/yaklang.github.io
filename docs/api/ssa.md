@@ -10,7 +10,7 @@
 
 与相邻库的关系：`ssa` 负责"把代码编译成可查询的程序"，`syntaxflow` 在其之上写规则做查询，`sfreport` 输出审计报告，`risk` 记录代码风险；常配合 `git`/`filesys` 提供源码。
 
-> 共 51 个函数、8 个实例
+> 共 58 个函数、8 个实例
 
 ## 实例
 
@@ -289,7 +289,7 @@ New 创建一个 SSA 配置对象（导出名为 ssa.NewConfig）
 
 **可选参数**
 
-可作为可变参数 `opts ...Option` 传入选项；共 38 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...Option` 传入选项；共 45 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -354,7 +354,7 @@ NewSSAProject(opts ...ssaconfig.Option) (*SSAProject, error)
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 38 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 45 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -390,7 +390,7 @@ Parse(code string, opts ...ssaconfig.Option) (*Program, error)
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 38 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 45 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -425,7 +425,7 @@ ParseProjectFromPath compiles a local directory into SSA programs (alias: ssa.Pa
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 38 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 45 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -446,7 +446,7 @@ compiles a project from options (local FS, git, etc.).
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 38 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 45 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -505,4 +505,11 @@ compiles a project from options (local FS, git, etc.).
 | `ssa.withReCompile` | `reCompile bool` | `Option` | WithCompileReCompile 设置是否强制重新编译 |
 | `ssa.withSetProgramName` | `name string` | `Option` | 设置主 program 名称（替换而非追加，导出名为 ssa.withSetProgramName） |
 | `ssa.withStrictMode` | `strictMode bool` | `Option` | WithCompileStrictMode 设置编译严格模式 |
+| `ssa.withStructRule` | `v any` | `ssaconfig.Option` | enables builtin struct rules (bool) or appends an explicit |
+| `ssa.withStructRuleCallback` | `cb func(*schema.SSARisk)` | `ssaconfig.Option` |  |
+| `ssa.withStructRuleDir` | `dir string` | `ssaconfig.Option` |  |
+| `ssa.withStructRuleRaw` | `raw string` | `ssaconfig.Option` |  |
+| `ssa.withStructRuleTimeout` | `d time.Duration` | `ssaconfig.Option` |  |
+| `ssa.withStructRuleWorkLimit` | `n int64` | `ssaconfig.Option` |  |
+| `ssa.withStructRules` | `rules ...*schema.SyntaxFlowRule` | `ssaconfig.Option` | appends compiled struct-mode rules to the compile-time scan. |
 

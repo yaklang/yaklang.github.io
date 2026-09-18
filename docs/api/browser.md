@@ -10,13 +10,16 @@
 
 与相邻库的关系：相比 `crawler`/`crawlerx` 的 HTTP 层爬取，`browser` 走真实浏览器内核，适合强 JS 渲染的页面；常与 `crawlerx`（浏览器爬虫）配合完成动态站点的资产发现。
 
-> 共 15 个函数
+> 共 18 个函数
 
 ## 函数索引
 
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | [browser.CloseAll](#closeall) | - | - | 关闭当前所有已打开的浏览器实例（导出名为 browser.CloseAll） |
+| [browser.ExtensionCall](#extensioncall) | `method string, params any, timeoutSeconds float64` | `any, error` |  |
+| [browser.ExtensionStatus](#extensionstatus) | - | `map[string]any` |  |
+| [browser.ExtensionWaitEvent](#extensionwaitevent) | `timeoutSeconds float64` | `any, error` |  |
 | [browser.HaveBrowserInstalled](#havebrowserinstalled) | - | `bool` | 检测当前环境是否已安装可用的浏览器（导出名为 browser.HaveBrowserInstalled） |
 | [browser.List](#list) | - | `[]string` | 列出当前所有已打开浏览器实例的 ID（导出名为 browser.List） |
 
@@ -43,6 +46,70 @@ CloseAll()
 ``````````````yak
 browser.CloseAll()
 ``````````````
+
+---
+
+### ExtensionCall {#extensioncall}
+
+```go
+ExtensionCall(method string, params any, timeoutSeconds float64) (any, error)
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| method | `string` |  |
+| params | `any` |  |
+| timeoutSeconds | `float64` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` |  |
+| r2 | `error` |  |
+
+---
+
+### ExtensionStatus {#extensionstatus}
+
+```go
+ExtensionStatus() map[string]any
+```
+
+暂无描述
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `map[string]any` |  |
+
+---
+
+### ExtensionWaitEvent {#extensionwaitevent}
+
+```go
+ExtensionWaitEvent(timeoutSeconds float64) (any, error)
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| timeoutSeconds | `float64` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` |  |
+| r2 | `error` |  |
 
 ---
 
