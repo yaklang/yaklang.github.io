@@ -201,45 +201,85 @@
         "impact": "Yak Project entered public development; Yakit began providing security engineers with a unified desktop workbench.",
         "dateLabel": "// October 2021"
       },
+      "m2022_isc_champion": {
+        "title": "YAK Won the Innovation Unicorn Sandbox Contest at the 10th ISC (Internet Security Conference)",
+        "impact": "A landmark milestone marking the birth of China’s first domestic cybersecurity programming language.",
+        "dateLabel": "// August 2022"
+      },
+      "m2023_yakit_v2_list": {
+        "title": "YAKIT Listed in Beijing New Technology and Products (Services) Catalog",
+        "impact": "Yakit’s productization and practical application entered a new stage of development.",
+        "dateLabel": "// January 2023"
+      },
       "m2023_open_source_launch": {
         "title": "CDSL-YAK Open Source Launch at Beijing National Convention Center",
         "impact": "Core language, runtime, and security capability base were opened to the community, allowing external developers to inspect source code, file issues, and contribute.",
-        "dateLabel": "// May 30, 2023"
+        "dateLabel": "// May 2023"
       },
-      "m2023_yakit_v2_list": {
-        "title": "YAKIT Cybersecurity Individual Test System V2.0 Listed in Beijing New Technology and Products Catalog",
-        "impact": "Yakit’s productization and practical application entered a new stage of development.",
-        "dateLabel": "// 2023"
+      "m2024_2_academicians": {
+        "title": "YAK Appraised by 2 Academicians of the Chinese Academy of Engineering",
+        "impact": "YAK was appraised by Academicians Wu Hequan and Wu Shizhong of the Chinese Academy of Engineering, recognized as having fully independent intellectual property rights.",
+        "dateLabel": "// April 2024"
       },
       "m2024_yakit_v2_test": {
         "title": "Yakit V2.0 Passed Third Research Institute of the Ministry of Public Security Testing",
         "impact": "Yakit completed testing against national standards for cyber-security products and Web application security detection.",
         "dateLabel": "// May 2024"
       },
+      "m2024_military_civilian": {
+        "title": "Yakit Listed as Beijing Key Product for Military-Civilian Integration",
+        "impact": "YAK/Yakit entered the national defense sector, marking a key step in extending civilian cybersecurity products into the military-civilian integration market.",
+        "dateLabel": "// May 2024"
+      },
+      "m2024_cdsl_book": {
+        "title": "“CDSL-YAK: Cybersecurity Domain Programming Language — From Introduction to Practice” Published",
+        "impact": "With a foreword by Academician Wu Shizhong of the Chinese Academy of Engineering.",
+        "dateLabel": "// October 2024"
+      },
       "m2024_cicc_top10": {
-        "title": "“YakLang: A Domain-Specific Secure Programming Language for Communication Networks” Named One of 2023 Top 10 ICT Tech Advances",
+        "title": "YAK Named One of 2023 Top 10 ICT Tech Advances",
         "impact": "Yaklang’s domain-specific programming language path entered the annual ICT technology advance list.",
-        "dateLabel": "// November 30, 2024"
+        "dateLabel": "// November 2024"
+      },
+      "m2025_7_academicians": {
+        "title": "YAK Appraised by 7 Academicians of the Chinese Academy of Engineering",
+        "impact": "YAK received appraisal opinions from 7 academicians — Chen Zuoning, Chen Zhijie, Zhang Ping, Ding Wenhua, Huang Dianzhong, Zhang Baodong, and Nima Zhaxi — recognizing it as “domestically pioneered, internationally advanced, and domestically leading.”",
+        "dateLabel": "// January 2025"
       },
       "m2025_irify_release": {
         "title": "IRify Released",
         "impact": "Yak SSA, SyntaxFlow, and AI capabilities formed a standalone code-auditing product, extending project capabilities from interactive testing to source-code security analysis.",
         "dateLabel": "// April 2025"
       },
+      "m2025_heilongjiang": {
+        "title": "YAK Won Heilongjiang Provincial Science and Technology Progress Second Prize",
+        "impact": "YAK supported key technologies for multi-scenario power security threat detection, safeguarding power network security.",
+        "dateLabel": "// June 2025"
+      },
+      "m2025_maker_china": {
+        "title": "YAK Won First Prize in the “Maker China” Cybersecurity Competition",
+        "impact": "YAK demonstrated the engineering capabilities and application value of a homegrown security development environment.",
+        "dateLabel": "// August 2025"
+      },
       "m2025_cic_first_prize": {
-        "title": "“Domain-Specific Programming Language and Development Environment for Cybersecurity” Won First Prize of CIC Science and Technology Award",
+        "title": "YAK Won First Prize of the China Institute of Communications Science and Technology Progress Award",
         "impact": "Yaklang and its supporting development environment received an industry technology award for technical achievements and practical application.",
         "dateLabel": "// December 2025"
       },
-      "m2025_maker_china": {
-        "title": "“Homegrown Cybersecurity Development Environment YAK” Won Third Prize in Maker China National Finals Enterprise Group",
-        "impact": "YAK advanced from the cybersecurity themed competition to the national finals, demonstrating the engineering capabilities and application value of a homegrown security development environment.",
-        "dateLabel": "// 2025"
+      "m2025_beijing_equipment": {
+        "title": "YAK Received Beijing First (Set) Major Technical Equipment Certificate",
+        "impact": "Domestically pioneered and autonomously controllable, filling a gap in national-level equipment in the cybersecurity field.",
+        "dateLabel": "// December 2025"
       },
       "m2026_memfit_release": {
         "title": "Memfit AI Released",
         "impact": "Yaklang, Yakit, and their tool ecosystem entered the Agent workflow, providing security engineers with analysis, execution, and delivery support.",
         "dateLabel": "// March 2026"
+      },
+      "m2026_yakit_guide": {
+        "title": "“Yakit Practical Guide: Basic Applications and Advanced Development” Published",
+        "impact": "With a foreword by Academicians Fang Binxing and Yun Xiaochun of the Chinese Academy of Engineering.",
+        "dateLabel": "// June 2026"
       }
     }
   },
