@@ -9,7 +9,7 @@
 
 与相邻库的关系：`subdomain` 处于资产发现前端，与 `dns`（解析）、`spacengine`（测绘）配合发现资产，结果可交给 `servicescan`/`poc` 做后续扫描。
 
-> 共 14 个函数
+> 共 15 个函数
 
 ## 可变参数函数索引
 
@@ -37,7 +37,7 @@ Scan(target any, opts ...subdomain.ConfigOption) (chan *subdomain.SubdomainResul
 
 **可选参数**
 
-可作为可变参数 `opts ...subdomain.ConfigOption` 传入选项；共 13 个可用选项，详见 [ConfigOption 选项列表](#option-configoption)。
+可作为可变参数 `opts ...subdomain.ConfigOption` 传入选项；共 14 个可用选项，详见 [ConfigOption 选项列表](#option-configoption)。
 
 **返回值**
 
@@ -71,6 +71,7 @@ dump(domain)
 | `subdomain.eachSearchTimeout` | `i float64` | `subdomain.ConfigOption` | 是一个选项参数，设置每个搜索的超时时间，单位为秒，默认为 10s |
 | `subdomain.mainDict` | `i any` | `subdomain.ConfigOption` | 是一个选项参数，设置子域名爆破主字典，其第一个参数可以是文件名、字符串或字符串数组 |
 | `subdomain.maxDepth` | `d int` | `ConfigOption` | 是一个选项参数，设置子域名遍历的最大深度，默认为 5，通常与 recursive 一起使用 |
+| `subdomain.modes` | `modes ...string` | `subdomain.ConfigOption` | 是一个选项参数，设置子域名发现模式。可传入 search / brute / zone-transfer（或 axfr）， |
 | `subdomain.recursive` | `b bool` | `ConfigOption` | 是一个选项参数，设置是否递归扫描子域名，如果不递归扫描，那么只会扫描一层子域名，默认为false |
 | `subdomain.recursiveDict` | `i any` | `subdomain.ConfigOption` | 是一个选项参数，设置子域名爆破递归字典，其第一个参数可以是文件名、字符串或字符串数组 |
 | `subdomain.targetConcurrent` | `c int` | `ConfigOption` | 是一个选项参数，设置每个目标的最大线程数量，默认为 10 |

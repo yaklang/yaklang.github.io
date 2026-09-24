@@ -2,14 +2,14 @@
 sidebar_label: ai
 slug: /api/ai
 title: ai
-description: AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。
+description: AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。 模型配置选项可用于 `ai.Chat`，也可传给 `aim.aiConfig`、`aim.qualityPriorityAIConfig` 等 Agent 配置函数。以下选项复用前端模型配置使用的底层配置函数： | 选项 | 用途 | | --- | --- | | `ai.baseURL(string)` | API 基础地址 | | `ai.endpoint(string)`、`ai.enableEndpoint(bool)` | 设置并启用完整请求地址 | | `ai.apiType(string)` | API 协议，如 `chat_completions` 或 `responses` | | `ai.extraHeader(any)` | 自定义请求头，支持 map 或 `json.loads` 返回的有序映射，值必须是字符串 | | `ai.maxTokens(int)` | 最大输出 token 数 | | `ai.temperature(float)`、`ai.topP(float)`、`ai.topK(int)` | 采样参数 | | `ai.frequencyPenalty(float)` | 频率惩罚 | | `ai.reasoningEffort(string)`、`ai.thinkingLevel(string)` | 思考强度 | 不传采样选项时保留未设置状态；显式传入 `0` 会保留零值。具体参数是否支持及如何发送由模型和 API 协议决定。 ```yak options = [ ai.apiKey("your-api-key"), ai.model("your-model"), ai.endpoint("https://example.com/v1/responses"), ai.enableEndpoint(true), ai.apiType("responses"), ai.extraHeader({"X-Benchmark": "test-run"}), ai.maxTokens(8192), ai.temperature(0.7), ai.reasoningEffort("high"), ] qualityConfig = aim.qualityPriorityAIConfig("openai", options...) ```
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 :::info
-AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。
+AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。 模型配置选项可用于 `ai.Chat`，也可传给 `aim.aiConfig`、`aim.qualityPriorityAIConfig` 等 Agent 配置函数。以下选项复用前端模型配置使用的底层配置函数： | 选项 | 用途 | | --- | --- | | `ai.baseURL(string)` | API 基础地址 | | `ai.endpoint(string)`、`ai.enableEndpoint(bool)` | 设置并启用完整请求地址 | | `ai.apiType(string)` | API 协议，如 `chat_completions` 或 `responses` | | `ai.extraHeader(any)` | 自定义请求头，支持 map 或 `json.loads` 返回的有序映射，值必须是字符串 | | `ai.maxTokens(int)` | 最大输出 token 数 | | `ai.temperature(float)`、`ai.topP(float)`、`ai.topK(int)` | 采样参数 | | `ai.frequencyPenalty(float)` | 频率惩罚 | | `ai.reasoningEffort(string)`、`ai.thinkingLevel(string)` | 思考强度 | 不传采样选项时保留未设置状态；显式传入 `0` 会保留零值。具体参数是否支持及如何发送由模型和 API 协议决定。 ```yak options = [ ai.apiKey("your-api-key"), ai.model("your-model"), ai.endpoint("https://example.com/v1/responses"), ai.enableEndpoint(true), ai.apiType("responses"), ai.extraHeader({"X-Benchmark": "test-run"}), ai.maxTokens(8192), ai.temperature(0.7), ai.reasoningEffort("high"), ] qualityConfig = aim.qualityPriorityAIConfig("openai", options...) ```
 :::
 
 ## 函数索引
@@ -33,17 +33,23 @@ AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、Chat
 | [ai.VisionFunctionCall](#visionfunctioncall) | VisionFunctionCall 使用视觉模型进行函数调用，可结合图片输入（导出名为 ai.VisionFunctionCall） |
 | [ai.aicacheSession](#aicachesession) | SessionDir 返回当前进程 aicache 调试落盘根目录的绝对路径， |
 | [ai.apiKey](#apikey) | WithAPIKey 设置 AI 服务的 API 密钥，这是访问 AI 服务的必需凭证。 |
+| [ai.apiType](#apitype) |  |
 | [ai.baseURL](#baseurl) | WithBaseURL 设置 AI 服务的基础 URL，用于自定义 API 端点或使用代理服务。 |
 | [ai.debugStream](#debugstream) | WithDebugStream 启用流式输出调试模式，用于开发调试。 |
 | [ai.domain](#domain) | WithDomain 设置服务域名，用于某些特定的 AI 服务提供商。 |
+| [ai.enableEndpoint](#enableendpoint) |  |
+| [ai.endpoint](#endpoint) |  |
+| [ai.extraHeader](#extraheader) | WithExtraHeader 设置自定义请求头，支持 Yak map 和 json.loads 返回的有序映射。 |
+| [ai.frequencyPenalty](#frequencypenalty) |  |
 | [ai.funcCallRetryTimes](#funccallretrytimes) | WithFunctionCallRetryTimes 设置函数调用失败时的重试次数。 |
 | [ai.imageAI](#imageai) | WithVisionPriority 设置视觉优先（使用视觉模型，导出名为 ai.visionPriority / ai.imageAI） |
 | [ai.imageBase64](#imagebase64) | WithImageBase64 传入 Base64 编码的图片数据，用于图像识别场景。 |
 | [ai.imageFile](#imagefile) | WithImageFile 传入图片文件路径，自动读取并发送给 AI 进行分析。 |
 | [ai.imageRaw](#imageraw) | WithImageRaw 传入原始图片字节数据，用于图像识别场景。 |
+| [ai.maxTokens](#maxtokens) |  |
 | [ai.model](#model) | WithModel 指定要使用的 AI 模型名称。 |
-| [ai.modelInfoCallback](#modelinfocallback) | WithModelInfoCallback 在选定模型并开始调用前触发的回调（导出名为 ai.modelInfoCallback） |
-| [ai.modelInfoConfirmCallback](#modelinfoconfirmcallback) | WithModelInfoConfirmCallback 在模型调用成功确认后触发的回调（导出名为 ai.modelInfoConfirmCallback） |
+| [ai.modelInfoCallback](#modelinfocallback) |  |
+| [ai.modelInfoConfirmCallback](#modelinfoconfirmcallback) | WithModelInfoConfirmCallback 在模型调用成功确认后触发的回调（导出名为 ai.modelInfoConfirmCallback）。 |
 | [ai.noHttps](#nohttps) | WithNoHttps 禁用 HTTPS，使用 HTTP 协议进行通信。 |
 | [ai.onReasonStream](#onreasonstream) | WithReasonStreamHandler 设置推理过程的流式输出回调，用于获取 AI 的思考过程。 |
 | [ai.onStream](#onstream) | WithStreamHandler 设置流式输出的回调函数，用于实时接收 AI 响应数据。 |
@@ -56,10 +62,13 @@ AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、Chat
 | [ai.rawMessages](#rawmessages) | WithRawMessages 让上层把客户端原始的 messages 数组完整透传到上游 LLM， |
 | [ai.reasoningEffort](#reasoningeffort) | WithReasoningEffort 是兼容 wrapper：将 effort 字符串统一写入 ThinkingLevel。 |
 | [ai.speedPriority](#speedpriority) | WithSpeedPriority 设置速度优先（使用轻量模型，导出名为 ai.speedPriority） |
+| [ai.temperature](#temperature) |  |
 | [ai.thinking](#thinking) | WithEnableThinking 是兼容 wrapper：true → ThinkingLevel=&#34;high&#34;，false → ThinkingLevel=&#34;none&#34;。 |
 | [ai.thinkingLevel](#thinkinglevel) | WithThinkingLevel 设置统一思考强度等级。 |
 | [ai.timeout](#timeout) | WithTimeout 设置请求超时时间（单位：秒）。 |
 | [ai.toolCallCallback](#toolcallcallback) | WithToolCallCallback 设置 tool_calls 回调函数，用于在 AI 响应中包含 tool_calls 时接管其处理逻辑。启用后，tool_calls 将不再以默认的占位标记形式输出，而是直接通过回调函数返回解析后的 ToolCall 对象。 目前只在项目内部测试脚本使用 |
+| [ai.topK](#topk) |  |
+| [ai.topP](#topp) |  |
 | [ai.type](#type) | WithType 指定 AI 服务提供商类型。 |
 | [ai.usageCallback](#usagecallback) | WithUsageCallback registers a callback that receives the final token usage |
 | [ai.videoBase64](#videobase64) | WithVideoBase64 传入 Base64 编码的视频数据，自动包装为 data URI。 |
@@ -876,6 +885,34 @@ client = ai.OpenAI(
 
 ---
 
+### apiType {#apitype}
+
+
+<Tabs>
+<TabItem value="apiType-1" label="定义" default>
+
+```go
+apiType(apiType string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| apiType | `string` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
+
+</TabItem>
+</Tabs>
+
+
+---
+
 ### baseURL {#baseurl}
 
 - 描述: WithBaseURL 设置 AI 服务的基础 URL，用于自定义 API 端点或使用代理服务。
@@ -997,6 +1034,130 @@ client = ai.OpenAI(
 
 )
 ``````````````
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### enableEndpoint {#enableendpoint}
+
+
+<Tabs>
+<TabItem value="enableEndpoint-1" label="定义" default>
+
+```go
+enableEndpoint(enable bool) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### endpoint {#endpoint}
+
+
+<Tabs>
+<TabItem value="endpoint-1" label="定义" default>
+
+```go
+endpoint(endpoint string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| endpoint | `string` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### extraHeader {#extraheader}
+
+- 描述: WithExtraHeader 设置自定义请求头，支持 Yak map 和 json.loads 返回的有序映射。
+
+- 详细描述: 请求头的值必须是字符串，空映射或nil不添加请求头。
+
+
+<Tabs>
+<TabItem value="extraHeader-1" label="定义" default>
+
+```go
+extraHeader(headers any) aispec.AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| headers | `any` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `aispec.AIConfigOption` |  |
+
+</TabItem>
+<TabItem value="extraHeader-2" label="示例">
+
+
+``````````````yak
+option = ai.extraHeader({"X-Benchmark": "test-run"})
+``````````````
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### frequencyPenalty {#frequencypenalty}
+
+
+<Tabs>
+<TabItem value="frequencyPenalty-1" label="定义" default>
+
+```go
+frequencyPenalty(v float64) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v | `float64` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
 
 </TabItem>
 </Tabs>
@@ -1255,6 +1416,34 @@ println(response)
 
 ---
 
+### maxTokens {#maxtokens}
+
+
+<Tabs>
+<TabItem value="maxTokens-1" label="定义" default>
+
+```go
+maxTokens(n int64) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int64` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
+
+</TabItem>
+</Tabs>
+
+
+---
+
 ### model {#model}
 
 - 描述: WithModel 指定要使用的 AI 模型名称。
@@ -1309,36 +1498,25 @@ client = ai.OpenAI(
 
 ### modelInfoCallback {#modelinfocallback}
 
-- 描述: WithModelInfoCallback 在选定模型并开始调用前触发的回调（导出名为 ai.modelInfoCallback）
-
 
 <Tabs>
 <TabItem value="modelInfoCallback-1" label="定义" default>
 
 ```go
-modelInfoCallback(cb func(provider, model string)) AIConfigOption
+modelInfoCallback(cb any) AIConfigOption
 ```
 
 **参数配置信息**
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(provider, model string)` | 回调函数，参数为 (provider, model) |
+| cb | `any` |  |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` | AI 配置选项 |
-
-</TabItem>
-<TabItem value="modelInfoCallback-2" label="示例">
-
-
-``````````````yak
-opt = ai.modelInfoCallback(func(provider, model) { println(provider, model) })
-println(opt)
-``````````````
+| r1 | `AIConfigOption` |  |
 
 </TabItem>
 </Tabs>
@@ -1348,21 +1526,23 @@ println(opt)
 
 ### modelInfoConfirmCallback {#modelinfoconfirmcallback}
 
-- 描述: WithModelInfoConfirmCallback 在模型调用成功确认后触发的回调（导出名为 ai.modelInfoConfirmCallback）
+- 描述: WithModelInfoConfirmCallback 在模型调用成功确认后触发的回调（导出名为 ai.modelInfoConfirmCallback）。
+
+- 详细描述: 同时兼容二参数和包含thinkingLevel的三参数函数。
 
 
 <Tabs>
 <TabItem value="modelInfoConfirmCallback-1" label="定义" default>
 
 ```go
-modelInfoConfirmCallback(cb func(provider, model string)) AIConfigOption
+modelInfoConfirmCallback(cb any) AIConfigOption
 ```
 
 **参数配置信息**
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(provider, model string)` | 回调函数，参数为 (provider, model) |
+| cb | `any` | 回调函数，参数为 (provider, model) |
 
 **返回值**
 
@@ -1882,6 +2062,34 @@ println(response)
 
 ---
 
+### temperature {#temperature}
+
+
+<Tabs>
+<TabItem value="temperature-1" label="定义" default>
+
+```go
+temperature(v float64) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v | `float64` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
+
+</TabItem>
+</Tabs>
+
+
+---
+
 ### thinking {#thinking}
 
 - 描述: WithEnableThinking 是兼容 wrapper：true → ThinkingLevel=&#34;high&#34;，false → ThinkingLevel=&#34;none&#34;。
@@ -2031,6 +2239,62 @@ toolCallCallback(cb func([]*ToolCall)) AIConfigOption
 opt = ai.toolCallCallback(func(toolCalls) { dump(toolCalls) })
 println(opt)
 ``````````````
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### topK {#topk}
+
+
+<Tabs>
+<TabItem value="topK-1" label="定义" default>
+
+```go
+topK(n int64) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int64` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### topP {#topp}
+
+
+<Tabs>
+<TabItem value="topP-1" label="定义" default>
+
+```go
+topP(v float64) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v | `float64` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
 
 </TabItem>
 </Tabs>

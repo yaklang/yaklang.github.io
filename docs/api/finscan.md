@@ -29,7 +29,7 @@
 
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
-| [finscan.Scan](#scan) | `target string, port string, opts ...finScanOpt` | `chan *finscan.FinScanResult, error` | 对目标执行 FIN 端口扫描，以 channel 形式流式返回开放端口结果 |
+| [finscan.Scan](#scan) | `target string, port string, opts ...finScanOpt` | `chan *finscan.FinScanResult, error` |  |
 
 ## 函数详情
 
@@ -321,40 +321,27 @@ res = finscan.Scan("192.168.1.1", "80,443", finscan.wait(5))~
 Scan(target string, port string, opts ...finScanOpt) (chan *finscan.FinScanResult, error)
 ```
 
-对目标执行 FIN 端口扫描，以 channel 形式流式返回开放端口结果
-
-在 yak 中通过 finscan.Scan 调用，FIN 扫描具有较好的隐蔽性，依赖网络环境且通常需要相应权限
+暂无描述
 
 **必填参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| target | `string` | 扫描目标，支持 IP、域名、CIDR、逗号分隔等多种写法 |
-| port | `string` | 端口表达式，如 &#34;80,443&#34;、&#34;1-65535&#34; |
+| target | `string` |  |
+| port | `string` |  |
 
 **可选参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| opts | `...finScanOpt` | 可选配置项，如 finscan.concurrent、finscan.wait、finscan.excludePorts 等 |
+| opts | `...finScanOpt` |  |
 
 **返回值**
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `chan *finscan.FinScanResult` | 一个只读 channel，逐条产出 FIN 扫描结果 |
-| r2 | `error` | 错误信息，启动失败时非 nil |
-
-**示例**
-
-``````````````yak
-// 该示例为示意性用法：对目标执行 FIN 端口扫描
-res = finscan.Scan("192.168.1.1", "22,80,443", finscan.wait(5))~
-
-	for result = range res {
-	    println(result.Host, result.Port)
-	}
-``````````````
+| r1 | `chan *finscan.FinScanResult` |  |
+| r2 | `error` |  |
 
 ---
 

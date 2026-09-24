@@ -6,12 +6,13 @@
 
 - 启动引擎：`aim.InvokeReAct` 同步执行一次 ReAct 任务，`aim.InvokeReActAsync` 异步返回 `*AIEngine` 句柄，`aim.NewAIEngine` 创建可复用引擎。
 - 快速首轮：`aim.allowSyncInitContext` 默认 `false`，首轮直接进入主循环，后续按需识别意图、发现能力；设置为 `true` 可在首轮前同步增强上下文。记忆后端与自动检索始终异步加载，就绪后供后续轮次使用。
+- 目标模式：通过 `aim.enableGoalMode(true)` 开启；`aim.goalAcceptanceCriteria` 设置 finish 时检查的验收条件，`aim.goalDurationSeconds` 设置强制继续深入的时间窗口（`3600` / `10800` / `18000` 分别是一、三、五小时，`-1` 表示永不自动结束），还可用 `aim.goalMinIterations` 设置最少迭代轮次。
 - 接入模型与能力：`aim.aiConfig` / `aim.aiCallback` 配置模型，`aim.attachedAITool` / `aim.attachedAIForge` / `aim.attachedKnowledgeBase` 挂载工具、Forge 与知识库，`aim.includeToolNames` / `aim.excludeToolNames` 精选工具集。
 - 过程观测与交互：`aim.onStream` / `aim.onStreamContent` / `aim.onEvent` / `aim.onFinished` 订阅流式输出与事件，`aim.onInputRequired` 处理需要人工补充输入的场景，`aim.maxIteration` / `aim.timeout` 控制迭代与超时。
 
 与相邻库的关系：`aim` 把 `ai`（模型对话）、`aiagent`（编排）、`rag`（知识检索）、`liteforge`/Forge（结构化任务）整合为统一引擎，适合需要"一行调用即可跑通一个带工具的智能体"的脚本。
 
-> 共 50 个函数
+> 共 54 个函数
 
 ## 可变参数函数索引
 
@@ -41,7 +42,7 @@ InvokeReAct(input string, options ...AIEngineConfigOption) error
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 47 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 51 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -75,7 +76,7 @@ InvokeReActAsync(input string, options ...AIEngineConfigOption) (*AIEngine, erro
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 47 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 51 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -107,7 +108,7 @@ AI 引擎封装了 ReAct 等能力，可通过 SendMsg/SendMsgAsync 发送任务
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 47 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 51 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -156,9 +157,13 @@ engine.SendMsg("list files in current dir")
 | `aim.disableToolUse` | `disable bool` | `AIEngineConfigOption` | WithDisableToolUse 禁用工具调用 |
 | `aim.enableAISearchTool` | `enable bool` | `AIEngineConfigOption` | WithEnableAISearchTool 启用 AI 搜索工具 |
 | `aim.enableForgeSearchTool` | `enable bool` | `AIEngineConfigOption` | WithEnableForgeSearchTool 启用 Forge 搜索工具 |
+| `aim.enableGoalMode` | `enable bool` | `AIEngineConfigOption` | WithEnableGoalMode 设置是否启用目标模式 |
 | `aim.excludeToolNames` | `names ...string` | `AIEngineConfigOption` | WithExcludeToolNames 设置排除的工具名称黑名单 |
 | `aim.extendedForgeFromZip` | `zipPath string, password ...string` | `AIEngineConfigOption` | WithExtendedForgeFromZip 从 ZIP 文件加载扩展 Forge |
 | `aim.focus` | `focus string` | `AIEngineConfigOption` | WithFocus 设置焦点，用于让引擎聚焦某个任务 |
+| `aim.goalAcceptanceCriteria` | `criteria string` | `AIEngineConfigOption` | WithGoalAcceptanceCriteria 设置目标模式验收条件 |
+| `aim.goalDurationSeconds` | `seconds int64` | `AIEngineConfigOption` | WithGoalDurationSeconds 设置目标模式时间窗口 |
+| `aim.goalMinIterations` | `iterations int64` | `AIEngineConfigOption` | WithGoalMinIterations 设置目标模式允许 finish 前的最少迭代数 |
 | `aim.includeToolNames` | `names ...string` | `AIEngineConfigOption` | WithIncludeToolNames 设置包含的工具名称白名单 |
 | `aim.keywords` | `keywords ...string` | `AIEngineConfigOption` | WithKeywords 设置工具搜索关键词 |
 | `aim.language` | `lang string` | `AIEngineConfigOption` | WithLanguage 设置引擎响应语言偏好 |

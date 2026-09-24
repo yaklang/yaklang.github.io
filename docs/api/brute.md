@@ -10,7 +10,7 @@
 
 与相邻库的关系：`brute` 常接在资产发现之后——`synscan`/`servicescan` 找到开放服务，`brute` 对其做口令爆破，命中结果可经 `risk` 记录、`report` 汇总。
 
-> 共 15 个函数
+> 共 21 个函数
 
 ## 函数索引
 
@@ -28,12 +28,18 @@
 | [brute.maxDelay](#maxdelay) | `max int` | `BruteOpt` | 设置每个目标两次尝试之间的最大间隔秒数 |
 | [brute.minDelay](#mindelay) | `min int` | `BruteOpt` | 设置每个目标两次尝试之间的最小间隔秒数 |
 | [brute.okToStop](#oktostop) | `b bool` | `BruteOpt` | 设置当某个目标爆破出有效凭据后是否立即停止对该目标的后续尝试 |
+| [brute.oracleEncryption](#oracleencryption) | `policy string` | `BruteOpt, error` | 设置原生加密策略：accepted/rejected/requested/required。 |
+| [brute.oracleSID](#oraclesid) | `sid string` | `BruteOpt` | 使用指定 SID 连接 Oracle，替代 SERVICE_NAME。 |
+| [brute.oracleSysDBA](#oraclesysdba) | `enabled bool` | `BruteOpt` | 显式选择 SYSDBA 模式；默认仅用户名 SYS 自动启用。 |
+| [brute.oracleTimeout](#oracletimeout) | `seconds float64` | `BruteOpt, error` | 设置整个凭证验证的秒数预算，所有服务和重试共享，最多 20 秒。 |
 
 ## 可变参数函数索引
 
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | [brute.New](#new) | `typeStr string, opts ...BruteOpt` | `*yakBruter, error` | 创建一个指定类型的弱口令爆破器，可通过选项配置字典、并发、延迟等，再调用 Start 对目标执行爆破 |
+| [brute.oracleService](#oracleservice) | `services ...string` | `BruteOpt` | 指定 Oracle SERVICE_NAME 候选，不再猜测默认服务名。 |
+| [brute.oracleTLS](#oracletls) | `serverName string, caPEM ...string` | `BruteOpt, error` | 强制使用 TCPS 并校验证书，失败不会退回明文。 |
 | [brute.passList](#passlist) | `passes ...string` | `BruteOpt` | 设置爆破使用的密码字典 |
 | [brute.userList](#userlist) | `users ...string` | `BruteOpt` | 设置爆破使用的用户名字典 |
 
@@ -405,6 +411,124 @@ bruter = brute.New("ssh", brute.okToStop(true))~
 
 ---
 
+### oracleEncryption {#oracleencryption}
+
+```go
+oracleEncryption(policy string) (BruteOpt, error)
+```
+
+设置原生加密策略：accepted/rejected/requested/required。
+
+required 要求原生加密，不会静默降级；此选项独立于 TCPS。
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| policy | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `BruteOpt` |  |
+| r2 | `error` |  |
+
+**示例**
+
+``````````````yak
+enc = brute.oracleEncryption("required")~
+b = brute.New("oracle", enc)~
+``````````````
+
+---
+
+### oracleSID {#oraclesid}
+
+```go
+oracleSID(sid string) BruteOpt
+```
+
+使用指定 SID 连接 Oracle，替代 SERVICE_NAME。
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| sid | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `BruteOpt` |  |
+
+**示例**
+
+``````````````yak
+b = brute.New("oracle", brute.oracleSID("ORCL"))~
+``````````````
+
+---
+
+### oracleSysDBA {#oraclesysdba}
+
+```go
+oracleSysDBA(enabled bool) BruteOpt
+```
+
+显式选择 SYSDBA 模式；默认仅用户名 SYS 自动启用。
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| enabled | `bool` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `BruteOpt` |  |
+
+**示例**
+
+``````````````yak
+b = brute.New("oracle", brute.oracleSysDBA(false))~
+``````````````
+
+---
+
+### oracleTimeout {#oracletimeout}
+
+```go
+oracleTimeout(seconds float64) (BruteOpt, error)
+```
+
+设置整个凭证验证的秒数预算，所有服务和重试共享，最多 20 秒。
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| seconds | `float64` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `BruteOpt` |  |
+| r2 | `error` |  |
+
+**示例**
+
+``````````````yak
+timeoutOpt = brute.oracleTimeout(15)~
+b = brute.New("oracle", timeoutOpt)~
+``````````````
+
+---
+
 ## 可变参数函数详情
 
 ### New {#new}
@@ -454,6 +578,72 @@ res = bruter.Start("127.0.0.1:22")~
 	        println("found:", item.Username, item.Password)
 	    }
 	}
+``````````````
+
+---
+
+### oracleService {#oracleservice}
+
+```go
+oracleService(services ...string) BruteOpt
+```
+
+指定 Oracle SERVICE_NAME 候选，不再猜测默认服务名。
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| services | `...string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `BruteOpt` |  |
+
+**示例**
+
+``````````````yak
+b = brute.New("oracle", brute.oracleService("SALES_PDB"))~
+``````````````
+
+---
+
+### oracleTLS {#oracletls}
+
+```go
+oracleTLS(serverName string, caPEM ...string) (BruteOpt, error)
+```
+
+强制使用 TCPS 并校验证书，失败不会退回明文。
+
+serverName 为空时按目标主机校验；可选 caPEM 指定信任的 PEM CA，省略时用系统 CA。
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| serverName | `string` |  |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| caPEM | `...string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `BruteOpt` |  |
+| r2 | `error` |  |
+
+**示例**
+
+``````````````yak
+tlsOpt = brute.oracleTLS("db.example.com")~
+b = brute.New("oracle", brute.oracleService("SALES"), tlsOpt)~
 ``````````````
 
 ---

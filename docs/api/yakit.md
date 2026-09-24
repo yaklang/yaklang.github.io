@@ -11,7 +11,7 @@
 
 与相邻库的关系：`yakit` 关注"把结果展示给人"，`db` 关注"把结果持久化到数据库"，`risk` / `report` 关注"漏洞与报告对象"。三者常组合使用：扫描发现结果后，用 `risk` 记录漏洞、用 `db` 入库、用 `yakit` 在界面上实时呈现。
 
-> 共 79 个函数
+> 共 81 个函数
 
 ## 函数索引
 
@@ -29,6 +29,8 @@
 | [yakit.ForceSyncBuildInForge](#forcesyncbuildinforge) | `notify func(float64, string)` | `error` | 强制把内置 AI Forge 同步到数据库（导出名为 yakit.ForceSyncBuildInForge） |
 | [yakit.ForceSyncCorePlugin](#forcesynccoreplugin) | `notify func(float64, string)` | `error` | 强制把内置 Core 插件同步到数据库（导出名为 yakit.ForceSyncCorePlugin） |
 | [yakit.ForceSyncSyntaxFlowRule](#forcesyncsyntaxflowrule) | `notify func(float64, string)` | `error` | 强制把内置的 SyntaxFlow 规则同步到数据库（导出名为 yakit.ForceSyncSyntaxFlowRule） |
+| [yakit.GetGitHubAPIKey](#getgithubapikey) | - | `string` | 读取 GitHub API Token（导出名为 yakit.GetGitHubAPIKey） |
+| [yakit.GetGiteeAPIKey](#getgiteeapikey) | - | `string` | 读取 Gitee API Token（导出名为 yakit.GetGiteeAPIKey） |
 | [yakit.GetHomeDir](#gethomedir) | - | `string` | GetDefaultYakitBaseDir 获取 Yakit 的主工作目录（导出名为 yakit.GetHomeDir） |
 | [yakit.GetHomeTempDir](#gethometempdir) | - | `string` | GetDefaultYakitBaseTempDir 获取 Yakit 的临时目录（导出名为 yakit.GetHomeTempDir） |
 | [yakit.GetOnlineBaseUrl](#getonlinebaseurl) | - | `string` | 获取当前配置的在线服务（Yakit 商店等）基础 URL（导出名为 yakit.GetOnlineBaseUrl） |
@@ -447,6 +449,64 @@ ForceSyncSyntaxFlowRule(notify func(float64, string)) error
 ``````````````yak
 // 同步内置 SyntaxFlow 规则到数据库（会写库，示意性示例）
 yakit.ForceSyncSyntaxFlowRule(func(p, msg) { println(msg) })
+``````````````
+
+---
+
+### GetGitHubAPIKey {#getgithubapikey}
+
+```go
+GetGitHubAPIKey() string
+```
+
+读取 GitHub API Token（导出名为 yakit.GetGitHubAPIKey）
+
+优先使用 Yakit 第三方应用配置里 Type=github 的 APIKey/UserSecret，
+
+未配置时回退环境变量 GITHUB_TOKEN，再回退 GH_TOKEN。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | GitHub token；未配置时返回空字符串 |
+
+**示例**
+
+``````````````yak
+token = yakit.GetGitHubAPIKey()
+if token == "" {
+    yakit.Warn("github token not configured")
+}
+``````````````
+
+---
+
+### GetGiteeAPIKey {#getgiteeapikey}
+
+```go
+GetGiteeAPIKey() string
+```
+
+读取 Gitee API Token（导出名为 yakit.GetGiteeAPIKey）
+
+优先使用 Yakit 第三方应用配置里 Type=gitee 的 APIKey/UserSecret，
+
+未配置时回退环境变量 GITEE_TOKEN。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | Gitee token；未配置时返回空字符串 |
+
+**示例**
+
+``````````````yak
+token = yakit.GetGiteeAPIKey()
+if token == "" {
+    yakit.Warn("gitee token not configured")
+}
 ``````````````
 
 ---
