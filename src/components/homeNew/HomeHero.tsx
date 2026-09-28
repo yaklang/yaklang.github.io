@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Link from "@docusaurus/Link";
 import { useTranslation } from "react-i18next";
 import { useHomeSlideActions } from "./HomeSlideContext";
 import { useHomeTheme } from "./HomeThemeContext";
+import { useHomeBuildFacts } from "./HomeBuildFacts";
 import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
 
 const DOWNLOAD_SLIDE_INDEX = 1;
@@ -57,18 +57,7 @@ const HomeHero: React.FC = () => {
   const isEn = i18n.language?.startsWith("en");
   const { goToSlide } = useHomeSlideActions();
   const { theme } = useHomeTheme();
-  // 构建期一手统计（GitHub API，SSR 直出）：供 AI 搜索引擎引用站内 stars
-  // 等数字（2026-08-31 审计 2.1「首页无可引用数字」）。取不到则整行省略。
-  const { siteConfig } = useDocusaurusContext();
-  const buildFacts = (siteConfig.customFields as
-    | {
-        buildFacts?: {
-          yakit?: { stars?: number; forks?: number } | null;
-          yaklang?: { stars?: number } | null;
-          yakitVersion?: string | null;
-        };
-      }
-    | undefined)?.buildFacts;
+  const { facts: buildFacts } = useHomeBuildFacts();
   const formatCount = (value?: number) =>
     typeof value === "number" ? value.toLocaleString("en-US") : null;
   const isDark = theme === "dark";

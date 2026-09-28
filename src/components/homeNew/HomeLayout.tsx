@@ -3,6 +3,7 @@ import Head from "@docusaurus/Head";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { HomeSlideProvider } from "./HomeSlideContext";
 import { HomeThemeProvider } from "./HomeThemeContext";
+import { HomeBuildFactsProvider } from "./HomeBuildFacts";
 import HomeNavbar from "./HomeNavbar";
 
 interface HomeLayoutProps {
@@ -37,9 +38,10 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({
   };
 
   return (
-    <HomeSlideProvider>
-      <HomeThemeProvider>
-        <Head>
+    <HomeBuildFactsProvider>
+      <HomeSlideProvider>
+        <HomeThemeProvider>
+          <Head>
           <title>{title}</title>
           <meta name="description" content={description} />
           <meta property="og:title" content={title} />
@@ -65,13 +67,14 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({
           <script type="application/ld+json">
             {JSON.stringify(structuredData)}
           </script>
-        </Head>
-        <div className="relative h-screen overflow-hidden">
-          <HomeNavbar />
-          <main className="absolute inset-0 flex flex-col">{children}</main>
-        </div>
-      </HomeThemeProvider>
-    </HomeSlideProvider>
+          </Head>
+          <div className="relative h-screen overflow-hidden">
+            <HomeNavbar />
+            <main className="absolute inset-0 flex flex-col">{children}</main>
+          </div>
+        </HomeThemeProvider>
+      </HomeSlideProvider>
+    </HomeBuildFactsProvider>
   );
 };
 
