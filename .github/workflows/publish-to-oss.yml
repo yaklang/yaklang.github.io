@@ -122,7 +122,11 @@ jobs:
 
       - name: Pack Out File
         if: ${{ (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && inputs.publish_only != true }}
-        run: tar -zcf out.tgz build
+        # 已上传到 OSS 的资源（见 manifest）不再打进 out.tgz，页面引用的已是 OSS 地址
+        run: |
+          node -e "const m=require('./build/.oss-assets-manifest.json');console.log(m.assets.flatMap(a=>a.relativePaths).map(p=>'build/'+p).join('\n'))" > oss-exclude.txt
+          tar -zcf out.tgz -X oss-exclude.txt build
+          ls -lh out.tgz
 
       # 配置 Git
       - name: Setup Git

@@ -3605,9 +3605,9 @@
     "description": "左侧展示脚本类型选择及插件配置项，右侧为Yak语言源代码编辑区域。",
     "heading": "插件注册：从配置到 UI 适配",
     "idx": 43,
-    "localAbs": "/Users/v1ll4n/Projects/yaklang.github.io/static/img/products/manual/chapter5/ch5-043.png",
+    "localAbs": "/Users/v1ll4n/Projects/yaklang.github.io/static/img/products/manual/chapter5/ch5-043.jpg",
     "ok": true,
-    "relPath": "/img/products/manual/chapter5/ch5-043.png"
+    "relPath": "/img/products/manual/chapter5/ch5-043.jpg"
   },
   "https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/authcode/?code=YjU1ZDA3MTI3YTM5MzVkZjNlMTBlYjU4YWY1NmI5NDdfYmNiMjFhYWIzNTRmZjBjZGYxZmVkZmQxNzY5MWMzZTlfSUQ6NzUyMTU4MzE1MDA2MDQyMTE0OF8xNzgxNjY2MDI0OjE3ODE3NTI0MjRfVjM": {
     "caption": "Yakit插件扩展菜单与Codec History注册示例",
