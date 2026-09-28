@@ -113,7 +113,8 @@
       "yakitDesc": "一体化交互式渗透测试平台",
       "yaklangDesc": "为网络安全而生的领域编程语言",
       "memfitDesc": "面向安全工程师的桌面 AI Agent",
-      "irifyDesc": "SSA 与 AI 驱动的代码安全分析系统"
+      "irifyDesc": "SSA 与 AI 驱动的代码安全分析系统",
+      "ytrayDesc": "多身份浏览器实例工作台"
     },
     "yakEnv": {
       "setup": "Yak 语言环境搭建",
@@ -129,7 +130,8 @@
     },
     "footer": {
       "legacy": "下载兼容版本",
-      "oldRelease": "下载旧版"
+      "oldRelease": "下载旧版",
+      "ytraySite": "了解 YTray"
     },
     "messages": {
       "fetchSizeError": "获取{{product}}-{{file}}版本大小错误",
