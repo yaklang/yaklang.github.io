@@ -248,7 +248,7 @@ const TABS: {
       <img src="/img/newHome/ytray-vector.svg" alt="" className="h-[20px] w-[20px]" />
     ),
     brandIcon: (
-      <img src="/img/newHome/ytray-vector.svg" alt="" className="h-[48px] w-[48px]" />
+      <img src="/img/newHome/ytray-vector.svg" alt="" className="h-[36px] w-[36px]" />
     ),
     description: "HomeDownload.tabs.ytrayDesc",
   },
@@ -871,7 +871,9 @@ const HomeDownload: React.FC = () => {
               className="flex h-[48px] w-[48px] shrink-0 items-center justify-center overflow-hidden rounded-[48px]"
               style={
                 activeProduct.brandIcon
-                  ? undefined
+                  ? activeTab === "ytray"
+                    ? { backgroundColor: "rgba(242, 98, 21, 0.1)" }
+                    : undefined
                   : { backgroundColor: activeAccent }
               }
             >
