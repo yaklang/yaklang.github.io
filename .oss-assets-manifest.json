@@ -4,8 +4,8 @@
   "objectPrefix": "yaklang-website/assets",
   "thresholdBytes": 102400,
   "buildDir": "build",
-  "assetCount": 2202,
-  "totalBytes": 711693599,
+  "assetCount": 2209,
+  "totalBytes": 711816799,
   "assets": [
     {
       "relativePath": "assets/fonts/crimson-text-400-f002dfeee9542c98fae39296e68aea7e.woff2",
@@ -112,30 +112,30 @@
       "sourceFile": "build/assets/fonts/noto-serif-sc-700-2002ed63629e1cbdb1949395c583dc8e.woff2"
     },
     {
-      "relativePath": "assets/fonts/noto-serif-sc-home-500-709ccd7ad5ee56ca540fb191636761ad.woff2",
-      "size": 189732,
+      "relativePath": "assets/fonts/noto-serif-sc-home-500-43d02997c752789fb04682ef9e4810b1.woff2",
+      "size": 193704,
       "replacements": 2,
-      "sha256": "847996dd550f8fe4556776c86721211a589e41b18903ac6bf2896dfff96f7ac7",
-      "objectKey": "yaklang-website/assets/847996dd550f8fe4556776c86721211a589e41b18903ac6bf2896dfff96f7ac7/noto-serif-sc-home-500-709ccd7ad5ee56ca540fb191636761ad.woff2",
-      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/847996dd550f8fe4556776c86721211a589e41b18903ac6bf2896dfff96f7ac7/noto-serif-sc-home-500-709ccd7ad5ee56ca540fb191636761ad.woff2",
+      "sha256": "21d21c881b874c09cc5de3cea87ded5b4c0e8d3efbaa33ad9edc56663d14ce0c",
+      "objectKey": "yaklang-website/assets/21d21c881b874c09cc5de3cea87ded5b4c0e8d3efbaa33ad9edc56663d14ce0c/noto-serif-sc-home-500-43d02997c752789fb04682ef9e4810b1.woff2",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/21d21c881b874c09cc5de3cea87ded5b4c0e8d3efbaa33ad9edc56663d14ce0c/noto-serif-sc-home-500-43d02997c752789fb04682ef9e4810b1.woff2",
       "relativePaths": [
-        "assets/fonts/noto-serif-sc-home-500-709ccd7ad5ee56ca540fb191636761ad.woff2",
-        "en/assets/fonts/noto-serif-sc-home-500-709ccd7ad5ee56ca540fb191636761ad.woff2"
+        "assets/fonts/noto-serif-sc-home-500-43d02997c752789fb04682ef9e4810b1.woff2",
+        "en/assets/fonts/noto-serif-sc-home-500-43d02997c752789fb04682ef9e4810b1.woff2"
       ],
-      "sourceFile": "build/assets/fonts/noto-serif-sc-home-500-709ccd7ad5ee56ca540fb191636761ad.woff2"
+      "sourceFile": "build/assets/fonts/noto-serif-sc-home-500-43d02997c752789fb04682ef9e4810b1.woff2"
     },
     {
-      "relativePath": "assets/fonts/noto-serif-sc-home-600-1e2696aac0d3943865d7b69e1e47a874.woff2",
-      "size": 190428,
+      "relativePath": "assets/fonts/noto-serif-sc-home-600-6988253a526016d4b8165d6199b393e1.woff2",
+      "size": 194768,
       "replacements": 2,
-      "sha256": "d37bc0812ca7eba305025100793b535a3adf9e937a04d9431dc5d504f8fae3ef",
-      "objectKey": "yaklang-website/assets/d37bc0812ca7eba305025100793b535a3adf9e937a04d9431dc5d504f8fae3ef/noto-serif-sc-home-600-1e2696aac0d3943865d7b69e1e47a874.woff2",
-      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/d37bc0812ca7eba305025100793b535a3adf9e937a04d9431dc5d504f8fae3ef/noto-serif-sc-home-600-1e2696aac0d3943865d7b69e1e47a874.woff2",
+      "sha256": "ec8ba658dc464f1fdeaaf52bc08e90ba04d53b0ce3c8066e094b3b412d1693e8",
+      "objectKey": "yaklang-website/assets/ec8ba658dc464f1fdeaaf52bc08e90ba04d53b0ce3c8066e094b3b412d1693e8/noto-serif-sc-home-600-6988253a526016d4b8165d6199b393e1.woff2",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/ec8ba658dc464f1fdeaaf52bc08e90ba04d53b0ce3c8066e094b3b412d1693e8/noto-serif-sc-home-600-6988253a526016d4b8165d6199b393e1.woff2",
       "relativePaths": [
-        "assets/fonts/noto-serif-sc-home-600-1e2696aac0d3943865d7b69e1e47a874.woff2",
-        "en/assets/fonts/noto-serif-sc-home-600-1e2696aac0d3943865d7b69e1e47a874.woff2"
+        "assets/fonts/noto-serif-sc-home-600-6988253a526016d4b8165d6199b393e1.woff2",
+        "en/assets/fonts/noto-serif-sc-home-600-6988253a526016d4b8165d6199b393e1.woff2"
       ],
-      "sourceFile": "build/assets/fonts/noto-serif-sc-home-600-1e2696aac0d3943865d7b69e1e47a874.woff2"
+      "sourceFile": "build/assets/fonts/noto-serif-sc-home-600-6988253a526016d4b8165d6199b393e1.woff2"
     },
     {
       "relativePath": "assets/fonts/roboto-400-4977cb87a58c463dbc07027a96688df6.ttf",
@@ -26239,6 +26239,18 @@
       "sourceFile": "build/img/home-optimized/milestones/2021-xcon-yak-yakit-release.webp"
     },
     {
+      "relativePath": "img/home-optimized/milestones/2022-isc-champion.webp",
+      "size": 11788,
+      "replacements": 2,
+      "sha256": "7cbb511d08f4df0dc9e0d4ac32c5a9f423aa90497f0da0019d8ae27181154436",
+      "objectKey": "yaklang-website/assets/7cbb511d08f4df0dc9e0d4ac32c5a9f423aa90497f0da0019d8ae27181154436/2022-isc-champion.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/7cbb511d08f4df0dc9e0d4ac32c5a9f423aa90497f0da0019d8ae27181154436/2022-isc-champion.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/2022-isc-champion.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/2022-isc-champion.webp"
+    },
+    {
       "relativePath": "img/home-optimized/milestones/2023-yaklang-open-source-launch.webp",
       "size": 10946,
       "replacements": 2,
@@ -26251,6 +26263,18 @@
       "sourceFile": "build/img/home-optimized/milestones/2023-yaklang-open-source-launch.webp"
     },
     {
+      "relativePath": "img/home-optimized/milestones/2024-cdsl-yak-book.webp",
+      "size": 22320,
+      "replacements": 2,
+      "sha256": "0113b819a9e381bf71b12535006a53ad5d9a2b01169dd81aba5848e318152837",
+      "objectKey": "yaklang-website/assets/0113b819a9e381bf71b12535006a53ad5d9a2b01169dd81aba5848e318152837/2024-cdsl-yak-book.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/0113b819a9e381bf71b12535006a53ad5d9a2b01169dd81aba5848e318152837/2024-cdsl-yak-book.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/2024-cdsl-yak-book.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/2024-cdsl-yak-book.webp"
+    },
+    {
       "relativePath": "img/home-optimized/milestones/2024-cicc-conference.webp",
       "size": 21710,
       "replacements": 2,
@@ -26261,6 +26285,66 @@
         "img/home-optimized/milestones/2024-cicc-conference.webp"
       ],
       "sourceFile": "build/img/home-optimized/milestones/2024-cicc-conference.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/2025-beijing-equipment.webp",
+      "size": 19054,
+      "replacements": 2,
+      "sha256": "3521bbd58b1dc649195da447a953d4c8f4795e227161f49f3f267c3458a5d71c",
+      "objectKey": "yaklang-website/assets/3521bbd58b1dc649195da447a953d4c8f4795e227161f49f3f267c3458a5d71c/2025-beijing-equipment.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/3521bbd58b1dc649195da447a953d4c8f4795e227161f49f3f267c3458a5d71c/2025-beijing-equipment.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/2025-beijing-equipment.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/2025-beijing-equipment.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/2025-cic-first-prize.webp",
+      "size": 23678,
+      "replacements": 2,
+      "sha256": "acb4d0a287fba90bb44cd5c150cb965698b47ad22c5235ae1e7f1d768f07e499",
+      "objectKey": "yaklang-website/assets/acb4d0a287fba90bb44cd5c150cb965698b47ad22c5235ae1e7f1d768f07e499/2025-cic-first-prize.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/acb4d0a287fba90bb44cd5c150cb965698b47ad22c5235ae1e7f1d768f07e499/2025-cic-first-prize.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/2025-cic-first-prize.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/2025-cic-first-prize.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/2025-heilongjiang.webp",
+      "size": 8214,
+      "replacements": 2,
+      "sha256": "a4a6bd85fbeda8c22cc85cf44ba940232ab24397a9c2d9f0080ff4417c870c51",
+      "objectKey": "yaklang-website/assets/a4a6bd85fbeda8c22cc85cf44ba940232ab24397a9c2d9f0080ff4417c870c51/2025-heilongjiang.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/a4a6bd85fbeda8c22cc85cf44ba940232ab24397a9c2d9f0080ff4417c870c51/2025-heilongjiang.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/2025-heilongjiang.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/2025-heilongjiang.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/2025-maker-china.webp",
+      "size": 12968,
+      "replacements": 2,
+      "sha256": "3f2915ade689c2852dcec91f6d8c121b5489961b2350550b4000feb5c3b2f618",
+      "objectKey": "yaklang-website/assets/3f2915ade689c2852dcec91f6d8c121b5489961b2350550b4000feb5c3b2f618/2025-maker-china.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/3f2915ade689c2852dcec91f6d8c121b5489961b2350550b4000feb5c3b2f618/2025-maker-china.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/2025-maker-china.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/2025-maker-china.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/2026-yakit-guide.webp",
+      "size": 16866,
+      "replacements": 2,
+      "sha256": "856885bf895ad8e567946b15e8dbc9d20190178ac260aee75f6612a038b1cf75",
+      "objectKey": "yaklang-website/assets/856885bf895ad8e567946b15e8dbc9d20190178ac260aee75f6612a038b1cf75/2026-yakit-guide.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/856885bf895ad8e567946b15e8dbc9d20190178ac260aee75f6612a038b1cf75/2026-yakit-guide.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/2026-yakit-guide.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/2026-yakit-guide.webp"
     },
     {
       "relativePath": "img/home-optimized/milestones/20260803-174557.webp",
