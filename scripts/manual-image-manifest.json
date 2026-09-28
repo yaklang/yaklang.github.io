@@ -3595,9 +3595,9 @@
     "description": "图片展示了 Yakit 软件界面的右键菜单，左侧为“HTTP 数据包变形”选项，右侧子菜单中红框高亮显示了名为 Codec 的插件功能。",
     "heading": "插件注册：从配置到 UI 适配",
     "idx": 44,
-    "localAbs": "/Users/v1ll4n/Projects/yaklang.github.io/static/img/products/manual/chapter5/ch5-044.png",
+    "localAbs": "/Users/v1ll4n/Projects/yaklang.github.io/static/img/products/manual/chapter5/ch5-044.jpg",
     "ok": true,
-    "relPath": "/img/products/manual/chapter5/ch5-044.png"
+    "relPath": "/img/products/manual/chapter5/ch5-044.jpg"
   },
   "https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/authcode/?code=YzkyZTY2NjY0ZWVhMDg5N2JhOGFmMDczYWRmYmI3MDVfZTMyNTQwNTRkNGZmOGE4M2U1ZmMyMmFjNzRkZDkwM2NfSUQ6NzUyMTU4MzE1MDIzNDU4MzA0M18xNzgxNjY2MDI0OjE3ODE3NTI0MjRfVjM": {
     "caption": "Yakit新建Codec插件的配置与代码编写界面",
@@ -3625,9 +3625,9 @@
     "description": "展示选中JSON数据后，通过右键菜单选择“HTTP数据包变形”下的“请求包美化”选项。",
     "heading": "场景一：HTTP 请求体原地转换与美化",
     "idx": 47,
-    "localAbs": "/Users/v1ll4n/Projects/yaklang.github.io/static/img/products/manual/chapter5/ch5-047.png",
+    "localAbs": "/Users/v1ll4n/Projects/yaklang.github.io/static/img/products/manual/chapter5/ch5-047.jpg",
     "ok": true,
-    "relPath": "/img/products/manual/chapter5/ch5-047.png"
+    "relPath": "/img/products/manual/chapter5/ch5-047.jpg"
   },
   "https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/authcode/?code=NjNhYTZmY2I2NTRlMjEzMGQ1NDZmNzFkOTNkYzA3OGVfZDY1NzQ2MDA4OWMwOTdiZmJmZjQzY2VlOTVmYmNlOWRfSUQ6NzUyMTc0MTI2NDk4Mzk2NTcyNF8xNzgxNjY2MDIzOjE3ODE3NTI0MjNfVjM": {
     "caption": "Yakit插件扩展与结果输出界面",
