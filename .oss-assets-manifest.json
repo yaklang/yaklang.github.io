@@ -4,8 +4,8 @@
   "objectPrefix": "yaklang-website/assets",
   "thresholdBytes": 102400,
   "buildDir": "build",
-  "assetCount": 2203,
-  "totalBytes": 711817580,
+  "assetCount": 2202,
+  "totalBytes": 711693599,
   "assets": [
     {
       "relativePath": "assets/fonts/crimson-text-400-f002dfeee9542c98fae39296e68aea7e.woff2",
@@ -11536,19 +11536,6 @@
         "en/assets/images/ch5-042-ebad5479a50f5b13c221dd4f51f1a964.png"
       ],
       "sourceFile": "build/assets/images/ch5-042-ebad5479a50f5b13c221dd4f51f1a964.png"
-    },
-    {
-      "relativePath": "assets/images/ch5-049-b3da70850ab59b651dcc643cd69ca547.png",
-      "size": 123981,
-      "replacements": 4,
-      "sha256": "bb6c99a5843607824aad55bebcd199b1585a255793500a2ed6e0a0f696445970",
-      "objectKey": "yaklang-website/assets/bb6c99a5843607824aad55bebcd199b1585a255793500a2ed6e0a0f696445970/ch5-049-b3da70850ab59b651dcc643cd69ca547.png",
-      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/bb6c99a5843607824aad55bebcd199b1585a255793500a2ed6e0a0f696445970/ch5-049-b3da70850ab59b651dcc643cd69ca547.png",
-      "relativePaths": [
-        "assets/images/ch5-049-b3da70850ab59b651dcc643cd69ca547.png",
-        "en/assets/images/ch5-049-b3da70850ab59b651dcc643cd69ca547.png"
-      ],
-      "sourceFile": "build/assets/images/ch5-049-b3da70850ab59b651dcc643cd69ca547.png"
     },
     {
       "relativePath": "assets/images/ch5-063-a24ee75d7c0306558cff36f1824e9471.png",

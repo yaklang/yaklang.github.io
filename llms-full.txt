@@ -85,11 +85,11 @@ for result = range results {
 
 ## Project facts
 
-- Latest Yakit release: v1.4.8-0919 (retrieved 2026-09-18 at site build time)
-- GitHub stars: yaklang/yakit 7,747
-- GitHub stars: yaklang/yaklang 632
-- GitHub forks: yaklang/yakit 828
-- Yakit v1.4.8-0919 installer sizes: macIntel 197.98 MB, macApple 188.18 MB, linux 239.06 MB, windows 164.97 MB, linuxArm64 232.97 MB
+- Latest Yakit release: v1.4.9-0925 (retrieved 2026-09-28 at site build time)
+- GitHub stars: yaklang/yakit 7,770
+- GitHub stars: yaklang/yaklang 634
+- GitHub forks: yaklang/yakit 831
+- Yakit v1.4.9-0925 installer sizes: macIntel 184.96 MB, macApple 175.47 MB, linux 176.64 MB, windows 152.72 MB, linuxArm64 173 MB
 - Releases: https://github.com/yaklang/yakit/releases
 
 ## Documentation index (auto-generated at build time)
@@ -198,7 +198,7 @@ for result = range results {
 - [实战1: 扫端口/子域名+指纹识别](https://yaklang.com/docs/yakexamples/yak_misc): 本届我们将学习的知识量非常大，这可能是很多开源项目的核心功能，我们要做的就是要把这些功能的实现成本降低。之前我们要完成这些功能，可能需要一个语言的很多的库，然而在 Yak 中，这些全部被封装在了一个个的内置模块中。…
 - [Java 反序列化利用链: yso(ysoserial)](https://yaklang.com/docs/yakexamples/ysoserial-demo): Yak 通过非 Java 的方式实现了一整套 Java 反序列化协议。可以在一定容错限度内劫持绝大部分 Java 反序列化流。详情参考 java: java 反序列化协议的 Golang/Yak 实现 在实现了 Java 反序列化协议后，J
 - [__global__](https://yaklang.com/docs/api/__global__): append(a any, vals ...any) (ret any) doc:Append does append(a, vals...) assert(b bool, reason ...any) assertEmpty(any) a
-- [ai](https://yaklang.com/docs/api/ai): AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。
+- [ai](https://yaklang.com/docs/api/ai): AI 模块集成多种大语言模型服务，提供统一的对话、函数调用和流式输出接口。
 - [aiagent {#library-aiagent}](https://yaklang.com/docs/api/aiagent): aiagent 库是 yaklang 的 AI 智能体（Agent）编排入口，把"大模型 + 工具调用 + 计划执行"封装成可在脚本里驱动的自动化流程。它围绕 ReAct 式的"思考-行动-观察"循环，让 AI 自主拆解任务、调用 yak 
 - [aim {#library-aim}](https://yaklang.com/docs/api/aim): aim 库是 yaklang 的 AI 引擎（AI Engine）封装，提供一个开箱即用的 ReAct 智能体运行时：给定一句自然语言输入，引擎自动规划、调用工具、与知识库/Forge 协作，并通过丰富的事件回调把过程实时吐出来。相比 ai
 - [aireducer {#library-aireducer}](https://yaklang.com/docs/api/aireducer): aireducer 库用于把大文本/大文件按块（chunk）切分，并对每一块逐步执行回调——这正是 "reduce" 的含义。它常用于配合 AI：把超长内容分段喂给模型处理（如逐段摘要、逐段分析），避免一次性超出上下文长度限制。…
