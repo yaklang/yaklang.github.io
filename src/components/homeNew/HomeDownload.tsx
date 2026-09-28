@@ -3,12 +3,12 @@ import { Dropdown, message } from "antd";
 import { useMemoizedFn } from "ahooks";
 import { useTranslation } from "react-i18next";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { LoadingIcon, SureIcon } from "../HomeIcon";
 import { detectDownloadPlatform } from "../../utils/yakitDownload";
 import { yakitIcon, yakIcon, memfitIcon, irifyIcon, memfitBrandIcon, irifyBrandIcon } from "./productIcons";
 import HomePartnerMarquee from "./HomePartnerMarquee";
 import { useHomeTheme } from "./HomeThemeContext";
+import { useHomeBuildFacts } from "./HomeBuildFacts";
 import {
   HOME_CONTAINER_CLASS,
   HOME_SECTION_CENTER_CLASS,
@@ -482,29 +482,13 @@ const HomeDownload: React.FC = () => {
   const [currentSelectYak, setCurrentSelectYak] = useState<YakEnvKey>(
     "MacOs(Intel/Apple Silicon)",
   );
-  // 构建期注入的 Yakit 最新版本（docusaurus.config.js customFields，SSR/CSR
-  // 均可用）：让静态 HTML 里就有真实版本号，无 JS 环境不再是"最新版: -"空占位；
-  // 运行时仍会照旧拉取刷新。
-  const { siteConfig } = useDocusaurusContext();
-  const injectedYakitVersion = (siteConfig.customFields as
-    | { yakitLatestVersion?: string }
-    | undefined)?.yakitLatestVersion;
+  const { facts: buildFacts, ready: buildFactsReady } = useHomeBuildFacts();
   const [versionMap, setVersionMap] = useState<
     Partial<Record<DownloadableTabKey, string>>
-  >(injectedYakitVersion ? { yakit: injectedYakitVersion } : {});
+  >(buildFacts.yakitVersion ? { yakit: buildFacts.yakitVersion } : {});
   const [sizeMap, setSizeMap] = useState<
     Partial<Record<DownloadableTabKey, Record<string, number>>>
-  >(
-    // 构建期 HEAD 请求得到的 Yakit 各平台安装包大小（MB），SSR 直出到静态
-    // HTML（2026-08-31 审计 2.1「下载表格统计列为空占位」）；运行时照旧刷新。
-    ((siteConfig.customFields as
-      | { buildFacts?: { assetSizes?: Record<string, number> } }
-      | undefined)?.buildFacts?.assetSizes
-      ? { yakit: (siteConfig.customFields as {
-            buildFacts: { assetSizes: Record<string, number> };
-          }).buildFacts.assetSizes }
-      : {}),
-  );
+  >(buildFacts.assetSizes ? { yakit: buildFacts.assetSizes } : {});
   const [ytrayRelease, setYtrayRelease] = useState<
     ReturnType<typeof parseYTrayRelease>
   >({ version: "", assets: {} });
@@ -592,12 +576,12 @@ const HomeDownload: React.FC = () => {
   );
 
   const initProductDownload = useMemoizedFn(
-    async (product: DownloadableTabKey) => {
+    async (product: DownloadableTabKey, latestVersion?: string) => {
       const config = PRODUCT_DOWNLOAD_CONFIG[product];
-      let version = versionMap[product];
+      let version = latestVersion || versionMap[product];
 
       // 版本未知时先拉取（构建期注入的 Yakit 版本可跳过此步，直接补包大小）
-      if (!version) {
+      if (!version || product !== "yakit") {
         try {
           const response = await axios.get(config.getVersionUrl());
           if (response?.data && typeof response.data === "string") {
@@ -636,10 +620,21 @@ const HomeDownload: React.FC = () => {
   );
 
   useEffect(() => {
+    if (!buildFactsReady) return;
     if (isDownloadableTab(activeTab)) {
-      initProductDownload(activeTab);
+      const latestVersion =
+        activeTab === "yakit" ? buildFacts.yakitVersion || undefined : undefined;
+      if (latestVersion) {
+        setVersionMap((prev) => ({ ...prev, yakit: latestVersion }));
+      }
+      initProductDownload(activeTab, latestVersion);
     }
-  }, [activeTab, initProductDownload]);
+  }, [
+    activeTab,
+    buildFacts.yakitVersion,
+    buildFactsReady,
+    initProductDownload,
+  ]);
 
   useEffect(() => {
     if (activeTab !== "ytray" || ytrayRelease.version) return;
