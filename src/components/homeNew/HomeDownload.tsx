@@ -245,10 +245,10 @@ const TABS: {
     key: "ytray",
     label: "YTray",
     icon: (
-      <img src="/img/newHome/ytray-icon.png" alt="" className="h-[20px] w-[20px]" />
+      <img src="/img/newHome/ytray-vector.svg" alt="" className="h-[20px] w-[20px]" />
     ),
     brandIcon: (
-      <img src="/img/newHome/ytray-icon.png" alt="" className="h-[48px] w-[48px]" />
+      <img src="/img/newHome/ytray-vector.svg" alt="" className="h-[48px] w-[48px]" />
     ),
     description: "HomeDownload.tabs.ytrayDesc",
   },
@@ -845,7 +845,7 @@ const HomeDownload: React.FC = () => {
                   >
                     <div className="flex items-center gap-[6px] font-['PingFang_SC'] text-[14px] font-normal leading-[20px] tracking-[0.1px]">
                       <span
-                        className="inline-flex"
+                        className={`inline-flex ${tab.key === "ytray" && !selected ? "grayscale opacity-75" : ""}`}
                         style={{
                           color: selected
                             ? TAB_ACCENT[tab.key]
