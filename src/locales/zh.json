@@ -201,45 +201,85 @@
         "impact": "Yak Project 进入公开发展阶段，Yakit 开始为安全工程师提供统一的桌面工作台。",
         "dateLabel": "// 2021 年 10 月"
       },
+      "m2022_isc_champion": {
+        "title": "YAK 获得 ISC 第十届互联网安全大会创新独角兽沙盒大赛冠军",
+        "impact": "是国产网络安全编程语言从 0 到 1 的标志性节点。",
+        "dateLabel": "// 2022 年 8 月"
+      },
+      "m2023_yakit_v2_list": {
+        "title": "YAKIT 入选北京市新技术新产品（服务）名单",
+        "impact": "Yakit 的产品化和实际应用进入新的发展阶段。",
+        "dateLabel": "// 2023 年 1 月"
+      },
       "m2023_open_source_launch": {
         "title": "CDSL-YAK 在北京国家会议中心举行开源发布会",
         "impact": "核心语言、运行时和安全能力底座面向社区开放，外部开发者可以直接检查源码、提交问题并参与建设。",
-        "dateLabel": "// 2023 年 5 月 30 日"
+        "dateLabel": "// 2023 年 5 月"
       },
-      "m2023_yakit_v2_list": {
-        "title": "YAKIT 网络安全单兵测试系统 V2.0 入选第十七批北京市新技术新产品（服务）名单",
-        "impact": "Yakit 的产品化和实际应用进入新的发展阶段。",
-        "dateLabel": "// 2023年"
+      "m2024_2_academicians": {
+        "title": "YAK 获得中国工程院 2 位院士科技成果鉴定",
+        "impact": "YAK 获得中国工程院邬贺铨、吴世忠院士鉴定，具有完全自主知识产权。",
+        "dateLabel": "// 2024 年 4 月"
       },
       "m2024_yakit_v2_test": {
         "title": "Yakit V2.0 通过公安部第三研究所检测",
         "impact": "Yakit 按照网络安全专用产品和 Web 应用安全检测相关国家标准完成测试。",
         "dateLabel": "// 2024 年 5 月"
       },
+      "m2024_military_civilian": {
+        "title": "Yakit 入选北京市军民融合重点产品",
+        "impact": "YAK/Yakit 进入国防军工领域，民用网安产品向军民融合市场延伸的关键一步。",
+        "dateLabel": "// 2024 年 5 月"
+      },
+      "m2024_cdsl_book": {
+        "title": "《CDSL-YAK 网络安全领域编程语言 — 从入门到实践》出版",
+        "impact": "由中国工程院吴世忠院士作序。",
+        "dateLabel": "// 2024 年 10 月"
+      },
       "m2024_cicc_top10": {
-        "title": "“面向通信网络的专用安全编程语言 YakLang 创新及应用”入选 2023 年度信息通信领域十大科技进展",
+        "title": "YAK 入选“2023 年度信息通信领域十大科技进展”",
         "impact": "Yaklang 的专用编程语言路线进入信息通信领域年度科技进展名单。",
-        "dateLabel": "// 2024 年 11 月 30 日"
+        "dateLabel": "// 2024 年 11 月"
+      },
+      "m2025_7_academicians": {
+        "title": "YAK 获得中国工程院 7 位院士科技成果鉴定",
+        "impact": "YAK 获得陈左宁、陈志杰、张平、丁文华、黄殿中、张宝东、尼玛扎西 7 位院士“国内外首创、国际先进、国内领先”的鉴定意见。",
+        "dateLabel": "// 2025 年 1 月"
       },
       "m2025_irify_release": {
         "title": "IRify 对外发布",
         "impact": "Yak SSA、SyntaxFlow 与 AI 能力形成独立代码审计产品，项目能力从交互式测试扩展到源码安全分析。",
         "dateLabel": "// 2025 年 4 月"
       },
+      "m2025_heilongjiang": {
+        "title": "YAK 获得黑龙江省科技进步二等奖",
+        "impact": "YAK 支撑电力多场景安全隐患发现关键技术，护航电力网络安全。",
+        "dateLabel": "// 2025 年 6 月"
+      },
+      "m2025_maker_china": {
+        "title": "YAK 获得“创客中国”网安大赛一等奖",
+        "impact": "YAK 展示了国产安全开发环境的工程能力和应用价值。",
+        "dateLabel": "// 2025 年 8 月"
+      },
       "m2025_cic_first_prize": {
-        "title": "“面向网络安全的专用编程语言与开发环境技术与应用”获中国通信学会科学技术奖一等奖",
+        "title": "YAK 获得中国通信学会科学技术进步奖一等奖",
         "impact": "Yaklang 与配套开发环境的技术成果和实际应用获得行业科技奖励。",
         "dateLabel": "// 2025 年 12 月"
       },
-      "m2025_maker_china": {
-        "title": "“国产化网络安全开发环境 YAK”获“创客中国”全国总决赛企业组三等奖",
-        "impact": "YAK 从网络安全专题赛进入全国总决赛，展示了国产安全开发环境的工程能力和应用价值。",
-        "dateLabel": "// 2025年"
+      "m2025_beijing_equipment": {
+        "title": "YAK 获得北京市首台（套）重大技术装备证书",
+        "impact": "国内首创、自主可控，填补网络安全领域国家级装备空白。",
+        "dateLabel": "// 2025 年 12 月"
       },
       "m2026_memfit_release": {
         "title": "Memfit AI 对外发布",
         "impact": "Yaklang、Yakit 及其工具生态进入 Agent 工作流，为安全工程师提供分析、执行和交付支持。",
         "dateLabel": "// 2026 年 3 月"
+      },
+      "m2026_yakit_guide": {
+        "title": "《Yakit 实战指南 基础应用与高级开发》出版",
+        "impact": "由中国工程院方滨兴、云晓春院士作序。",
+        "dateLabel": "// 2026 年 6 月"
       }
     }
   },

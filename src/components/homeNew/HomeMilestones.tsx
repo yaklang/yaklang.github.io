@@ -74,89 +74,193 @@ type MilestoneItem = {
   href: string;
   dateLabel: string;
   image?: string;
+  /** "cover" = 横图占满容器；"contain" = 竖图完整显示 */
+  imageFit?: "cover" | "contain";
 };
 
 type MilestoneBase = Omit<MilestoneItem, "title" | "impact" | "dateLabel"> & {
   titleKey: string;
   impactKey: string;
   dateLabelKey: string;
+  imageFit?: "cover" | "contain";
 };
 
+const FULL_HISTORY_URL =
+  "https://github.com/yaklang/yaklang.github.io/blob/master/materials/project-credibility/full-history.md";
+
 const getMilestonesBase = (t: (key: string) => string): MilestoneItem[] =>
-  [
-    {
-      year: "2021",
-      titleKey: "HomeMilestones.items.m2021_xcon.title",
-      impactKey: "HomeMilestones.items.m2021_xcon.impact",
-      dateLabelKey: "HomeMilestones.items.m2021_xcon.dateLabel",
-      href: "https://www.sohu.com/a/567305083_120846244",
-      image: "img/home-optimized/milestones/2021-xcon-yak-yakit-release.webp",
-    },
-    {
-      year: "2023",
-      titleKey: "HomeMilestones.items.m2023_open_source_launch.title",
-      impactKey: "HomeMilestones.items.m2023_open_source_launch.impact",
-      dateLabelKey: "HomeMilestones.items.m2023_open_source_launch.dateLabel",
-      href: "https://www.cnblogs.com/yaklang/articles/17461795.html",
-      image: "img/home-optimized/milestones/2023-yaklang-open-source-launch.webp",
-    },
-    {
-      year: "2023",
-      titleKey: "HomeMilestones.items.m2023_yakit_v2_list.title",
-      impactKey: "HomeMilestones.items.m2023_yakit_v2_list.impact",
-      dateLabelKey: "HomeMilestones.items.m2023_yakit_v2_list.dateLabel",
-      href: "https://kw.beijing.gov.cn/zwfw/bsjg/202307/P020240909007888758167.pdf",
-      image: "img/home-optimized/milestones/20260803-174557.webp",
-    },
-    {
-      year: "2024",
-      titleKey: "HomeMilestones.items.m2024_yakit_v2_test.title",
-      impactKey: "HomeMilestones.items.m2024_yakit_v2_test.impact",
-      dateLabelKey: "HomeMilestones.items.m2024_yakit_v2_test.dateLabel",
-      href: "https://mp.weixin.qq.com/s?__biz=MzIwMzI1MDg2Mg==&mid=2649944674&idx=1&sn=bb61768ac951be7656caf3d6f58794dd",
-      image: "img/home-optimized/milestones/20260804203037.webp",
-    },
-    {
-      year: "2024",
-      titleKey: "HomeMilestones.items.m2024_cicc_top10.title",
-      impactKey: "HomeMilestones.items.m2024_cicc_top10.impact",
-      dateLabelKey: "HomeMilestones.items.m2024_cicc_top10.dateLabel",
-      href: "https://www.china-cic.cn/Detail/24/60/6085",
-      image: "img/home-optimized/milestones/2024-cicc-conference.webp",
-    },
-    {
-      year: "2025",
-      titleKey: "HomeMilestones.items.m2025_irify_release.title",
-      impactKey: "HomeMilestones.items.m2025_irify_release.impact",
-      dateLabelKey: "HomeMilestones.items.m2025_irify_release.dateLabel",
-      href: "https://yaklang.com/en/blog/sql-injection-detection-with-irify/",
-      image: "img/home-optimized/milestones/0718bf2f426b3b8a.webp",
-    },
-    {
-      year: "2025",
-      titleKey: "HomeMilestones.items.m2025_cic_first_prize.title",
-      impactKey: "HomeMilestones.items.m2025_cic_first_prize.impact",
-      dateLabelKey: "HomeMilestones.items.m2025_cic_first_prize.dateLabel",
-      href: "https://www.china-cic.cn/Detail/24/6900/6900",
-      image: "",
-    },
-    {
-      year: "2025",
-      titleKey: "HomeMilestones.items.m2025_maker_china.title",
-      impactKey: "HomeMilestones.items.m2025_maker_china.impact",
-      dateLabelKey: "HomeMilestones.items.m2025_maker_china.dateLabel",
-      href: "https://www.miitxxzx.org.cn/module/download/downfile.jsp?classid=0&filename=4920ee41e78c447ca39295aeae07e019.pdf&showname=%E7%AC%AC%E5%8D%81%E5%B1%8A%E2%80%9C%E5%88%9B%E5%AE%A2%E4%B8%AD%E5%9B%BD%E2%80%9D%E4%B8%AD%E5%B0%8F%E4%BC%81%E4%B8%9A%E5%88%9B%E6%96%B0%E5%88%9B%E4%B8%9A%E5%A4%A7%E8%B5%9B%E5%85%A8%E5%9B%BD%E6%80%BB%E5%86%B3%E8%B5%9B%E8%8E%B7%E5%A5%96%E5%90%8D%E5%8D%95.pdf",
-      image: "",
-    },
-    {
-      year: "2026",
-      titleKey: "HomeMilestones.items.m2026_memfit_release.title",
-      impactKey: "HomeMilestones.items.m2026_memfit_release.impact",
-      dateLabelKey: "HomeMilestones.items.m2026_memfit_release.dateLabel",
-      href: "https://www.yaklang.com/en/blog/memfit-autonomous-pentest-agent-architecture/",
-      image: "img/home-optimized/milestones/3cac0ba124b1bebc.webp",
-    },
-  ].map((m) => ({
+  (
+    [
+      {
+        // 序号1 — 2021年10月 — 不变
+        year: "2021",
+        titleKey: "HomeMilestones.items.m2021_xcon.title",
+        impactKey: "HomeMilestones.items.m2021_xcon.impact",
+        dateLabelKey: "HomeMilestones.items.m2021_xcon.dateLabel",
+        href: "https://www.sohu.com/a/567305083_120846244",
+        image: "img/home-optimized/milestones/2021-xcon-yak-yakit-release.webp",
+        imageFit: "cover",
+      },
+      {
+        // 序号2 — 2022年8月 — 新增
+        year: "2022",
+        titleKey: "HomeMilestones.items.m2022_isc_champion.title",
+        impactKey: "HomeMilestones.items.m2022_isc_champion.impact",
+        dateLabelKey: "HomeMilestones.items.m2022_isc_champion.dateLabel",
+        href: FULL_HISTORY_URL,
+        image: "img/home-optimized/milestones/2022-isc-champion.webp",
+        imageFit: "contain",
+      },
+      {
+        // 序号3 — 2023年1月 — 内容变化（标题+日期更新）
+        year: "2023",
+        titleKey: "HomeMilestones.items.m2023_yakit_v2_list.title",
+        impactKey: "HomeMilestones.items.m2023_yakit_v2_list.impact",
+        dateLabelKey: "HomeMilestones.items.m2023_yakit_v2_list.dateLabel",
+        href: "https://kw.beijing.gov.cn/zwfw/bsjg/202307/P020240909007888758167.pdf",
+        image: "img/home-optimized/milestones/20260803-174557.webp",
+        imageFit: "cover",
+      },
+      {
+        // 序号4 — 2023年5月 — 内容变化（日期更新）
+        year: "2023",
+        titleKey: "HomeMilestones.items.m2023_open_source_launch.title",
+        impactKey: "HomeMilestones.items.m2023_open_source_launch.impact",
+        dateLabelKey: "HomeMilestones.items.m2023_open_source_launch.dateLabel",
+        href: "https://www.cnblogs.com/yaklang/articles/17461795.html",
+        image:
+          "img/home-optimized/milestones/2023-yaklang-open-source-launch.webp",
+        imageFit: "cover",
+      },
+      {
+        // 序号5 — 2024年4月 — 新增
+        year: "2024",
+        titleKey: "HomeMilestones.items.m2024_2_academicians.title",
+        impactKey: "HomeMilestones.items.m2024_2_academicians.impact",
+        dateLabelKey: "HomeMilestones.items.m2024_2_academicians.dateLabel",
+        href: "https://rivers.chaitin.cn/blog/cqj629h0lnedo7thptf0",
+        image: "",
+      },
+      {
+        // 序号6 — 2024年5月 — 不变
+        year: "2024",
+        titleKey: "HomeMilestones.items.m2024_yakit_v2_test.title",
+        impactKey: "HomeMilestones.items.m2024_yakit_v2_test.impact",
+        dateLabelKey: "HomeMilestones.items.m2024_yakit_v2_test.dateLabel",
+        href: "https://mp.weixin.qq.com/s?__biz=MzIwMzI1MDg2Mg==&mid=2649944674&idx=1&sn=bb61768ac951be7656caf3d6f58794dd",
+        image: "img/home-optimized/milestones/20260804203037.webp",
+        imageFit: "cover",
+      },
+      {
+        // 序号7 — 2024年5月 — 新增
+        year: "2024",
+        titleKey: "HomeMilestones.items.m2024_military_civilian.title",
+        impactKey: "HomeMilestones.items.m2024_military_civilian.impact",
+        dateLabelKey: "HomeMilestones.items.m2024_military_civilian.dateLabel",
+        href: FULL_HISTORY_URL,
+        image: "",
+      },
+      {
+        // 序号8 — 2024年10月 — 新增
+        year: "2024",
+        titleKey: "HomeMilestones.items.m2024_cdsl_book.title",
+        impactKey: "HomeMilestones.items.m2024_cdsl_book.impact",
+        dateLabelKey: "HomeMilestones.items.m2024_cdsl_book.dateLabel",
+        href: FULL_HISTORY_URL,
+        image: "img/home-optimized/milestones/2024-cdsl-yak-book.webp",
+        imageFit: "contain",
+      },
+      {
+        // 序号9 — 2024年11月 — 内容变化（日期+标题更新）
+        year: "2024",
+        titleKey: "HomeMilestones.items.m2024_cicc_top10.title",
+        impactKey: "HomeMilestones.items.m2024_cicc_top10.impact",
+        dateLabelKey: "HomeMilestones.items.m2024_cicc_top10.dateLabel",
+        href: "https://www.china-cic.cn/Detail/24/60/6085",
+        image: "img/home-optimized/milestones/2024-cicc-conference.webp",
+        imageFit: "cover",
+      },
+      {
+        // 序号10 — 2025年1月 — 新增
+        year: "2025",
+        titleKey: "HomeMilestones.items.m2025_7_academicians.title",
+        impactKey: "HomeMilestones.items.m2025_7_academicians.impact",
+        dateLabelKey: "HomeMilestones.items.m2025_7_academicians.dateLabel",
+        href: "https://mp.weixin.qq.com/s?__biz=MzIwMzI1MDg2Mg==&mid=2649945091&idx=1&sn=aa256e46f7f2273986af611deca8c581",
+        image: "",
+      },
+      {
+        // 序号11 — 2025年4月 — 不变
+        year: "2025",
+        titleKey: "HomeMilestones.items.m2025_irify_release.title",
+        impactKey: "HomeMilestones.items.m2025_irify_release.impact",
+        dateLabelKey: "HomeMilestones.items.m2025_irify_release.dateLabel",
+        href: "https://yaklang.com/en/blog/sql-injection-detection-with-irify/",
+        image: "img/home-optimized/milestones/0718bf2f426b3b8a.webp",
+        imageFit: "cover",
+      },
+      {
+        // 序号12 — 2025年6月 — 新增
+        year: "2025",
+        titleKey: "HomeMilestones.items.m2025_heilongjiang.title",
+        impactKey: "HomeMilestones.items.m2025_heilongjiang.impact",
+        dateLabelKey: "HomeMilestones.items.m2025_heilongjiang.dateLabel",
+        href: "https://mdj.hljcgzh.org.cn/u/20250611/6848e2d180072.pdf",
+        image: "img/home-optimized/milestones/2025-heilongjiang.webp",
+        imageFit: "cover",
+      },
+      {
+        // 序号13 — 2025年8月 — 内容变化（日期+标题+补充更新）
+        year: "2025",
+        titleKey: "HomeMilestones.items.m2025_maker_china.title",
+        impactKey: "HomeMilestones.items.m2025_maker_china.impact",
+        dateLabelKey: "HomeMilestones.items.m2025_maker_china.dateLabel",
+        href: "https://xinwen.bjd.com.cn/content/s68a31884e4b02424b0befc1a.html",
+        image: "img/home-optimized/milestones/2025-maker-china.webp",
+        imageFit: "cover",
+      },
+      {
+        // 序号14 — 2025年12月 — 内容变化（标题更新）
+        year: "2025",
+        titleKey: "HomeMilestones.items.m2025_cic_first_prize.title",
+        impactKey: "HomeMilestones.items.m2025_cic_first_prize.impact",
+        dateLabelKey: "HomeMilestones.items.m2025_cic_first_prize.dateLabel",
+        href: "https://www.china-cic.cn/Detail/24/6900/6900",
+        image: "img/home-optimized/milestones/2025-cic-first-prize.webp",
+        imageFit: "contain",
+      },
+      {
+        // 序号15 — 2025年12月 — 新增
+        year: "2025",
+        titleKey: "HomeMilestones.items.m2025_beijing_equipment.title",
+        impactKey: "HomeMilestones.items.m2025_beijing_equipment.impact",
+        dateLabelKey: "HomeMilestones.items.m2025_beijing_equipment.dateLabel",
+        href: FULL_HISTORY_URL,
+        image: "img/home-optimized/milestones/2025-beijing-equipment.webp",
+        imageFit: "cover",
+      },
+      {
+        // 序号16 — 2026年3月 — 不变
+        year: "2026",
+        titleKey: "HomeMilestones.items.m2026_memfit_release.title",
+        impactKey: "HomeMilestones.items.m2026_memfit_release.impact",
+        dateLabelKey: "HomeMilestones.items.m2026_memfit_release.dateLabel",
+        href: "https://www.yaklang.com/en/blog/memfit-autonomous-pentest-agent-architecture/",
+        image: "img/home-optimized/milestones/3cac0ba124b1bebc.webp",
+        imageFit: "cover",
+      },
+      {
+        // 序号17 — 2026年6月 — 新增
+        year: "2026",
+        titleKey: "HomeMilestones.items.m2026_yakit_guide.title",
+        impactKey: "HomeMilestones.items.m2026_yakit_guide.impact",
+        dateLabelKey: "HomeMilestones.items.m2026_yakit_guide.dateLabel",
+        href: FULL_HISTORY_URL,
+        image: "img/home-optimized/milestones/2026-yakit-guide.webp",
+        imageFit: "contain",
+      },
+    ] satisfies MilestoneBase[]
+  ).map((m) => ({
     ...m,
     title: t(m.titleKey),
     impact: t(m.impactKey),
@@ -164,9 +268,6 @@ const getMilestonesBase = (t: (key: string) => string): MilestoneItem[] =>
   }));
 
 const padIndex = (n: number) => String(n).padStart(2, "0");
-
-const FULL_HISTORY_URL =
-  "https://github.com/yaklang/yaklang.github.io/blob/master/materials/project-credibility/full-history.md";
 
 const ViewFullDataLink: React.FC<{ label: string; className?: string }> = ({
   label,
@@ -565,288 +666,294 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
 
         {/* ========== 中屏：年 | 序号+事件（可视约 5 行，手动滚动） ========== */}
         {mounted && (
-        <div
-          className={`hidden min-h-0 lg:hidden ${
-            fillViewport
-              ? "flex-1 sm:flex sm:flex-col"
-              : "shrink-0 sm:block"
-          } ${HOME_CONTAINER_CLASS}`}
-        >
           <div
-            data-milestones-scroll
-            className={`overflow-y-auto border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] ${SCROLLBAR_HIDE} ${
-              fillViewport ? "min-h-0 flex-1" : ""
-            }`}
-            style={fillViewport ? { minHeight: mdBodyH } : { height: mdBodyH }}
+            className={`hidden min-h-0 lg:hidden ${
+              fillViewport ? "flex-1 sm:flex sm:flex-col" : "shrink-0 sm:block"
+            } ${HOME_CONTAINER_CLASS}`}
           >
-            {yearGroups.map((group, groupIndex) => (
-              <div
-                key={group.year}
-                className={`grid grid-cols-[88px_minmax(0,1fr)] border-0 border-solid border-[var(--Colors-Use-Main---Gold-Focus)] md:grid-cols-[100px_minmax(0,1fr)] ${
-                  groupIndex === yearGroups.length - 1 ? "" : "border-b"
-                }`}
-              >
-                <div className="relative min-w-0 self-stretch border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]">
-                  <div className="sticky top-0 z-[2] bg-[var(--Colors-Use-Main---Gold-Bg)] py-[10px] md:py-[12px]">
-                    <span
-                      className={`block truncate ${isEn ? "font-['Crimson_Text'] text-[30px] md:text-[34px]" : "font-['Noto_Serif_SC_Home'] text-[22px] md:text-[26px]"} font-medium leading-[28px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:leading-[32px]`}
-                    >
-                      {group.year}
-                    </span>
+            <div
+              data-milestones-scroll
+              className={`overflow-y-auto border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] ${SCROLLBAR_HIDE} ${
+                fillViewport ? "min-h-0 flex-1" : ""
+              }`}
+              style={
+                fillViewport ? { minHeight: mdBodyH } : { height: mdBodyH }
+              }
+            >
+              {yearGroups.map((group, groupIndex) => (
+                <div
+                  key={group.year}
+                  className={`grid grid-cols-[88px_minmax(0,1fr)] border-0 border-solid border-[var(--Colors-Use-Main---Gold-Focus)] md:grid-cols-[100px_minmax(0,1fr)] ${
+                    groupIndex === yearGroups.length - 1 ? "" : "border-b"
+                  }`}
+                >
+                  <div className="relative min-w-0 self-stretch border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]">
+                    <div className="sticky top-0 z-[2] bg-[var(--Colors-Use-Main---Gold-Bg)] py-[10px] md:py-[12px]">
+                      <span
+                        className={`block truncate ${isEn ? "font-['Crimson_Text'] text-[30px] md:text-[34px]" : "font-['Noto_Serif_SC_Home'] text-[22px] md:text-[26px]"} font-medium leading-[28px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:leading-[32px]`}
+                      >
+                        {group.year}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex min-w-0 flex-col">
+                    {group.items.map(({ item, index }) => {
+                      const active = hoveredIndex === index;
+                      return (
+                        <a
+                          key={`m-row-${index}`}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onMouseEnter={() => setHoveredIndex(index)}
+                          onMouseLeave={() => setHoveredIndex(null)}
+                          onFocus={() => setHoveredIndex(index)}
+                          onBlur={() => setHoveredIndex(null)}
+                          className={`group grid grid-cols-[48px_minmax(0,1fr)_36px] min-h-[112px] border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] !no-underline last:border-b-0 transition-colors duration-200 md:grid-cols-[56px_minmax(0,1fr)_40px] ${
+                            active
+                              ? "bg-[var(--Colors-Use-Main---Gold-Focus)] shadow-[inset_1px_0_0_var(--Colors-Use-Main---Gold-Bg)]"
+                              : "bg-transparent"
+                          }`}
+                        >
+                          <div
+                            className={`flex h-full items-start overflow-hidden border-0 border-r border-solid px-[8px] pt-[10px] pb-[8px] ${
+                              active
+                                ? "border-[var(--Colors-Use-Main---Gold-Bg)]"
+                                : "border-[var(--Colors-Use-Main---Gold-Focus)]"
+                            }`}
+                          >
+                            <span
+                              className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC_Home'] text-[24px]"} font-medium leading-[24px] transition-colors duration-200 ${
+                                active
+                                  ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
+                                  : "text-[color:var(--Colors-Use-Neutral-Disable)]"
+                              }`}
+                            >
+                              {padIndex(index + 1)}.
+                            </span>
+                          </div>
+                          <div className="flex h-full min-w-0 flex-col justify-start pt-[14px] pl-[12px] pr-[8px] pb-10">
+                            <div
+                              className={`mb-[4px] truncate font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 lg:hidden ${
+                                active
+                                  ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
+                                  : "text-[color:var(--Colors-Use-Neutral-Text-2-Primary)]"
+                              }`}
+                            >
+                              {item.dateLabel}
+                            </div>
+                            <h3
+                              className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] font-normal" : "font-['Noto_Serif_SC_Home'] text-[16px] font-semibold"} leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
+                            >
+                              {item.title}
+                            </h3>
+                            <p
+                              className={`m-0 font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 ${
+                                active
+                                  ? "!text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
+                                  : "!text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]"
+                              }`}
+                            >
+                              {item.impact}
+                            </p>
+                          </div>
+                          <span
+                            className={`inline-flex h-full items-center justify-end pr-[8px] transition-colors duration-200 ${
+                              active
+                                ? "text-[color:var(--Colors-Use-Main---web-Primary)]"
+                                : "text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]"
+                            }`}
+                          >
+                            {ChevronDoubleRightIcon}
+                          </span>
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
-                <div className="flex min-w-0 flex-col">
-                  {group.items.map(({ item, index }) => {
-                    const active = hoveredIndex === index;
-                    return (
-                      <a
-                        key={`m-row-${index}`}
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                        onFocus={() => setHoveredIndex(index)}
-                        onBlur={() => setHoveredIndex(null)}
-                        className={`group grid grid-cols-[48px_minmax(0,1fr)_36px] min-h-[112px] border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] !no-underline last:border-b-0 transition-colors duration-200 md:grid-cols-[56px_minmax(0,1fr)_40px] ${
-                          active
-                            ? "bg-[var(--Colors-Use-Main---Gold-Focus)] shadow-[inset_1px_0_0_var(--Colors-Use-Main---Gold-Bg)]"
-                            : "bg-transparent"
-                        }`}
-                      >
-                        <div
-                          className={`flex h-full items-start overflow-hidden border-0 border-r border-solid px-[8px] pt-[10px] pb-[8px] ${
-                            active
-                              ? "border-[var(--Colors-Use-Main---Gold-Bg)]"
-                              : "border-[var(--Colors-Use-Main---Gold-Focus)]"
-                          }`}
-                        >
-                          <span
-                            className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC_Home'] text-[24px]"} font-medium leading-[24px] transition-colors duration-200 ${
-                              active
-                                ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
-                                : "text-[color:var(--Colors-Use-Neutral-Disable)]"
-                            }`}
-                          >
-                            {padIndex(index + 1)}.
-                          </span>
-                        </div>
-                        <div className="flex h-full min-w-0 flex-col justify-start pt-[14px] pl-[12px] pr-[8px] pb-10">
-                          <div
-                            className={`mb-[4px] truncate font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 lg:hidden ${
-                              active
-                                ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
-                                : "text-[color:var(--Colors-Use-Neutral-Text-2-Primary)]"
-                            }`}
-                          >
-                            {item.dateLabel}
-                          </div>
-                          <h3
-                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] font-normal" : "font-['Noto_Serif_SC_Home'] text-[16px] font-semibold"} leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
-                          >
-                            {item.title}
-                          </h3>
-                          <p
-                            className={`m-0 font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 ${
-                              active
-                                ? "!text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
-                                : "!text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]"
-                            }`}
-                          >
-                            {item.impact}
-                          </p>
-                        </div>
-                        <span
-                          className={`inline-flex h-full items-center justify-end pr-[8px] transition-colors duration-200 ${
-                            active
-                              ? "text-[color:var(--Colors-Use-Main---web-Primary)]"
-                              : "text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]"
-                          }`}
-                        >
-                          {ChevronDoubleRightIcon}
-                        </span>
-                      </a>
-                    );
-                  })}
+              ))}
+              <div className="grid grid-cols-[88px_minmax(0,1fr)] border-0 border-t border-solid border-[var(--Colors-Use-Main---Gold-Focus)] md:grid-cols-[100px_minmax(0,1fr)]">
+                <div
+                  className="border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
+                  aria-hidden
+                />
+                <div className="grid grid-cols-[minmax(0,1fr)_36px] md:grid-cols-[minmax(0,1fr)_40px]">
+                  <div className="flex items-center px-[10px] py-[14px] md:px-[12px]">
+                    <ViewFullDataLink
+                      label={t("HomeMilestones.viewFullData")}
+                    />
+                  </div>
+                  <div aria-hidden />
                 </div>
-              </div>
-            ))}
-            <div className="grid grid-cols-[88px_minmax(0,1fr)] border-0 border-t border-solid border-[var(--Colors-Use-Main---Gold-Focus)] md:grid-cols-[100px_minmax(0,1fr)]">
-              <div
-                className="border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
-                aria-hidden
-              />
-              <div className="grid grid-cols-[minmax(0,1fr)_36px] md:grid-cols-[minmax(0,1fr)_40px]">
-                <div className="flex items-center px-[10px] py-[14px] md:px-[12px]">
-                  <ViewFullDataLink label={t("HomeMilestones.viewFullData")} />
-                </div>
-                <div aria-hidden />
               </div>
             </div>
           </div>
-        </div>
         )}
 
         {/* ========== 大屏：年 | 图+事件（可视约 5 行，手动滚动） ========== */}
         {mounted && (
-        <div
-          className={`hidden min-h-0 ${
-            fillViewport
-              ? "flex-1 lg:flex lg:flex-col"
-              : "shrink-0 lg:block"
-          } ${HOME_CONTAINER_CLASS}`}
-        >
           <div
-            data-milestones-scroll
-            className={`overflow-x-hidden overflow-y-auto border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] ${SCROLLBAR_HIDE} ${
-              fillViewport ? "min-h-0 flex-1" : ""
-            }`}
-            style={fillViewport ? { minHeight: lgBodyH } : { height: lgBodyH }}
+            className={`hidden min-h-0 ${
+              fillViewport ? "flex-1 lg:flex lg:flex-col" : "shrink-0 lg:block"
+            } ${HOME_CONTAINER_CLASS}`}
           >
-            {yearGroups.map((group, groupIndex) => (
-              <div
-                key={group.year}
-                className={`grid grid-cols-[96px_minmax(0,1fr)] border-0 border-solid border-[var(--Colors-Use-Main---Gold-Focus)] xl:grid-cols-[140px_minmax(0,1fr)] 2xl:grid-cols-[160px_minmax(0,1fr)] ${
-                  groupIndex === yearGroups.length - 1 ? "" : "border-b"
-                }`}
-              >
-                <div className="relative min-w-0 self-stretch border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]">
-                  <div className="sticky top-0 z-[2] bg-[var(--Colors-Use-Main---Gold-Bg)] py-[12px] xl:py-[18px] 2xl:py-[18px]">
-                    <span
-                      className={`block truncate ${isEn ? "font-['Crimson_Text'] text-[32px] xl:text-[40px] 2xl:text-[44px]" : "font-['Noto_Serif_SC_Home'] text-[24px] xl:text-[32px] 2xl:text-[36px]"} font-medium leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[40px] 2xl:leading-[44px]`}
-                    >
-                      {group.year}
-                    </span>
+            <div
+              data-milestones-scroll
+              className={`overflow-x-hidden overflow-y-auto border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] ${SCROLLBAR_HIDE} ${
+                fillViewport ? "min-h-0 flex-1" : ""
+              }`}
+              style={
+                fillViewport ? { minHeight: lgBodyH } : { height: lgBodyH }
+              }
+            >
+              {yearGroups.map((group, groupIndex) => (
+                <div
+                  key={group.year}
+                  className={`grid grid-cols-[96px_minmax(0,1fr)] border-0 border-solid border-[var(--Colors-Use-Main---Gold-Focus)] xl:grid-cols-[140px_minmax(0,1fr)] 2xl:grid-cols-[160px_minmax(0,1fr)] ${
+                    groupIndex === yearGroups.length - 1 ? "" : "border-b"
+                  }`}
+                >
+                  <div className="relative min-w-0 self-stretch border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]">
+                    <div className="sticky top-0 z-[2] bg-[var(--Colors-Use-Main---Gold-Bg)] py-[12px] xl:py-[18px] 2xl:py-[18px]">
+                      <span
+                        className={`block truncate ${isEn ? "font-['Crimson_Text'] text-[32px] xl:text-[40px] 2xl:text-[44px]" : "font-['Noto_Serif_SC_Home'] text-[24px] xl:text-[32px] 2xl:text-[36px]"} font-medium leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[40px] 2xl:leading-[44px]`}
+                      >
+                        {group.year}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="relative flex min-w-0 flex-col">
+                    {group.items.map(({ item, index }) => {
+                      const active = hoveredIndex === index;
+                      const hasImage = Boolean(item.image);
+                      return (
+                        <a
+                          key={`row-${index}`}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onMouseEnter={() => setHoveredIndex(index)}
+                          onMouseLeave={() => setHoveredIndex(null)}
+                          onFocus={() => setHoveredIndex(index)}
+                          onBlur={() => setHoveredIndex(null)}
+                          className={`group relative z-[1] grid min-w-0 grid-cols-[100px_40px_200px_minmax(0,1fr)_40px] border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] !no-underline last:border-b-0 transition-colors duration-200 xl:grid-cols-[180px_56px_200px_minmax(0,1fr)_48px] 2xl:grid-cols-[200px_64px_200px_minmax(0,1fr)_52px] ${
+                            active
+                              ? "bg-[var(--Colors-Use-Main---Gold-Focus)] shadow-[inset_1px_0_0_var(--Colors-Use-Main---Gold-Bg)]"
+                              : "bg-transparent"
+                          }`}
+                          style={{ minHeight: ROW_H }}
+                        >
+                          <div
+                            className={`relative h-full min-w-0 overflow-hidden border-0 border-r border-solid ${
+                              active
+                                ? "border-[var(--Colors-Use-Main---Gold-Bg)]"
+                                : "border-[var(--Colors-Use-Main---Gold-Focus)]"
+                            }`}
+                          >
+                            {hasImage ? (
+                              <>
+                                <DotPattern
+                                  className={`transition-opacity duration-200 ${
+                                    active ? "opacity-0" : "opacity-100"
+                                  }`}
+                                />
+                                <img
+                                  src={
+                                    shouldLoadImages ? item.image : undefined
+                                  }
+                                  alt=""
+                                  loading="lazy"
+                                  decoding="async"
+                                  fetchPriority="low"
+                                  className={`absolute inset-0 block h-full w-full ${item.imageFit === "contain" ? "object-contain" : "object-cover"} transition-opacity duration-200 ${
+                                    active ? "opacity-100" : "opacity-0"
+                                  }`}
+                                />
+                              </>
+                            ) : (
+                              <DotPattern />
+                            )}
+                          </div>
+                          <div
+                            className={`flex h-full items-start px-[8px] pt-[10px] xl:px-[12px] xl:pt-[14px]`}
+                          >
+                            <span
+                              className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC_Home'] text-[24px]"} font-medium leading-[22px] transition-colors duration-200 ${
+                                active
+                                  ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
+                                  : "text-[color:var(--Colors-Use-Neutral-Disable)]"
+                              }`}
+                            >
+                              {padIndex(index + 1)}.
+                            </span>
+                          </div>
+                          <div
+                            className={`flex h-full items-start px-[10px] pt-[10px] xl:px-[16px] xl:pt-[14px]`}
+                          >
+                            <span
+                              className={`truncate font-['PingFang_SC'] text-[13px] leading-[22px] transition-colors duration-200 xl:text-[14px] xl:leading-[28px] ${
+                                active
+                                  ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
+                                  : "text-[color:var(--Colors-Use-Neutral-Text-2-Primary)]"
+                              }`}
+                            >
+                              {item.dateLabel}
+                            </span>
+                          </div>
+                          <div className="flex min-h-0 min-w-0 flex-1 flex-col items-start justify-center pt-[22px] pl-[14px] pr-[10px] xl:pl-[24px] xl:pr-[12px] pb-10">
+                            <h3
+                              className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] xl:text-[26px] font-normal" : "font-['Noto_Serif_SC_Home'] text-[16px] xl:text-[18px] font-semibold"} leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[26px]`}
+                            >
+                              {item.title}
+                            </h3>
+                            <p
+                              className={`m-0 font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 xl:text-[15px] xl:leading-[22px] ${
+                                active
+                                  ? "!text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
+                                  : "!text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]"
+                              }`}
+                            >
+                              {item.impact}
+                            </p>
+                          </div>
+                          <span
+                            className={`inline-flex h-full items-center justify-end pr-[8px] transition-colors duration-200 ${
+                              active
+                                ? "text-[color:var(--Colors-Use-Main---web-Primary)]"
+                                : "text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]"
+                            }`}
+                          >
+                            {ChevronDoubleRightIcon}
+                          </span>
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
-
-                <div className="relative flex min-w-0 flex-col">
-                  {group.items.map(({ item, index }) => {
-                    const active = hoveredIndex === index;
-                    const hasImage = Boolean(item.image);
-                    return (
-                      <a
-                        key={`row-${index}`}
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                        onFocus={() => setHoveredIndex(index)}
-                        onBlur={() => setHoveredIndex(null)}
-                        className={`group relative z-[1] grid min-w-0 grid-cols-[100px_40px_200px_minmax(0,1fr)_40px] border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] !no-underline last:border-b-0 transition-colors duration-200 xl:grid-cols-[180px_56px_200px_minmax(0,1fr)_48px] 2xl:grid-cols-[200px_64px_200px_minmax(0,1fr)_52px] ${
-                          active
-                            ? "bg-[var(--Colors-Use-Main---Gold-Focus)] shadow-[inset_1px_0_0_var(--Colors-Use-Main---Gold-Bg)]"
-                            : "bg-transparent"
-                        }`}
-                        style={{ minHeight: ROW_H }}
-                      >
-                        <div
-                          className={`relative h-full min-w-0 overflow-hidden border-0 border-r border-solid ${
-                            active
-                              ? "border-[var(--Colors-Use-Main---Gold-Bg)]"
-                              : "border-[var(--Colors-Use-Main---Gold-Focus)]"
-                          }`}
-                        >
-                          {hasImage ? (
-                            <>
-                              <DotPattern
-                                className={`transition-opacity duration-200 ${
-                                  active ? "opacity-0" : "opacity-100"
-                                }`}
-                              />
-                              <img
-                                src={shouldLoadImages ? item.image : undefined}
-                                alt=""
-                                loading="lazy"
-                                decoding="async"
-                                fetchPriority="low"
-                                className={`absolute inset-0 block h-full w-full object-cover transition-opacity duration-200 ${
-                                  active ? "opacity-100" : "opacity-0"
-                                }`}
-                              />
-                            </>
-                          ) : (
-                            <DotPattern />
-                          )}
-                        </div>
-                        <div
-                          className={`flex h-full items-start px-[8px] pt-[10px] xl:px-[12px] xl:pt-[14px]`}
-                        >
-                          <span
-                            className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC_Home'] text-[24px]"} font-medium leading-[22px] transition-colors duration-200 ${
-                              active
-                                ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
-                                : "text-[color:var(--Colors-Use-Neutral-Disable)]"
-                            }`}
-                          >
-                            {padIndex(index + 1)}.
-                          </span>
-                        </div>
-                        <div
-                          className={`flex h-full items-start px-[10px] pt-[10px] xl:px-[16px] xl:pt-[14px]`}
-                        >
-                          <span
-                            className={`truncate font-['PingFang_SC'] text-[13px] leading-[22px] transition-colors duration-200 xl:text-[14px] xl:leading-[28px] ${
-                              active
-                                ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
-                                : "text-[color:var(--Colors-Use-Neutral-Text-2-Primary)]"
-                            }`}
-                          >
-                            {item.dateLabel}
-                          </span>
-                        </div>
-                        <div className="flex min-h-0 min-w-0 flex-1 flex-col items-start justify-center pt-[22px] pl-[14px] pr-[10px] xl:pl-[24px] xl:pr-[12px] pb-10">
-                          <h3
-                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] xl:text-[26px] font-normal" : "font-['Noto_Serif_SC_Home'] text-[16px] xl:text-[18px] font-semibold"} leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[26px]`}
-                          >
-                            {item.title}
-                          </h3>
-                          <p
-                            className={`m-0 font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 xl:text-[15px] xl:leading-[22px] ${
-                              active
-                                ? "!text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
-                                : "!text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]"
-                            }`}
-                          >
-                            {item.impact}
-                          </p>
-                        </div>
-                        <span
-                          className={`inline-flex h-full items-center justify-end pr-[8px] transition-colors duration-200 ${
-                            active
-                              ? "text-[color:var(--Colors-Use-Main---web-Primary)]"
-                              : "text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]"
-                          }`}
-                        >
-                          {ChevronDoubleRightIcon}
-                        </span>
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-            <div className="grid grid-cols-[96px_minmax(0,1fr)] border-0 border-t border-solid border-[var(--Colors-Use-Main---Gold-Focus)] xl:grid-cols-[140px_minmax(0,1fr)] 2xl:grid-cols-[160px_minmax(0,1fr)]">
-              <div
-                className="border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
-                aria-hidden
-              />
-              <div className="grid grid-cols-[100px_minmax(0,1fr)_40px] xl:grid-cols-[180px_minmax(0,1fr)_48px] 2xl:grid-cols-[200px_minmax(0,1fr)_52px]">
+              ))}
+              <div className="grid grid-cols-[96px_minmax(0,1fr)] border-0 border-t border-solid border-[var(--Colors-Use-Main---Gold-Focus)] xl:grid-cols-[140px_minmax(0,1fr)] 2xl:grid-cols-[160px_minmax(0,1fr)]">
                 <div
-                  className="relative overflow-hidden border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
+                  className="border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
                   aria-hidden
-                >
-                  <DotPattern />
+                />
+                <div className="grid grid-cols-[100px_minmax(0,1fr)_40px] xl:grid-cols-[180px_minmax(0,1fr)_48px] 2xl:grid-cols-[200px_minmax(0,1fr)_52px]">
+                  <div
+                    className="relative overflow-hidden border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
+                    aria-hidden
+                  >
+                    <DotPattern />
+                  </div>
+                  <div className="flex w-full items-center px-[10px] py-[14px] xl:px-[12px] xl:py-[20px]">
+                    <ViewFullDataLink
+                      label={t("HomeMilestones.viewFullData")}
+                    />
+                  </div>
+                  <div aria-hidden />
                 </div>
-                <div className="flex w-full items-center px-[10px] py-[14px] xl:px-[12px] xl:py-[20px]">
-                  <ViewFullDataLink label={t("HomeMilestones.viewFullData")} />
-                </div>
-                <div aria-hidden />
               </div>
             </div>
           </div>
-        </div>
         )}
       </div>
     </section>
