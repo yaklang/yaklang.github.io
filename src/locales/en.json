@@ -113,7 +113,8 @@
       "yakitDesc": "All-in-one interactive penetration testing platform",
       "yaklangDesc": "Cyber-security domain-specific programming language",
       "memfitDesc": "Desktop AI Agent for security engineers",
-      "irifyDesc": "SSA & AI-driven code security analysis system"
+      "irifyDesc": "SSA & AI-driven code security analysis system",
+      "ytrayDesc": "Multi-identity browser workspace"
     },
     "yakEnv": {
       "setup": "Yak Environment Setup",
@@ -129,7 +130,8 @@
     },
     "footer": {
       "legacy": "Download compatible version",
-      "oldRelease": "Download old version"
+      "oldRelease": "Download old version",
+      "ytraySite": "Explore YTray"
     },
     "messages": {
       "fetchSizeError": "Failed to get size for {{product}}-{{file}}",

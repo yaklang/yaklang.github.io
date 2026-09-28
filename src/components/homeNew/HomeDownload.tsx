@@ -204,7 +204,7 @@ const ChevronDownIcon = (
   </svg>
 );
 
-type TabKey = "yakit" | "yaklang" | "memfit" | "irify";
+type TabKey = "yakit" | "yaklang" | "memfit" | "irify" | "ytray";
 type DownloadableTabKey = "yakit" | "irify" | "memfit";
 
 const TABS: {
@@ -241,6 +241,17 @@ const TABS: {
     brandIcon: irifyBrandIcon,
     description: "HomeDownload.tabs.irifyDesc",
   },
+  {
+    key: "ytray",
+    label: "YTray",
+    icon: (
+      <img src="/img/newHome/ytray-vector.svg" alt="" className="h-[20px] w-[20px]" />
+    ),
+    brandIcon: (
+      <img src="/img/newHome/ytray-vector.svg" alt="" className="h-[36px] w-[36px]" />
+    ),
+    description: "HomeDownload.tabs.ytrayDesc",
+  },
 ];
 
 /** Tab active / 产品强调色 */
@@ -249,6 +260,7 @@ const TAB_ACCENT: Record<TabKey, string> = {
   yaklang: "var(--Colors-Use-Main---web-Primary)",
   memfit: "var(--Colors-Use-Main---memfit-Primary)",
   irify: "#6A4AA0",
+  ytray: "var(--Colors-Use-Main---web-Primary)",
 };
 
 type PlatformRow = {
@@ -297,6 +309,61 @@ const DOWNLOAD_PLATFORMS: PlatformRow[] = [
   },
 ];
 
+const YTRAY_RELEASE_URL = "https://github.com/yaklang/ytray/releases/latest";
+const YTRAY_MANIFEST_URL = "https://aliyun-oss.yaklang.com/ytray/latest.json";
+const YTRAY_GITHUB_API_URL =
+  "https://api.github.com/repos/yaklang/ytray/releases/latest";
+const YTRAY_PLATFORMS: PlatformRow[] = [
+  { key: "darwin:arm64", os: "macOS 14+", arch: "(Apple Silicon)", osIcon: "mac", url: "darwin:arm64" },
+  { key: "darwin:amd64", os: "macOS 14+", arch: "(Intel)", osIcon: "mac", url: "darwin:amd64" },
+  { key: "windows:amd64", os: "Windows 10/11", arch: "(x64)", osIcon: "win", url: "windows:amd64" },
+  { key: "windows:386", os: "Windows 10/11", arch: "(x86)", osIcon: "win", url: "windows:386" },
+];
+
+type YTrayAsset = { platform?: string; architecture?: string; url?: string; size?: number };
+type YTrayRelease = { version?: string; assets?: YTrayAsset[] };
+type YTrayGitHubRelease = {
+  tag_name?: string;
+  assets?: { name?: string; browser_download_url?: string; size?: number }[];
+};
+
+const parseYTrayRelease = (release: YTrayRelease) => {
+  const assets: Record<string, { url: string; size: number }> = {};
+  for (const asset of release.assets || []) {
+    const key = `${asset.platform}:${asset.architecture}`;
+    if (
+      YTRAY_PLATFORMS.some((row) => row.key === key) &&
+      asset.url?.startsWith("https://aliyun-oss.yaklang.com/ytray/")
+    ) {
+      assets[key] = { url: asset.url, size: Number(asset.size) || 0 };
+    }
+  }
+  return { version: release.version || "", assets };
+};
+
+const parseYTrayGitHubRelease = (release: YTrayGitHubRelease) => {
+  const version = release.tag_name?.replace(/^v/, "") || "";
+  const filenames: Record<string, string> = {
+    "darwin:arm64": `YTray-${version}-darwin-arm64.dmg`,
+    "darwin:amd64": `YTray-${version}-darwin-amd64.dmg`,
+    "windows:amd64": `YTray-${version}-windows-amd64-setup.exe`,
+    "windows:386": `YTray-${version}-windows-386-setup.exe`,
+  };
+  const assets: Record<string, { url: string; size: number }> = {};
+  for (const asset of release.assets || []) {
+    const key = Object.keys(filenames).find((item) => filenames[item] === asset.name);
+    if (
+      key &&
+      asset.browser_download_url?.startsWith(
+        "https://github.com/yaklang/ytray/releases/download/",
+      )
+    ) {
+      assets[key] = { url: asset.browser_download_url, size: Number(asset.size) || 0 };
+    }
+  }
+  return { version, assets };
+};
+
 const PRODUCT_DOWNLOAD_CONFIG: Record<
   DownloadableTabKey,
   {
@@ -336,6 +403,7 @@ const LEGACY_RELEASE_URL: Record<TabKey, string> = {
   yakit: "https://github.com/yaklang/yakit/releases",
   memfit: "https://github.com/yaklang/yakit/releases",
   irify: "https://github.com/yaklang/yakit/releases",
+  ytray: "https://github.com/yaklang/ytray/releases",
 };
 
 const LEGACY_DOWNLOAD_ITEMS = [
@@ -437,14 +505,32 @@ const HomeDownload: React.FC = () => {
           }).buildFacts.assetSizes }
       : {}),
   );
+  const [ytrayRelease, setYtrayRelease] = useState<
+    ReturnType<typeof parseYTrayRelease>
+  >({ version: "", assets: {} });
   const activeProduct = TABS.find((t) => t.key === activeTab) ?? TABS[0];
   const activeAccent = TAB_ACCENT[activeTab];
-  const activeVersion = isDownloadableTab(activeTab)
-    ? versionMap[activeTab] || ""
-    : "";
-  const activeSizes = isDownloadableTab(activeTab)
-    ? sizeMap[activeTab] || {}
-    : {};
+  const activeVersion =
+    activeTab === "ytray"
+      ? ytrayRelease.version
+      : isDownloadableTab(activeTab)
+        ? versionMap[activeTab] || ""
+        : "";
+  const activeSizes =
+    activeTab === "ytray"
+      ? Object.fromEntries(
+          Object.entries(ytrayRelease.assets).map(([key, asset]) => [
+            key,
+            asset.size > 0
+              ? Math.ceil((asset.size / 1024 / 1024) * 100) / 100
+              : null,
+          ]),
+        )
+      : isDownloadableTab(activeTab)
+        ? sizeMap[activeTab] || {}
+        : {};
+  const activePlatforms =
+    activeTab === "ytray" ? YTRAY_PLATFORMS : DOWNLOAD_PLATFORMS;
   const currentYakEnv =
     YAK_ENV_OPTIONS.find((item) => item.key === currentSelectYak) ??
     YAK_ENV_OPTIONS[0];
@@ -556,6 +642,42 @@ const HomeDownload: React.FC = () => {
   }, [activeTab, initProductDownload]);
 
   useEffect(() => {
+    if (activeTab !== "ytray" || ytrayRelease.version) return;
+    const controller = new AbortController();
+    const loadRelease = async () => {
+      try {
+        const response = await fetch(YTRAY_MANIFEST_URL, {
+          signal: controller.signal,
+          headers: { Accept: "application/json" },
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const release = parseYTrayRelease(
+          (await response.json()) as YTrayRelease,
+        );
+        if (!release.version || !Object.keys(release.assets).length) {
+          throw new Error("Empty YTray release");
+        }
+        setYtrayRelease(release);
+      } catch {
+        if (controller.signal.aborted) return;
+        try {
+          const response = await fetch(YTRAY_GITHUB_API_URL, { signal: controller.signal });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          setYtrayRelease(
+            parseYTrayGitHubRelease(
+              (await response.json()) as YTrayGitHubRelease,
+            ),
+          );
+        } catch {
+          // Each row still links to the official latest release.
+        }
+      }
+    };
+    loadRelease();
+    return () => controller.abort();
+  }, [activeTab, ytrayRelease.version]);
+
+  useEffect(() => {
     setLegacyVisible(false);
     setYakEnvVisible(false);
   }, [activeTab]);
@@ -584,6 +706,10 @@ const HomeDownload: React.FC = () => {
   }, [yakEnvVisible, legacyVisible]);
 
   const onDownload = useMemoizedFn((fileUrl: string) => {
+    if (activeTab === "ytray") {
+      window.location.href = ytrayRelease.assets[fileUrl]?.url || YTRAY_RELEASE_URL;
+      return;
+    }
     if (!isDownloadableTab(activeTab)) return;
     const version = versionMap[activeTab];
     if (!version) {
@@ -684,7 +810,7 @@ const HomeDownload: React.FC = () => {
     <section className="relative box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]">
       <DownloadFlowerBg />
 
-      {/* 标题+下载主体：整组垂直居中；合作方跑马灯贴底 */}
+      {/* 标题和标签以最长下载表格为基准居中，切换产品时保持点击位置。 */}
       <div
         className={`relative z-[1] min-h-0 w-full overflow-hidden ${HOME_SECTION_CENTER_CLASS}`}
       >
@@ -699,16 +825,19 @@ const HomeDownload: React.FC = () => {
               {t("HomeDownload.title")}
             </div>
 
-            {/* Tab：小屏未选中仅图标，大屏显示文案 */}
-            <div className="flex rounded-[8px] bg-[var(--Colors-Use-Main---Gold-Focus)] p-[4px] mb-[40px]">
+            {/* 小屏使用固定宽度的图标按钮，切换时标签不横移。 */}
+            <div className="flex max-w-full rounded-[8px] bg-[var(--Colors-Use-Main---Gold-Focus)] p-[4px] mb-[40px]">
               {TABS.map((tab) => {
                 const selected = activeTab === tab.key;
                 return (
                   <button
                     key={tab.key}
+                    type="button"
                     onClick={() => setActiveTab(tab.key)}
                     aria-label={tab.label}
-                    className={`flex cursor-pointer items-center gap-[10px] rounded-[4px] border-none px-[10px] py-[6px] transition-colors duration-200 ${
+                    title={tab.label}
+                    aria-pressed={selected}
+                    className={`flex w-[42px] sm:w-auto cursor-pointer items-center justify-center gap-[10px] rounded-[4px] border-none px-[8px] sm:px-[10px] py-[6px] transition-colors duration-200 ${
                       selected
                         ? "bg-[var(--Colors-Use-Basic-Background)] text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
                         : "bg-transparent text-[color:var(--Colors-Use-Neutral-Text-2-Primary)] hover:bg-[var(--Colors-Use-Main---Gold-Bg-Hover)]"
@@ -716,7 +845,7 @@ const HomeDownload: React.FC = () => {
                   >
                     <div className="flex items-center gap-[6px] font-['PingFang_SC'] text-[14px] font-normal leading-[20px] tracking-[0.1px]">
                       <span
-                        className="inline-flex"
+                        className={`inline-flex ${tab.key === "ytray" && !selected ? "grayscale opacity-75" : ""}`}
                         style={{
                           color: selected
                             ? TAB_ACCENT[tab.key]
@@ -725,9 +854,7 @@ const HomeDownload: React.FC = () => {
                       >
                         {tab.icon}
                       </span>
-                      <span
-                        className={selected ? "inline" : "hidden sm:inline"}
-                      >
+                      <span className="hidden sm:inline">
                         {tab.label}
                       </span>
                     </div>
@@ -738,13 +865,15 @@ const HomeDownload: React.FC = () => {
           </div>
 
           {/* 产品区 */}
-          <div className="flex min-h-0 w-full flex-col items-center gap-[12px] overflow-hidden">
+          <div className="flex min-h-[460px] sm:min-h-[420px] w-full flex-col items-center gap-[12px] overflow-hidden">
             {/* Logo：品牌标铺满 48×48；单色标用强调色底 + 36×36 白色图标 */}
             <div
               className="flex h-[48px] w-[48px] shrink-0 items-center justify-center overflow-hidden rounded-[48px]"
               style={
                 activeProduct.brandIcon
-                  ? undefined
+                  ? activeTab === "ytray"
+                    ? { backgroundColor: "rgba(242, 98, 21, 0.1)" }
+                    : undefined
                   : { backgroundColor: activeAccent }
               }
             >
@@ -868,7 +997,7 @@ const HomeDownload: React.FC = () => {
                   </div>
 
                   {/* 下载行 */}
-                  {DOWNLOAD_PLATFORMS.map((row) => (
+                  {activePlatforms.map((row) => (
                     <div
                       key={row.key}
                       className="flex items-center border-0 border-solid border-t border-[var(--Colors-Use-Main---Gold-Focus)] min-h-[56px] sm:min-h-0 sm:h-[48px] hover:bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] cursor-pointer group"
@@ -916,34 +1045,45 @@ const HomeDownload: React.FC = () => {
 
                 {/* 底部链接 */}
                 <div className="flex items-center justify-center gap-[12px] mt-[4px]">
-                  <Dropdown
-                    open={legacyVisible}
-                    onOpenChange={(open) => {
-                      if (!isDownloadableTab(activeTab)) return;
-                      setLegacyVisible(open);
-                    }}
-                    trigger={["click"]}
-                    placement="bottom"
-                    destroyOnHidden
-                    getPopupContainer={() => document.body}
-                    popupRender={() => legacyDropdown}
-                  >
-                    <button
-                      type="button"
-                      data-home-download-trigger="legacy"
-                      disabled={!isDownloadableTab(activeTab)}
-                      className="flex items-center gap-[4px] py-[3px] border-none bg-transparent cursor-pointer text-[12px] leading-[14px] tracking-[0.5px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] underline font-['PingFang_SC'] hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
+                  {activeTab === "ytray" ? (
+                    <a
+                      href="https://yaklang.io/ytray/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-[3px] text-[12px] leading-[14px] tracking-[0.5px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] underline font-['PingFang_SC'] hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
                     >
-                      {t("HomeDownload.footer.legacy")}
-                      <span
-                        className={`inline-flex transition-transform duration-200 ${
-                          legacyVisible ? "rotate-180" : ""
-                        }`}
+                      {t("HomeDownload.footer.ytraySite")}
+                    </a>
+                  ) : (
+                    <Dropdown
+                      open={legacyVisible}
+                      onOpenChange={(open) => {
+                        if (!isDownloadableTab(activeTab)) return;
+                        setLegacyVisible(open);
+                      }}
+                      trigger={["click"]}
+                      placement="bottom"
+                      destroyOnHidden
+                      getPopupContainer={() => document.body}
+                      popupRender={() => legacyDropdown}
+                    >
+                      <button
+                        type="button"
+                        data-home-download-trigger="legacy"
+                        disabled={!isDownloadableTab(activeTab)}
+                        className="flex items-center gap-[4px] py-[3px] border-none bg-transparent cursor-pointer text-[12px] leading-[14px] tracking-[0.5px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] underline font-['PingFang_SC'] hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
                       >
-                        {PlusIcon}
-                      </span>
-                    </button>
-                  </Dropdown>
+                        {t("HomeDownload.footer.legacy")}
+                        <span
+                          className={`inline-flex transition-transform duration-200 ${
+                            legacyVisible ? "rotate-180" : ""
+                          }`}
+                        >
+                          {PlusIcon}
+                        </span>
+                      </button>
+                    </Dropdown>
+                  )}
                   <div className="w-[1px] h-[12px] bg-[var(--Colors-Use-Main---Gold-Focus)]" />
                   <a
                     href={LEGACY_RELEASE_URL[activeTab]}
