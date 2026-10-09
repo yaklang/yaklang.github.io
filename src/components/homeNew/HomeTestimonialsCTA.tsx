@@ -96,6 +96,28 @@ const TESTIMONIAL_IMAGES: Record<string, string> = {
   t17: require("@site/static/img/home-optimized/testimonials/t17.webp").default,
   t18: require("@site/static/img/home-optimized/testimonials/t18.webp").default,
   t19: require("@site/static/img/home-optimized/testimonials/t19.webp").default,
+  t20: require("@site/static/img/home-optimized/testimonials/t20.webp").default,
+  t21: require("@site/static/img/home-optimized/testimonials/t21.webp").default,
+  t22: require("@site/static/img/home-optimized/testimonials/t22.webp").default,
+  t23: require("@site/static/img/home-optimized/testimonials/t23.webp").default,
+  t24: require("@site/static/img/home-optimized/testimonials/t24.webp").default,
+  t25: require("@site/static/img/home-optimized/testimonials/t25.webp").default,
+  t26: require("@site/static/img/home-optimized/testimonials/t26.webp").default,
+  t27: require("@site/static/img/home-optimized/testimonials/t27.webp").default,
+  t28: require("@site/static/img/home-optimized/testimonials/t28.webp").default,
+  t29: require("@site/static/img/home-optimized/testimonials/t29.webp").default,
+  t30: require("@site/static/img/home-optimized/testimonials/t30.webp").default,
+  t31: require("@site/static/img/home-optimized/testimonials/t31.webp").default,
+  t32: require("@site/static/img/home-optimized/testimonials/t32.webp").default,
+  t33: require("@site/static/img/home-optimized/testimonials/t33.webp").default,
+  t34: require("@site/static/img/home-optimized/testimonials/t34.webp").default,
+  t35: require("@site/static/img/home-optimized/testimonials/t35.webp").default,
+  t36: require("@site/static/img/home-optimized/testimonials/t36.webp").default,
+  t37: require("@site/static/img/home-optimized/testimonials/t37.webp").default,
+  t38: require("@site/static/img/home-optimized/testimonials/t38.webp").default,
+  t39: require("@site/static/img/home-optimized/testimonials/t39.webp").default,
+  t40: require("@site/static/img/home-optimized/testimonials/t40.webp").default,
+  t41: require("@site/static/img/home-optimized/testimonials/t41.webp").default,
 };
 
 const TESTIMONIAL_KEYS = Object.keys(TESTIMONIAL_IMAGES).sort(
@@ -148,7 +170,7 @@ const QuoteBody: React.FC<{
   return (
     <p
       ref={textRef}
-      className="m-0 overflow-hidden text-left font-['PingFang_SC'] text-[16px] leading-[24px] tracking-[0.1px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] [&_.appraise-content-key-point]:bg-transparent [&_.appraise-content-key-point]:text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
+      className="m-0 overflow-hidden text-left font-['PingFang_SC'] text-[16px] leading-[24px] tracking-[0.1px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:5] sm:[-webkit-line-clamp:4] [&_.appraise-content-key-point]:bg-transparent [&_.appraise-content-key-point]:text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
     >
       <span aria-hidden>“</span>
       {contentNodes.map((child, i) => {
@@ -183,7 +205,7 @@ const TestimonialCard: React.FC<AppraiseItem & { shouldLoadImages: boolean }> = 
     useIsOverflowing<HTMLParagraphElement>();
 
   return (
-    <article className="box-border flex h-[160px] w-[280px] shrink-0 flex-col overflow-hidden border-0 border-r border-solid border-r-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] transition-colors duration-200 hover:bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] sm:h-[240px] sm:w-[320px] lg:w-[360px] xl:w-[400px]">
+      <article className="box-border flex h-[220px] w-[280px] shrink-0 flex-col overflow-hidden border-0 border-r border-solid border-r-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] transition-colors duration-200 hover:bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] sm:h-[240px] sm:w-[320px] lg:w-[360px] xl:w-[400px]">
       <div className="flex shrink-0 items-center gap-[12px] border-0 border-b border-solid border-b-[var(--Colors-Use-Main---Gold-Focus)] px-[24px] py-[12px] sm:px-[40px] sm:pb-[20px] sm:pt-[20px]">
         <img
           src={shouldLoadImages ? img : undefined}
@@ -251,41 +273,6 @@ const InfiniteRow: React.FC<InfiniteRowProps> = ({
       ? "home-testimonial-marquee-left"
       : "home-testimonial-marquee-right";
   const rowRef = useRef<HTMLDivElement>(null);
-  const animRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const row = rowRef.current;
-    const anim = animRef.current;
-    if (!row || !anim) return;
-    let visible = true;
-
-    const applyState = () => {
-      const hovered = row.matches(":hover");
-      if (!visible || hovered) anim.style.animationPlayState = "paused";
-      else anim.style.animationPlayState = "running";
-    };
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        visible = entry?.isIntersecting ?? false;
-        applyState();
-      },
-      { threshold: 0.05 },
-    );
-    io.observe(row);
-
-    const onEnter = () => applyState();
-    const onLeave = () => applyState();
-    row.addEventListener("mouseenter", onEnter);
-    row.addEventListener("mouseleave", onLeave);
-
-    applyState();
-    return () => {
-      io.disconnect();
-      row.removeEventListener("mouseenter", onEnter);
-      row.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
 
   return (
     <div
@@ -293,7 +280,6 @@ const InfiniteRow: React.FC<InfiniteRowProps> = ({
       className="home-testimonial-row group/row relative w-full overflow-hidden"
     >
       <div
-        ref={animRef}
         className={`flex w-max ${animClass}`}
         style={{ animationDuration: `${duration}s` }}
       >
@@ -333,7 +319,7 @@ const HomeTestimonialsCTA: React.FC = () => {
   }, [TESTIMONIALS]);
 
   return (
-    <section className="flex h-full w-full flex-col items-center overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]">
+    <section className="flex min-h-[620px] w-full flex-col items-center overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)] sm:h-full sm:min-h-0">
       <style>{`
         @keyframes home-testimonial-marquee-left {
           from { transform: translateX(0); }
@@ -347,14 +333,17 @@ const HomeTestimonialsCTA: React.FC = () => {
           animation-name: home-testimonial-marquee-left;
           animation-timing-function: linear;
           animation-iteration-count: infinite;
+          animation-play-state: running;
         }
         .home-testimonial-marquee-right {
           animation-name: home-testimonial-marquee-right;
           animation-timing-function: linear;
           animation-iteration-count: infinite;
+          animation-play-state: running;
         }
-        .home-testimonial-row:hover .home-testimonial-marquee-left,
-        .home-testimonial-row:hover .home-testimonial-marquee-right {
+        /* 鼠标悬停时暂停 —— 纯 CSS 控制，不依赖 JS 事件 */
+        .home-testimonial-row:hover > .home-testimonial-marquee-left,
+        .home-testimonial-row:hover > .home-testimonial-marquee-right {
           animation-play-state: paused;
         }
         @media (prefers-reduced-motion: reduce) {
@@ -383,7 +372,7 @@ const HomeTestimonialsCTA: React.FC = () => {
       `}</style>
 
       {/* 标题区：小屏保底高度，避免被双行 marquee 挤没 */}
-      <div className="relative min-h-[240px] w-full flex-1 overflow-hidden sm:min-h-0">
+      <div className="relative min-h-[180px] w-full flex-1 overflow-hidden sm:min-h-0">
         <div
           className="pointer-events-none absolute inset-0 w-full"
           aria-hidden

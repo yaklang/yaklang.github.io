@@ -399,8 +399,6 @@ const SwiperHome: React.FC = () => {
       if (rafId) return;
       rafId = requestAnimationFrame(() => {
         rafId = 0;
-        // 滚过评价区后暂停跑马灯，减轻合成压力
-        free.dataset.pastIntro = free.scrollTop > 8 ? "1" : "0";
         syncScrollbar(swiperRef.current, false);
       });
     };
@@ -458,7 +456,6 @@ const SwiperHome: React.FC = () => {
 
           if (idx !== LAST_SLIDE_INDEX && freeScrollRef.current) {
             freeScrollRef.current.scrollTop = 0;
-            freeScrollRef.current.dataset.pastIntro = "0";
           }
           if (idx === LAST_SLIDE_INDEX) {
             swiper.mousewheel?.disable();
@@ -513,11 +510,6 @@ const SwiperHome: React.FC = () => {
             display: none;
             width: 0;
             height: 0;
-          }
-          /* 滚过评价区后暂停跑马灯，减轻末屏滚动卡顿 */
-          .home-page-swiper [data-home-free-scroll][data-past-intro="1"] .home-testimonial-marquee-left,
-          .home-page-swiper [data-home-free-scroll][data-past-intro="1"] .home-testimonial-marquee-right {
-            animation-play-state: paused !important;
           }
         `}</style>
 
