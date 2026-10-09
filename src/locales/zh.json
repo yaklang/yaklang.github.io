@@ -658,6 +658,420 @@
     "viewDocs": "查看文档",
     "testimonials": {
       "t0": {
+        "name": "walkingdone",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "yakit的热加载",
+            "highlight": true
+          },
+          {
+            "text": "，后面用",
+            "highlight": false
+          },
+          {
+            "text": "Memfit",
+            "highlight": true
+          },
+          {
+            "text": "觉得他plan模式用dag思路做挺厉害",
+            "highlight": false
+          }
+        ]
+      },
+      "t1": {
+        "name": "017",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "YakitJs逆向加解密",
+            "highlight": true
+          },
+          {
+            "text": "永远滴神！！！",
+            "highlight": false
+          }
+        ]
+      },
+      "t2": {
+        "name": "hangyi",
+        "segments": [
+          {
+            "text": "喜欢 ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit 的插件大全",
+            "highlight": true
+          },
+          {
+            "text": "，非常方便",
+            "highlight": false
+          }
+        ]
+      },
+      "t3": {
+        "name": "千 鱼",
+        "segments": [
+          {
+            "text": "那还得是",
+            "highlight": false
+          },
+          {
+            "text": "yakit标签",
+            "highlight": true
+          },
+          {
+            "text": "好用，暴力破解啥的非常舒服，还能按规则提取响应内容，添加脏数据时也很方便。",
+            "highlight": false
+          }
+        ]
+      },
+      "t4": {
+        "name": "淡竹叶",
+        "segments": [
+          {
+            "text": "使用ai结合mcp逆向编写",
+            "highlight": false
+          },
+          {
+            "text": "热加载的加解密程序",
+            "highlight": true
+          },
+          {
+            "text": "，明文查看加密数据流，丝滑",
+            "highlight": false
+          }
+        ]
+      },
+      "t5": {
+        "name": "TAI",
+        "segments": [
+          {
+            "text": "1.",
+            "highlight": false
+          },
+          {
+            "text": "插件云仓库上传",
+            "highlight": true
+          },
+          {
+            "text": "：这个功能真的很实用，能很方便地分类积累自己常用的POC和小工具插件。2. ",
+            "highlight": false
+          },
+          {
+            "text": "ysoJavahack模块",
+            "highlight": true
+          },
+          {
+            "text": "：做Java漏洞测试的时候这个功能太好用了，针对fastjson、JNDI这类漏洞的利用流程做了高度集成。3. ",
+            "highlight": false
+          },
+          {
+            "text": "fuzztag标签",
+            "highlight": true
+          },
+          {
+            "text": "：快速构造fuzz载荷、完成爆破发包都很顺畅，不用再搭配其他工具繁琐配置。整体用下来体验感很好，也真心希望Yakit能越做越好",
+            "highlight": false
+          }
+        ]
+      },
+      "t6": {
+        "name": "小哥哥",
+        "segments": [
+          {
+            "text": "非常喜欢",
+            "highlight": false
+          },
+          {
+            "text": "Memfit的自动渗透测试功能",
+            "highlight": true
+          },
+          {
+            "text": "，对于我们这种一个人的安全团队的甲方企业来说，有了这个就可以自由的对自家的资产进行测试，发现威胁，及时进行处置。立马买书去，必须支持一本。",
+            "highlight": false
+          }
+        ]
+      },
+      "t7": {
+        "name": "lcy离",
+        "segments": [
+          {
+            "text": "我个人比较喜欢",
+            "highlight": false
+          },
+          {
+            "text": "Yakit/Memfit的易上手",
+            "highlight": true
+          },
+          {
+            "text": "，对新手很友好，包括从安装到使用，都是比较便捷的，也希望yakit能越来越好",
+            "highlight": false
+          }
+        ]
+      },
+      "t8": {
+        "name": "1900",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "web fuzzer配置栏",
+            "highlight": true
+          },
+          {
+            "text": "很夯，发包有问题基本上都能从这解决了，数据匹配器用起来很爽。提取有规律的信息很舒服。",
+            "highlight": false
+          }
+        ]
+      },
+      "t9": {
+        "name": "玛卡巴卡-24h蹬ai版",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "web fuzzer",
+            "highlight": true
+          },
+          {
+            "text": "打组合链批量刷洞做的很好，打组合拳0day的时候比burp好，自定义正则也很方便。从大学到现在已经用了4年了，依旧觉得yakit是ui交互做的最好的工具",
+            "highlight": false
+          }
+        ]
+      },
+      "t10": {
+        "name": "米奇妙妙屋",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "yakit的热加载",
+            "highlight": true
+          },
+          {
+            "text": "吹爆！而且界面很简洁，我喜欢这种清晰的ui",
+            "highlight": false
+          }
+        ]
+      },
+      "t11": {
+        "name": "🌻是皮皮宋吖",
+        "segments": [
+          {
+            "text": "我最喜欢 ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit 的流量劫持与自动漏洞扫描功能",
+            "highlight": true
+          },
+          {
+            "text": "。在做内网渗透测试的时候，经常遇到大量待测试的业务站点，过去需要手动一个个发包、配置 payload，效率很低。Yakit 可以一键抓取浏览器全部流量，自动对请求做 fuzz 和漏洞检测，XSS、SQL 注入、路径穿越这类常见风险可以快速筛出来。脚本引擎也很实用，把抓包、分析、自定义 POC 复现整合在同一个界面，大大缩短渗透测试的时间。",
+            "highlight": false
+          }
+        ]
+      },
+      "t12": {
+        "name": "苟富贵",
+        "segments": [
+          {
+            "text": "必须是",
+            "highlight": false
+          },
+          {
+            "text": "热加载与 tun 劫持功能",
+            "highlight": true
+          },
+          {
+            "text": "，在做小程序测试超级方便，现已经脱离burpsuite 这些老外的工具，彻底爱上了国产化渗透工具",
+            "highlight": false
+          }
+        ]
+      },
+      "t13": {
+        "name": "Guardian",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "yakit最大优点就是高效率",
+            "highlight": true
+          },
+          {
+            "text": "，如果插件库，插件有提示如何操作就更好了！对于新手简直完爆burp！希望能够上线有关内容。",
+            "highlight": false
+          }
+        ]
+      },
+      "t14": {
+        "name": "无名过客",
+        "segments": [
+          {
+            "text": "我觉得可以加一个",
+            "highlight": false
+          },
+          {
+            "text": "自动化配置环境的功能",
+            "highlight": true
+          },
+          {
+            "text": "，当前有一个痛点是在渗透测试中遇到一些开源系统想本地部署总是报错，在issues中有些问题没完善，需要自己解决，如果AI能帮我自动化处理报错搭建部署环境的话会方便我本地进行漏洞挖掘和测试",
+            "highlight": false
+          }
+        ]
+      },
+      "t15": {
+        "name": "Yz0ne",
+        "segments": [
+          {
+            "text": "Yakit希望多一个",
+            "highlight": false
+          },
+          {
+            "text": "端口反代的功能",
+            "highlight": true
+          },
+          {
+            "text": "。比如本地开启一个端口反代给另一个端口。之后记录所有访问这个端口的流量数据包，并且能拦截修改。使用场景：开启一个端口反代给一个sse的mcp服务。后续ai设置mcp的sse为yakit端口。yakit能实时监控mcp的流量，对mcp服务进行测试。",
+            "highlight": false
+          }
+        ]
+      },
+      "t16": {
+        "name": "Chelth",
+        "segments": [
+          {
+            "text": "犹记得2022年，本命年，用",
+            "highlight": false
+          },
+          {
+            "text": "yakit内测版",
+            "highlight": true
+          },
+          {
+            "text": "测试手工发现了职业生涯中的第一个rce，从此打开了新世界。",
+            "highlight": false
+          }
+        ]
+      },
+      "t17": {
+        "name": "阿杰咯",
+        "segments": [
+          {
+            "text": "印象最深，在一次微服务API越权测试中，接口超200个且请求带动态签名。手工构造请求耗时巨大，我直接用",
+            "highlight": false
+          },
+          {
+            "text": "Yakit的MITM模块",
+            "highlight": true
+          },
+          {
+            "text": "提取token和签名参数为全局变量，再配合",
+            "highlight": false
+          },
+          {
+            "text": "Web Fuzzer的内置脚本",
+            "highlight": true
+          },
+          {
+            "text": "自动计算签名，批量低权token替换高权接口。半小时配置完成，快速发现3处越权漏洞（含敏感数据泄露），两天干完预估五天的活。",
+            "highlight": false
+          }
+        ]
+      },
+      "t18": {
+        "name": "Murphy",
+        "segments": [
+          {
+            "text": "印象最深的一次是用 ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit 的 MITM 代理 + Web Fuzzer 组合拳",
+            "highlight": true
+          },
+          {
+            "text": "，挖出一个订单越权遍历的漏洞。当时在做某电商后台的渗透测试，正常功能点都测完了没发现明显问题。我开了 Yakit 的 MITM 代理挂全局抓包，在浏览订单列表时，注意到一个 /api/order/detail?id=xxxxx 的请求。用 Web Fuzzer 把 id 改成连续数字批量跑了一遍，发现没有任何鉴权校验，直接能遍历到其他商户的订单详情。全靠 Yakit 的被动流量分析 + 可编程 Fuzzer，半小时就定位到了影响面。",
+            "highlight": false
+          }
+        ]
+      },
+      "t19": {
+        "name": "小黑是只猫",
+        "segments": [
+          {
+            "text": "印象最深的是：一次业务逻辑漏洞测试里，资产多、时间紧，纯人工分析不仅耗时，还容易漏掉深层问题。刚好 ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit 当时支持人工与 AI 双测",
+            "highlight": true
+          },
+          {
+            "text": "，配合数据包 AI 扫描能力，帮我省去了大量机械性验证时间，最终顺利地完成了测试工作。",
+            "highlight": false
+          }
+        ]
+      },
+      "t20": {
+        "name": "Fairy Tail",
+        "segments": [
+          {
+            "text": "印象最深的是处理无回显的漏洞验证场景，利用 ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit 的综合反连 OOB 能力",
+            "highlight": true
+          },
+          {
+            "text": "，不用看页面回显，就能确认命令执行、SQL 盲注这类漏洞是否真实存在，大大降低了盲测的难度，解决了之前手工测试很难复现验证的痛点",
+            "highlight": false
+          }
+        ]
+      },
+      "t21": {
+        "name": "天涯寒尽",
+        "segments": [
+          {
+            "text": "很多人印象最深的是用它",
+            "highlight": false
+          },
+          {
+            "text": "替代了Burp Suite",
+            "highlight": true
+          },
+          {
+            "text": "，解决了内存占用大、英文界面和不兼容的“工具焦虑”。特别是",
+            "highlight": false
+          },
+          {
+            "text": "热加载(Hotpatch) 功能",
+            "highlight": true
+          },
+          {
+            "text": "，能轻松搞定加解密和签名；以及原生插件系统，无需额外加载，非常省心。",
+            "highlight": false
+          }
+        ]
+      },
+      "t22": {
         "name": "ykc",
         "segments": [
           {
@@ -682,7 +1096,7 @@
           }
         ]
       },
-      "t1": {
+      "t23": {
         "name": "kio",
         "segments": [
           {
@@ -699,7 +1113,7 @@
           }
         ]
       },
-      "t2": {
+      "t24": {
         "name": "和你",
         "segments": [
           {
@@ -716,7 +1130,7 @@
           }
         ]
       },
-      "t3": {
+      "t25": {
         "name": "P0m32Kun",
         "segments": [
           {
@@ -749,7 +1163,7 @@
           }
         ]
       },
-      "t4": {
+      "t26": {
         "name": "18 Xtreme",
         "segments": [
           {
@@ -774,7 +1188,7 @@
           }
         ]
       },
-      "t5": {
+      "t27": {
         "name": "国产大熊猫",
         "segments": [
           {
@@ -799,7 +1213,7 @@
           }
         ]
       },
-      "t6": {
+      "t28": {
         "name": "CF_HB",
         "segments": [
           {
@@ -824,7 +1238,7 @@
           }
         ]
       },
-      "t7": {
+      "t29": {
         "name": "wooluo",
         "segments": [
           {
@@ -849,7 +1263,7 @@
           }
         ]
       },
-      "t8": {
+      "t30": {
         "name": "Vanilla",
         "segments": [
           {
@@ -882,7 +1296,7 @@
           }
         ]
       },
-      "t9": {
+      "t31": {
         "name": "ttStorm",
         "segments": [
           {
@@ -915,7 +1329,7 @@
           }
         ]
       },
-      "t10": {
+      "t32": {
         "name": "酒零",
         "segments": [
           {
@@ -948,7 +1362,7 @@
           }
         ]
       },
-      "t11": {
+      "t33": {
         "name": "key@OverSpace",
         "segments": [
           {
@@ -973,7 +1387,7 @@
           }
         ]
       },
-      "t12": {
+      "t34": {
         "name": "奶权",
         "segments": [
           {
@@ -998,7 +1412,7 @@
           }
         ]
       },
-      "t13": {
+      "t35": {
         "name": "sharecast",
         "segments": [
           {
@@ -1015,7 +1429,7 @@
           }
         ]
       },
-      "t14": {
+      "t36": {
         "name": "影舞者",
         "segments": [
           {
@@ -1040,7 +1454,7 @@
           }
         ]
       },
-      "t15": {
+      "t37": {
         "name": "TimWhite",
         "segments": [
           {
@@ -1057,7 +1471,7 @@
           }
         ]
       },
-      "t16": {
+      "t38": {
         "name": "Alex-null",
         "segments": [
           {
@@ -1082,7 +1496,7 @@
           }
         ]
       },
-      "t17": {
+      "t39": {
         "name": "六月初七",
         "segments": [
           {
@@ -1115,7 +1529,7 @@
           }
         ]
       },
-      "t18": {
+      "t40": {
         "name": "小米粥",
         "segments": [
           {
@@ -1156,7 +1570,7 @@
           }
         ]
       },
-      "t19": {
+      "t41": {
         "name": "李大壮'",
         "segments": [
           {

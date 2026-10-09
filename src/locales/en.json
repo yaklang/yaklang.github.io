@@ -658,6 +658,420 @@
     "viewDocs": "View Documentation",
     "testimonials": {
       "t0": {
+        "name": "walkingdone",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "Yakit's hot-reload",
+            "highlight": true
+          },
+          {
+            "text": ", and later using ",
+            "highlight": false
+          },
+          {
+            "text": "Memfit",
+            "highlight": true
+          },
+          {
+            "text": ", I found its plan mode with DAG approach quite impressive",
+            "highlight": false
+          }
+        ]
+      },
+      "t1": {
+        "name": "017",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "YakitJs reverse decryption",
+            "highlight": true
+          },
+          {
+            "text": " is the GOAT!!!",
+            "highlight": false
+          }
+        ]
+      },
+      "t2": {
+        "name": "hangyi",
+        "segments": [
+          {
+            "text": "Love ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit's plugin collection",
+            "highlight": true
+          },
+          {
+            "text": ", very convenient",
+            "highlight": false
+          }
+        ]
+      },
+      "t3": {
+        "name": "千 鱼",
+        "segments": [
+          {
+            "text": "Gotta be ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit tags",
+            "highlight": true
+          },
+          {
+            "text": " — brute-force is super comfortable, plus rule-based response extraction and dirty data injection are very handy.",
+            "highlight": false
+          }
+        ]
+      },
+      "t4": {
+        "name": "淡竹叶",
+        "segments": [
+          {
+            "text": "Using AI with MCP to reverse-engineer and write ",
+            "highlight": false
+          },
+          {
+            "text": "hot-reload decryption programs",
+            "highlight": true
+          },
+          {
+            "text": ", viewing encrypted data streams in plaintext — silky smooth",
+            "highlight": false
+          }
+        ]
+      },
+      "t5": {
+        "name": "TAI",
+        "segments": [
+          {
+            "text": "1. ",
+            "highlight": false
+          },
+          {
+            "text": "Plugin cloud repository upload",
+            "highlight": true
+          },
+          {
+            "text": ": really practical for categorizing and accumulating commonly used POCs and tools. 2. ",
+            "highlight": false
+          },
+          {
+            "text": "ysoJavahack module",
+            "highlight": true
+          },
+          {
+            "text": ": great for Java vulnerability testing, highly integrated for fastjson and JNDI exploitation. 3. ",
+            "highlight": false
+          },
+          {
+            "text": "fuzztag",
+            "highlight": true
+          },
+          {
+            "text": ": quickly construct fuzz payloads and brute-force packets without extra tool configuration. Overall great experience, truly hope Yakit keeps getting better",
+            "highlight": false
+          }
+        ]
+      },
+      "t6": {
+        "name": "小哥哥",
+        "segments": [
+          {
+            "text": "Really love ",
+            "highlight": false
+          },
+          {
+            "text": "Memfit's automated penetration testing",
+            "highlight": true
+          },
+          {
+            "text": " — for a one-person security team at an enterprise, it lets us freely test our own assets, discover threats, and respond promptly. Buying the book right away to show support.",
+            "highlight": false
+          }
+        ]
+      },
+      "t7": {
+        "name": "lcy离",
+        "segments": [
+          {
+            "text": "I personally like ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit/Memfit's ease of use",
+            "highlight": true
+          },
+          {
+            "text": " — very beginner-friendly, from installation to usage everything is convenient. Hope Yakit keeps improving",
+            "highlight": false
+          }
+        ]
+      },
+      "t8": {
+        "name": "1900",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "Web Fuzzer config panel",
+            "highlight": true
+          },
+          {
+            "text": " is solid — basically any packet issue can be solved here. The data matcher is great to use, extracting patterned info is satisfying.",
+            "highlight": false
+          }
+        ]
+      },
+      "t9": {
+        "name": "玛卡巴卡-24h蹬ai版",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "Web Fuzzer",
+            "highlight": true
+          },
+          {
+            "text": " does combo-chain batch vulnerability hunting really well, better than Burp for 0day combos. Custom regex is convenient too. Been using it for 4 years since college, still think Yakit has the best UI interaction of any tool",
+            "highlight": false
+          }
+        ]
+      },
+      "t10": {
+        "name": "米奇妙妙屋",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "Yakit's hot-reload",
+            "highlight": true
+          },
+          {
+            "text": " is amazing! The interface is clean too, I love this kind of clear UI",
+            "highlight": false
+          }
+        ]
+      },
+      "t11": {
+        "name": "🌻是皮皮宋吖",
+        "segments": [
+          {
+            "text": "My favorite is ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit's traffic hijacking and automated vulnerability scanning",
+            "highlight": true
+          },
+          {
+            "text": ". During internal pentests with many sites to test, previously I had to manually send packets and configure payloads — very inefficient. Yakit can capture all browser traffic at once, automatically fuzz and detect vulnerabilities, quickly screening XSS, SQL injection, path traversal and other common risks. The script engine is also practical, integrating packet capture, analysis, and custom POC reproduction in one interface, greatly shortening pentest time.",
+            "highlight": false
+          }
+        ]
+      },
+      "t12": {
+        "name": "苟富贵",
+        "segments": [
+          {
+            "text": "Definitely ",
+            "highlight": false
+          },
+          {
+            "text": "hot-reload and tun hijacking",
+            "highlight": true
+          },
+          {
+            "text": " — super convenient for mini-program testing. I've moved away from Burp Suite and foreign tools, fully embraced domestic pentest tools",
+            "highlight": false
+          }
+        ]
+      },
+      "t13": {
+        "name": "Guardian",
+        "segments": [
+          {
+            "text": "",
+            "highlight": false
+          },
+          {
+            "text": "Yakit's biggest advantage is high efficiency",
+            "highlight": true
+          },
+          {
+            "text": " — if the plugin library had usage hints it would be even better! For beginners it completely beats Burp! Hope to see related content published.",
+            "highlight": false
+          }
+        ]
+      },
+      "t14": {
+        "name": "无名过客",
+        "segments": [
+          {
+            "text": "I'd like to see an ",
+            "highlight": false
+          },
+          {
+            "text": "automated environment configuration feature",
+            "highlight": true
+          },
+          {
+            "text": " — a current pain point is that deploying open-source systems locally during pentests always errors out, and some issues in the repo aren't resolved. If AI could help me automatically handle errors and set up deployment environments, it would make local vulnerability hunting and testing much easier",
+            "highlight": false
+          }
+        ]
+      },
+      "t15": {
+        "name": "Yz0ne",
+        "segments": [
+          {
+            "text": "I'd like Yakit to add a ",
+            "highlight": false
+          },
+          {
+            "text": "port reverse-proxy feature",
+            "highlight": true
+          },
+          {
+            "text": ". For example, locally open a port that reverse-proxies to another port, then log all traffic to that port and allow interception/modification. Use case: reverse-proxy to an SSE MCP service, then have AI set the MCP's SSE to the Yakit port, so Yakit can monitor MCP traffic in real-time and test the MCP service.",
+            "highlight": false
+          }
+        ]
+      },
+      "t16": {
+        "name": "Chelth",
+        "segments": [
+          {
+            "text": "I still remember 2022, my zodiac year, using the ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit beta",
+            "highlight": true
+          },
+          {
+            "text": " to manually discover my career's first RCE — it opened up a whole new world.",
+            "highlight": false
+          }
+        ]
+      },
+      "t17": {
+        "name": "阿杰咯",
+        "segments": [
+          {
+            "text": "Most memorable: during a microservice API authorization test with 200+ endpoints and dynamic signatures. Manual request construction was extremely time-consuming. I directly used ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit's MITM module",
+            "highlight": true
+          },
+          {
+            "text": " to extract tokens and signature params as global variables, then combined with ",
+            "highlight": false
+          },
+          {
+            "text": "Web Fuzzer's built-in scripts",
+            "highlight": true
+          },
+          {
+            "text": " to auto-calculate signatures and batch-replace low-privilege tokens for high-privilege endpoints. Configured in 30 minutes, quickly found 3 authorization vulnerabilities (including sensitive data leaks), finished 5 days of estimated work in 2 days.",
+            "highlight": false
+          }
+        ]
+      },
+      "t18": {
+        "name": "Murphy",
+        "segments": [
+          {
+            "text": "Most memorable was using ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit's MITM proxy + Web Fuzzer combo",
+            "highlight": true
+          },
+          {
+            "text": " to find an order authorization traversal vulnerability. During an e-commerce backend pentest, all normal functions tested clean. I enabled Yakit's MITM proxy for global capture, noticed an /api/order/detail?id=xxxxx request while browsing orders. Using Web Fuzzer to batch-run sequential IDs, found no authorization checks — could traverse to other merchants' order details. Thanks to Yakit's passive traffic analysis + programmable Fuzzer, I located the impact scope in 30 minutes.",
+            "highlight": false
+          }
+        ]
+      },
+      "t19": {
+        "name": "小黑是只猫",
+        "segments": [
+          {
+            "text": "Most memorable: during a business logic vulnerability test with many assets and tight deadlines, pure manual analysis was time-consuming and prone to missing deep issues. Fortunately ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit supported both manual and AI testing",
+            "highlight": true
+          },
+          {
+            "text": ", and the packet AI scanning capability saved me a lot of mechanical verification time, ultimately completing the test work smoothly.",
+            "highlight": false
+          }
+        ]
+      },
+      "t20": {
+        "name": "Fairy Tail",
+        "segments": [
+          {
+            "text": "Most memorable was handling blind vulnerability verification scenarios, using ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit's comprehensive OOB reverse-connect capability",
+            "highlight": true
+          },
+          {
+            "text": " — without needing page responses, I could confirm whether command execution, blind SQL injection and similar vulnerabilities actually existed, greatly reducing the difficulty of blind testing and solving the pain point of manual verification that was hard to reproduce",
+            "highlight": false
+          }
+        ]
+      },
+      "t21": {
+        "name": "天涯寒尽",
+        "segments": [
+          {
+            "text": "Many people's most memorable experience is using it to ",
+            "highlight": false
+          },
+          {
+            "text": "replace Burp Suite",
+            "highlight": true
+          },
+          {
+            "text": ", solving the “tool anxiety” of high memory usage, English-only interface, and incompatibility. Especially the ",
+            "highlight": false
+          },
+          {
+            "text": "hot-reload (Hotpatch) feature",
+            "highlight": true
+          },
+          {
+            "text": " that easily handles encryption/decryption and signatures; plus the native plugin system that requires no extra loading — very worry-free.",
+            "highlight": false
+          }
+        ]
+      },
+      "t22": {
         "name": "ykc",
         "segments": [
           {
@@ -682,7 +1096,7 @@
           }
         ]
       },
-      "t1": {
+      "t23": {
         "name": "kio",
         "segments": [
           {
@@ -699,7 +1113,7 @@
           }
         ]
       },
-      "t2": {
+      "t24": {
         "name": "和你",
         "segments": [
           {
@@ -716,7 +1130,7 @@
           }
         ]
       },
-      "t3": {
+      "t25": {
         "name": "P0m32Kun",
         "segments": [
           {
@@ -749,7 +1163,7 @@
           }
         ]
       },
-      "t4": {
+      "t26": {
         "name": "18 Xtreme",
         "segments": [
           {
@@ -774,7 +1188,7 @@
           }
         ]
       },
-      "t5": {
+      "t27": {
         "name": "国产大熊猫",
         "segments": [
           {
@@ -799,7 +1213,7 @@
           }
         ]
       },
-      "t6": {
+      "t28": {
         "name": "CF_HB",
         "segments": [
           {
@@ -824,7 +1238,7 @@
           }
         ]
       },
-      "t7": {
+      "t29": {
         "name": "wooluo",
         "segments": [
           {
@@ -849,7 +1263,7 @@
           }
         ]
       },
-      "t8": {
+      "t30": {
         "name": "Vanilla",
         "segments": [
           {
@@ -882,7 +1296,7 @@
           }
         ]
       },
-      "t9": {
+      "t31": {
         "name": "ttStorm",
         "segments": [
           {
@@ -915,7 +1329,7 @@
           }
         ]
       },
-      "t10": {
+      "t32": {
         "name": "酒零",
         "segments": [
           {
@@ -948,7 +1362,7 @@
           }
         ]
       },
-      "t11": {
+      "t33": {
         "name": "key@OverSpace",
         "segments": [
           {
@@ -973,7 +1387,7 @@
           }
         ]
       },
-      "t12": {
+      "t34": {
         "name": "奶权",
         "segments": [
           {
@@ -998,7 +1412,7 @@
           }
         ]
       },
-      "t13": {
+      "t35": {
         "name": "sharecast",
         "segments": [
           {
@@ -1015,7 +1429,7 @@
           }
         ]
       },
-      "t14": {
+      "t36": {
         "name": "影舞者",
         "segments": [
           {
@@ -1040,7 +1454,7 @@
           }
         ]
       },
-      "t15": {
+      "t37": {
         "name": "TimWhite",
         "segments": [
           {
@@ -1057,7 +1471,7 @@
           }
         ]
       },
-      "t16": {
+      "t38": {
         "name": "Alex-null",
         "segments": [
           {
@@ -1082,7 +1496,7 @@
           }
         ]
       },
-      "t17": {
+      "t39": {
         "name": "六月初七",
         "segments": [
           {
@@ -1115,7 +1529,7 @@
           }
         ]
       },
-      "t18": {
+      "t40": {
         "name": "小米粥",
         "segments": [
           {
@@ -1156,7 +1570,7 @@
           }
         ]
       },
-      "t19": {
+      "t41": {
         "name": "李大壮'",
         "segments": [
           {
