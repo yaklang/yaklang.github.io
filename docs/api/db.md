@@ -7,11 +7,12 @@
 - 键值存储：`db.SetKey` / `db.GetKey` / `db.DelKey` 在 Profile 库里跨脚本、跨运行共享配置与中间结果；`db.SetKeyWithTTL` 写入带过期时间的缓存；`db.SetProjectKey` / `db.GetProjectKey` 则隔离在当前项目库中。
 - 资产入库：`db.SaveHTTPFlowFromRaw` / `db.SaveHTTPFlowFromRawWithOption` 把原始 HTTP 请求/响应入库，配合 `db.saveHTTPFlowWithTags` 等选项打标签；`db.SavePayload` / `db.SavePayloadByFile` 管理字典。
 - 数据检索：`db.QueryHTTPFlowsAll` / `db.QueryHTTPFlowsByKeyword` / `db.QueryPortsByTaskName` 等 `Query*` 家族按条件查询资产；`db.YieldPayload` / `db.YieldYakScriptAll` 以流式游标遍历大数据集。
+- 项目与 HTTP 历史：`db.ListYakProjects` 列出引擎、Yakit、Memfit 可识别的项目；`db.QueryHTTPFlows` 配合过滤、分页与报文预算查询当前或指定项目；历史条目提供 `Dump` 原文展示及 `ExportPackets` 完整文件导出；已有 `db.QueryHTTPFlowByID(id)` 保留 HTTPFlow 返回类型与完整存储字段，可继续与保存接口联动。
 - 临时插件与原始库：`db.CreateTemporaryYakScript` 创建临时插件供 `hook` 库加载（记得 `db.DeleteYakScriptByName` 清理）；`db.OpenSqliteDatabase` / `db.OpenTempSqliteDatabase` / `db.ScanResult` 直接操作自定义数据库。
 
 与相邻库的关系：`db` 负责"把数据持久化与查询"，`yakit` 负责"把结果展示给人"，`risk` 负责"漏洞对象"，`hook` 通过 `db.CreateTemporaryYakScript` 装载临时插件。它们在扫描类脚本中常协同：发现结果 → `risk` 记录 → `db` 入库 → `yakit` 实时展示。
 
-> 共 58 个函数、6 个实例
+> 共 71 个函数、6 个实例
 
 ## 实例
 
@@ -46,7 +47,6 @@
 | [db.QueryDomainsByDomainKeyword](#querydomainsbydomainkeyword) | `keyword string` | `chan *schema.Domain, error` | queryDomainAssetByDomainKeyword 按域名关键词模糊查询域名资产（导出名为 db.QueryDomainsByDomainKeyword） |
 | [db.QueryDomainsByNetwork](#querydomainsbynetwork) | `network string` | `chan *schema.Domain, error` | queryDomainAssetByNetwork 按网段（解析 IP 所在网段）查询域名资产（导出名为 db.QueryDomainsByNetwork） |
 | [db.QueryDomainsByTitle](#querydomainsbytitle) | `title string` | `chan *schema.Domain, error` | queryDomainAssetByHTMLTitle 按网站 HTML 标题模糊查询域名资产（导出名为 db.QueryDomainsByTitle） |
-| [db.QueryHTTPFlowByID](#queryhttpflowbyid) | `id int64` | `*schema.HTTPFlow, error` | 按数据库自增 ID 精确查询单条 HTTP 流量（导出名为 db.QueryHTTPFlowByID） |
 | [db.QueryHTTPFlowsAll](#queryhttpflowsall) | - | `chan *schema.HTTPFlow` | 查询数据库中保存的全部 HTTP 流量记录（导出名为 db.QueryHTTPFlowsAll） |
 | [db.QueryHTTPFlowsByKeyword](#queryhttpflowsbykeyword) | `k string` | `chan *schema.HTTPFlow` | queryHTTPFlowByKeyword 按关键词在 URL/请求/响应中模糊查询 HTTP 流量（导出名为 db.QueryHTTPFlowsByKeyword） |
 | [db.QueryHostPortByKeyword](#queryhostportbykeyword) | `network string` | `chan *schema.Host, error` | queryHostAssetByNetwork 按网段查询主机资产（导出名为 db.QueryHostPortByKeyword 等相关接口的底层实现之一） |
@@ -83,7 +83,10 @@
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | [db.CreateTemporaryYakScript](#createtemporaryyakscript) | `t string, code string, suffix ...string` | `string, error` | 创建一个临时插件并保存到数据库，返回插件名称（导出名为 db.CreateTemporaryYakScript） |
+| [db.ListYakProjects](#listyakprojects) | `opts ...DBHistoryOption` | `[]*YakProject, error` | 列出引擎、Yakit 和 Memfit 登记的 Yaklang 项目（导出名为 db.ListYakProjects）。 |
 | [db.NewAliveHost](#newalivehost) | `target string, opts ...yakit.AliveHostParamsOpt` | - | 创建并保存一条存活主机记录并输出（导出名为 db.NewAliveHost） |
+| [db.QueryHTTPFlowByID](#queryhttpflowbyid) | `id int64, opts ...DBHistoryOption` | `*schema.HTTPFlow, error` | 按数据库自增 ID 精确查询单条 HTTP 流量（导出名为 db.QueryHTTPFlowByID） |
+| [db.QueryHTTPFlows](#queryhttpflows) | `opts ...DBHistoryOption` | `*HTTPHistoryPage, error` | 按条件分页查询 HTTP 流量历史（导出名为 db.QueryHTTPFlows）。 |
 | [db.QueryHTTPFlowsByID](#queryhttpflowsbyid) | `id ...int64` | `chan *schema.HTTPFlow` | 按一个或多个 ID 查询 HTTP 流量（导出名为 db.QueryHTTPFlowsByID） |
 | [db.SaveDomain](#savedomain) | `domain string, ip ...string` | `error` | 保存域名及其关联 IP 到项目数据库（导出名为 db.SaveDomain） |
 | [db.SaveHTTPFlowFromRawWithOption](#savehttpflowfromrawwithoption) | `url string, req []byte, rsp []byte, exOption ...yakit.CreateHTTPFlowOptions` | `error` | 根据原始请求/响应及自定义选项保存一条 HTTP 流量记录（导出名为 db.SaveHTTPFlowFromRawWithOption） |
@@ -738,49 +741,6 @@ queryDomainAssetByHTMLTitle 按网站 HTML 标题模糊查询域名资产（导�
 ch = db.QueryDomainsByTitle("admin")~
 for domain in ch {
     println(domain.Domain, domain.HTTPTitle)
-}
-``````````````
-
----
-
-### QueryHTTPFlowByID {#queryhttpflowbyid}
-
-```go
-QueryHTTPFlowByID(id int64) (*schema.HTTPFlow, error)
-```
-
-按数据库自增 ID 精确查询单条 HTTP 流量（导出名为 db.QueryHTTPFlowByID）
-
-当你已经知道某条流量的 ID（例如从列表/表格中选中、或从其他查询里拿到 flow.ID）时，用它直接取回完整对象。
-
-批量按多个 ID 取用 db.QueryHTTPFlowsByID。
-
-**参数**
-
-|参数名|类型|说明|
-|:--|:--|:--|
-| id | `int64` | HTTPFlow 的数据库 ID |
-
-**返回值**
-
-|序号|类型|说明|
-|:--|:--|:--|
-| r1 | `*schema.HTTPFlow` | HTTPFlow 对象 |
-| r2 | `error` | 错误信息（数据库不可用或该 ID 不存在时返回） |
-
-**示例**
-
-``````````````yak
-// 先落一条流量，从遍历结果拿到它的 ID，再按 ID 精确取回（保存->拿ID->按ID查 联动）
-host = "doc-demo-byid.example.com"
-db.SaveHTTPFlowFromRaw("http://"+host+"/", []byte(f"GET / HTTP/1.1\r\nHost: ${host}\r\n\r\n"), []byte("HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok"))~
-
-id = 0
-for flow in db.QueryHTTPFlowsByKeyword(host) { id = flow.ID; break }
-if id > 0 {
-    one = db.QueryHTTPFlowByID(id)~
-    println(one.Url)
-    assert one.ID == id, "QueryHTTPFlowByID should return the same record"
 }
 ``````````````
 
@@ -1922,6 +1882,49 @@ println(name)
 
 ---
 
+### ListYakProjects {#listyakprojects}
+
+```go
+ListYakProjects(opts ...DBHistoryOption) ([]*YakProject, error)
+```
+
+列出引擎、Yakit 和 Memfit 登记的 Yaklang 项目（导出名为 db.ListYakProjects）。
+
+默认读取当前运行绑定的项目登记库，并从 YAKIT_HOME、MEMFITAI_HOME、用户目录和两个应用的 config.json 发现其他登记库。
+只读取登记信息，不切换当前项目、不修复登记记录。相同数据库路径去重；不同登记库可以复用数字 ProjectID，跨库查询请使用返回的 DatabaseID。
+当前项目优先，其余按 LastOperationAt 降序排列；keyword 不区分大小写地匹配项目名称和描述，默认 limit=10、offset=0。
+
+**可选参数**
+
+可作为可变参数 `opts ...DBHistoryOption` 传入选项；共 11 个可用选项，详见 [DBHistoryOption 选项列表](#option-dbhistoryoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*YakProject` | YakProject 列表；包含 DatabaseID、ProjectID、Name、Description、DatabasePath、Source、Type、Current、Available、SupportsHTTP、SizeBytes、LastOperationAt；无匹配返回空列表 |
+| r2 | `error` | 登记库读取失败、选项无效或上下文取消时返回错误 |
+
+**示例：列出项目并直接输出文本**
+
+``````````````yak
+projects, err = db.ListYakProjects(db.limit(10), db.offset(0))
+if err != nil { die(err) }
+for project in projects { println(project.Dump()) }
+``````````````
+
+**示例：按名称或描述查找项目**
+
+``````````````yak
+projects = db.ListYakProjects(db.keyword("认证调查"), db.limit(5))~
+
+	for project in projects {
+	    println(project.Name, project.SizeBytes, project.LastOperationAt)
+	}
+``````````````
+
+---
+
 ### NewAliveHost {#newalivehost}
 
 ```go
@@ -1947,6 +1950,138 @@ NewAliveHost(target string, opts ...yakit.AliveHostParamsOpt)
 ``````````````yak
 // 依赖本地项目数据库（示意性示例）
 db.NewAliveHost("127.0.0.1")
+``````````````
+
+---
+
+### QueryHTTPFlowByID {#queryhttpflowbyid}
+
+```go
+QueryHTTPFlowByID(id int64, opts ...DBHistoryOption) (*schema.HTTPFlow, error)
+```
+
+按数据库自增 ID 精确查询单条 HTTP 流量（导出名为 db.QueryHTTPFlowByID）
+
+当你已经知道某条流量的 ID（例如从列表/表格中选中、或从其他查询里拿到 flow.ID）时，用它直接取回完整对象。
+批量按多个 ID 取用 db.QueryHTTPFlowsByID，条件分页查询用 db.QueryHTTPFlows。
+db.projectID 接受 db.ListYakProjects 返回的 DatabaseID；跨库查询只读打开，不切换当前项目。
+保留已有 HTTPFlow 返回类型、完整存储字段与方法，可继续传入 db.SaveHTTPFlowInstance。大报文的旁路资源仍由原 HTTPFlow 字段描述。
+本函数不支持展示预算；需要按预算展示、省略标记或完整文件导出时，使用 db.QueryHTTPFlows 返回的历史条目。
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| id | `int64` | HTTPFlow 的数据库 ID，必须大于 0；该 ID 只在对应数据库内有效 |
+
+**可选参数**
+
+可作为可变参数 `opts ...DBHistoryOption` 传入选项；共 11 个可用选项，详见 [DBHistoryOption 选项列表](#option-dbhistoryoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*schema.HTTPFlow` | 原 HTTPFlow 对象，保留字段及 GetRequest、GetResponse、AddTag 等方法，可传给其他要求 HTTPFlow 类型的接口 |
+| r2 | `error` | 数据库不可用、项目标识无效、选项无效、ID 不存在或上下文取消时返回错误 |
+
+**示例：保留已有按 ID 查询的调用方式**
+
+``````````````yak
+// 先落一条流量，从遍历结果拿到它的 ID，再按 ID 精确取回（保存->拿ID->按ID查 联动）
+host = "doc-demo-byid.example.com"
+db.SaveHTTPFlowFromRaw("http://"+host+"/", []byte(f"GET / HTTP/1.1\r\nHost: ${host}\r\n\r\n"), []byte("HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok"))~
+
+id = 0
+for flow in db.QueryHTTPFlowsByKeyword(host) { id = flow.ID; break }
+
+	if id > 0 {
+	    one = db.QueryHTTPFlowByID(id)~
+	    println(one.Url)
+	    assert one.ID == id, "QueryHTTPFlowByID should return the same record"
+	    assert str.Contains(one.GetResponse(), "200 OK")
+	    one.AddTag("doc-compatibility")
+	    db.SaveHTTPFlowInstance(one)~
+	    assert str.Contains(db.QueryHTTPFlowByID(id)~.Tags, "doc-compatibility")
+	}
+``````````````
+
+**示例：小预算展示和完整文件导出**
+
+``````````````yak
+host = "doc-http-export.example.test"
+req = []byte(f"GET /large HTTP/1.1\r\nHost: ${host}\r\n\r\n")
+rsp = []byte("HTTP/1.1 200 OK\r\n\r\n" + str.Repeat("raw evidence\n", 500))
+db.SaveHTTPFlowFromRaw("http://"+host+"/large", req, rsp)~
+page = db.QueryHTTPFlows(db.url(host), db.limit(1), db.packetLimit(256))~
+assert len(page.Items) == 1
+item = page.Items[0]
+println(item.Dump())
+// 保存接口可能补全 Content-Length；按数据库实际原文核对导出。
+expectedResponse = db.QueryHTTPFlowByID(item.ID)~.GetResponse()
+files = item.ExportPackets("", "both")~
+
+	for packetFile in files {
+	    println(packetFile.Dump())
+	    if packetFile.Part == "response" {
+	        assert string(file.ReadFile(packetFile.Path)~) == expectedResponse
+	    }
+	    file.Remove(packetFile.Path)~
+	}
+``````````````
+
+---
+
+### QueryHTTPFlows {#queryhttpflows}
+
+```go
+QueryHTTPFlows(opts ...DBHistoryOption) (*HTTPHistoryPage, error)
+```
+
+按条件分页查询 HTTP 流量历史（导出名为 db.QueryHTTPFlows）。
+
+默认查询本次运行绑定的当前项目数据库；db.projectID 可选择 db.ListYakProjects 返回的 DatabaseID，其他项目以只读方式打开，不切换当前库。
+复用引擎 HTTPFlow 过滤器，按 ID 降序返回。关键词搜索数据库中的 URL、请求、响应等字段，不扫描大报文旁路文件的正文；该正文需按 ID 获取后导出搜索。
+默认 limit=10、offset=0、packetLimit=2048；只将预算内的请求/响应读取到结果，大报文以 RequestOmitted/ResponseOmitted 标明，不能把空字段理解为完整空报文。
+
+**可选参数**
+
+可作为可变参数 `opts ...DBHistoryOption` 传入选项；共 11 个可用选项，详见 [DBHistoryOption 选项列表](#option-dbhistoryoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*HTTPHistoryPage` | HTTPHistoryPage 分页结果；Items 为 HTTPHistoryItem 列表，Total 为过滤后总数，Offset 为本次偏移，NextOffset 为续查偏移，HasMore 表示还有下一页；无匹配时 Items 为空 |
+| r2 | `error` | 数据库不可用、未知项目标识、选项无效、查询失败或上下文取消时返回错误 |
+
+**示例：保存流量、过滤查询并展示原文**
+
+``````````````yak
+host = "doc-http-history.example.test"
+req = []byte(f"POST /api/orders HTTP/1.1\r\nHost: ${host}\r\n\r\n")
+rsp = []byte("HTTP/1.1 403 Forbidden\r\nContent-Length: 4\r\n\r\nCSRF")
+db.SaveHTTPFlowFromRawWithType("http://"+host+"/api/orders", req, rsp, "mitm")~
+page, err = db.QueryHTTPFlows(db.url(host), db.methods("POST"), db.statusCode("400-499"), db.sourceType("mitm"), db.limit(5))
+if err != nil { die(err) }
+println(page.Dump())
+assert len(page.Items) >= 1, "saved flow should match the query"
+``````````````
+
+**示例：使用返回的项目标识与分页偏移**
+
+``````````````yak
+for project in db.ListYakProjects()~ {
+    if project.Current && project.Available && project.SupportsHTTP {
+        page = db.QueryHTTPFlows(db.projectID(project.DatabaseID), db.limit(1))~
+        println(page.Dump())
+        if page.HasMore {
+            next = db.QueryHTTPFlows(db.projectID(project.DatabaseID), db.limit(1), db.offset(page.NextOffset))~
+            println(next.Dump())
+        }
+        break
+    }
+}
 ``````````````
 
 ---
@@ -2269,4 +2404,22 @@ db.DeletePayloadByGroup("doc-y-a"); db.DeletePayloadByGroup("doc-y-b")
 |选项函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | `db.saveHTTPFlowWithTags` | `tags string` | `yakit.CreateHTTPFlowOptions` | 构造一个为 HTTP 流量附加标签的保存选项 |
+
+### 2. 类型：DBHistoryOption {#option-dbhistoryoption}
+
+涉及到的函数有：[db.ListYakProjects](#listyakprojects)、[db.QueryHTTPFlowByID](#queryhttpflowbyid)、[db.QueryHTTPFlows](#queryhttpflows)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `db.afterID` | `n int64` | `DBHistoryOption` | dbHistoryAfterID 设置记录 ID 下界 |
+| `db.beforeID` | `n int64` | `DBHistoryOption` | dbHistoryBeforeID 设置记录 ID 上界 |
+| `db.keyword` | `s string` | `DBHistoryOption` | dbHistoryKeyword 设置查询关键字 |
+| `db.limit` | `n int` | `DBHistoryOption` | dbHistoryLimit 设置每页结果数量 |
+| `db.methods` | `s string` | `DBHistoryOption` | dbHistoryMethods 设置 HTTP 方法过滤条件 |
+| `db.offset` | `n int` | `DBHistoryOption` | dbHistoryOffset 设置查询结果偏移 |
+| `db.packetLimit` | `n int` | `DBHistoryOption` | dbHistoryPacketLimit 设置单份 HTTP 报文的读取/展示预算 |
+| `db.projectID` | `id string` | `DBHistoryOption` | dbHistoryProjectID 设置项目数据库标识 |
+| `db.sourceType` | `s string` | `DBHistoryOption` | dbHistorySource 设置 HTTP 流量来源过滤条件 |
+| `db.statusCode` | `s string` | `DBHistoryOption` | dbHistoryStatus 设置 HTTP 状态码过滤条件 |
+| `db.url` | `s string` | `DBHistoryOption` | dbHistoryURL 设置 HTTP URL 子串 |
 

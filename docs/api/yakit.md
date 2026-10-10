@@ -24,7 +24,7 @@
 | [yakit.EmitSSAResult](#emitssaresult) | `result *ssaapi.SyntaxFlowResult` | `int, int, int, error` | 将单个 SyntaxFlowResult 转换为 SSA 流式负载，并通过内部 &#34;ssa-stream&#34; 通道发送（导出名为 yakit.EmitSSAResult） |
 | [yakit.EnableDotGraphTab](#enabledotgraphtab) | `tabName string` | - | 在 Yakit UI 中启用一个 DOT 图标签页（导出名为 yakit.EnableDotGraphTab） |
 | [yakit.EnableTable](#enabletable) | `tableName string, columns []string` | - | 在 Yakit UI 中启用一个动态固定表格用于实时展示数据（导出名为 yakit.EnableTable） |
-| [yakit.EnableText](#enabletext) | `tabName string` | - | 在 Yakit UI 中启用一个文本标签页（导出名为 yakit.EnableText） |
+| [yakit.EnableText](#enabletext) | `tabName string` | - |  |
 | [yakit.EnableWebsiteTrees](#enablewebsitetrees) | `targets string` | - | 在 Yakit UI 中启用「网站树」展示标签（导出名为 yakit.EnableWebsiteTrees） |
 | [yakit.ForceSyncBuildInForge](#forcesyncbuildinforge) | `notify func(float64, string)` | `error` | 强制把内置 AI Forge 同步到数据库（导出名为 yakit.ForceSyncBuildInForge） |
 | [yakit.ForceSyncCorePlugin](#forcesynccoreplugin) | `notify func(float64, string)` | `error` | 强制把内置 Core 插件同步到数据库（导出名为 yakit.ForceSyncCorePlugin） |
@@ -66,7 +66,7 @@
 | [yakit.Success](#success) | `tmp any` | - | 向 Yakit 输出一条成功信息（导出名为 yakit.Success） |
 | [yakit.TableData](#tabledata) | `tableName string, data any` | `*YakitFixedTableData` | 向 Yakit UI 中已启用的固定表格写入一行数据（导出名为 yakit.TableData） |
 | [yakit.Text](#text) | `tmp any` | - | YakitTextBlock 向 Yakit 输出一个文本块（导出名为 yakit.Text） |
-| [yakit.TextTabData](#texttabdata) | `tabName string, data string` | - | 向 Yakit UI 中已启用的文本标签页追加文本内容（导出名为 yakit.TextTabData） |
+| [yakit.TextTabData](#texttabdata) | `tabName string, data string` | - |  |
 | [yakit.UpdateOnlineYakitStore](#updateonlineyakitstore) | - | `error` | 从在线商店下载并保存全部 Yakit 插件（导出名为 yakit.UpdateOnlineYakitStore） |
 | [yakit.UpdateYakitStore](#updateyakitstore) | - | `error` | 从本地数据库更新 Yakit 插件商店（导出名为 yakit.UpdateYakitStore） |
 | [yakit.UpdateYakitStoreLocal](#updateyakitstorelocal) | `f string` | `error` | LoadYakitFromLocalDir 从本地目录加载 Yakit 插件与文档并写入本地数据库（导出名为 yakit.UpdateYakitStoreLocal） |
@@ -316,23 +316,13 @@ findings = [["10.0.0.1", "80", "http"], ["10.0.0.1", "443", "https"], ["10.0.0.2
 EnableText(tabName string)
 ```
 
-在 Yakit UI 中启用一个文本标签页（导出名为 yakit.EnableText）
-
-启用后可配合 yakit.TextTabData 向该标签页追加文本内容
+暂无描述
 
 **参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| tabName | `string` | 标签页名称 |
-
-**示例**
-
-``````````````yak
-// 启用文本标签页并写入文本（需在 Yakit 引擎环境下生效，示意性示例）
-yakit.EnableText("Log")
-yakit.TextTabData("Log", "hello yak")
-``````````````
+| tabName | `string` |  |
 
 ---
 
@@ -1667,24 +1657,14 @@ yakit.Text(summary)
 TextTabData(tabName string, data string)
 ```
 
-向 Yakit UI 中已启用的文本标签页追加文本内容（导出名为 yakit.TextTabData）
-
-需先通过 yakit.EnableText 启用同名标签页
+暂无描述
 
 **参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| tabName | `string` | 目标标签页名称（需与 EnableText 一致） |
-| data | `string` | 要追加的文本内容 |
-
-**示例**
-
-``````````````yak
-// 向已启用的文本标签页写入内容（需在 Yakit 引擎环境下生效，示意性示例）
-yakit.EnableText("Log")
-yakit.TextTabData("Log", "hello yak")
-``````````````
+| tabName | `string` |  |
+| data | `string` |  |
 
 ---
 

@@ -26,7 +26,7 @@ assert r.Severity == "high", "severity should be set"
 // 无回显漏洞可用反连验证: domain, token = risk.NewDNSLogDomain()~ ; risk.CheckDNSLogByToken(token)
 ```
 
-> 共 55 个函数
+> 共 56 个函数
 
 ## 函数索引
 
@@ -91,6 +91,7 @@ assert r.Severity == "high", "severity should be set"
 | [risk.NewRandomPortTrigger](#newrandomporttrigger) | `opt ...RiskParamsOpt` | `string, string, error` | 返回一个公网 Bridge 的随机端口反连检测地址，返回的第一个值是 token，第二个值是检测地址，第三个值是错误 |
 | [risk.NewRisk](#newrisk) | `target string, opts ...yakit.RiskParamsOpt` | - | 创建一条漏洞记录并保存到数据库（导出名为 risk.NewRisk） |
 | [risk.NewUnverifiedRisk](#newunverifiedrisk) | `u string, token string, opts ...RiskParamsOpt` | `*schema.Risk, error` | 创建一条&#34;待验证&#34;风险记录并保存，常用于反连(reverse)类漏洞先记录、后由回连验证 |
+| [risk.QueryRiskInDatabase](#queryriskindatabase) | `filter map[string]any, opts ...DBHistoryOption` | `*RiskDatabasePage, error` | 分页搜索已保存的风险（导出名为 risk.QueryRiskInDatabase）。 |
 | [risk.QueryRisksByKeyword](#queryrisksbykeyword) | `keyword string, opts ...yakit.RiskParamsOpt` | `chan *schema.Risk` | 根据关键字查询风险记录，返回风险记录的管道 |
 
 ## 函数详情
@@ -442,9 +443,11 @@ HaveReverseRisk(token string) bool
 **示例**
 
 ``````````````yak
-if risk.HaveReverseRisk("token") { // 轮询检查是否存在反连风险，会阻塞
+// 先写入已验证的本地反连记录；真实场景由回连处理器保存记录。
+token = "doc-reverse-ready"
+risk.NewRisk("http://127.0.0.1/doc-reverse", risk.token(token))~
+assert risk.HaveReverseRisk(token), "the saved reverse risk should be found"
 println("have reverse risk")
-}
 ``````````````
 
 ---
@@ -1726,6 +1729,44 @@ NewUnverifiedRisk(u string, token string, opts ...RiskParamsOpt) (*schema.Risk, 
 // 该示例为示意性用法：创建待验证风险
 token = risk.NewDNSLogDomain()[1]
 r, err = risk.NewUnverifiedRisk("http://example.com", token, risk.title("SSRF"), risk.severity("high"))
+``````````````
+
+---
+
+### QueryRiskInDatabase {#queryriskindatabase}
+
+```go
+QueryRiskInDatabase(filter map[string]any, opts ...DBHistoryOption) (*RiskDatabasePage, error)
+```
+
+分页搜索已保存的风险（导出名为 risk.QueryRiskInDatabase）。
+
+普通脚本默认查询当前项目库，AI 工具默认查询本次运行绑定的项目库；两者均可用 db.projectID 选择 db.ListYakProjects 返回的数据库标识，跨项目只读，不切换当前库。
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| filter | `map[string]any` | 过滤字典；type 精确匹配风险类型或中文类型，支持逗号列表；severity 支持逗号列表；title 为标题关键词；runtime_id 为精确运行 ID；ids 为正整数 ID 列表；waiting_verified 默认 false，查询未处于等待验证状态的记录，true 仅查待验证记录。nil 或空字典使用默认过滤。 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| opts | `...DBHistoryOption` | db.projectID、db.keyword、db.url、db.limit、db.offset、db.afterID、db.beforeID；按 ID 降序，limit 默认 10，范围 1–100。 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*RiskDatabasePage` | RiskDatabasePage；Items 为摘要，Total 为匹配总数，NextOffset 和 HasMore 用于续查。 |
+| r2 | `error` | 无效过滤、数据库不可用、查询失败或上下文取消时返回错误。 |
+
+**示例**
+
+``````````````yak
+page = risk.QueryRiskInDatabase({"type": "sqli", "severity": "high"}, db.keyword("login"), db.limit(5))~
+println(page.Dump())
 ``````````````
 
 ---

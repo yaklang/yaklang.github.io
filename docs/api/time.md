@@ -57,10 +57,10 @@ After(d time.Duration) <-chan time.Time
 **示例**
 
 ``````````````yak
-// 等待 5 秒后继续(作示意)
-d = time.ParseDuration("5s")~
+// 等待 10 毫秒后继续
+d = time.ParseDuration("10ms")~
 <-time.After(d)
-println("after 5s")
+println("timer fired")
 ``````````````
 
 ---
@@ -91,10 +91,12 @@ AfterFunc(d time.Duration, f func()) *time.Timer
 **示例**
 
 ``````````````yak
-// 0.1 秒后执行回调
-d = time.ParseDuration("100ms")~
-timer = time.AfterFunc(d, () => println("fired"))
-time.sleep(0.3) // 等回调执行完
+// 10 毫秒后执行回调
+d = time.ParseDuration("10ms")~
+done = make(chan bool)
+timer = time.AfterFunc(d, () => { println("fired"); done <- true })
+fired = <-done
+assert fired, "callback should complete"
 ``````````````
 
 ---
@@ -179,10 +181,11 @@ NewTicker(d float64) *time.Ticker
 // 每 0.1 秒触发一次, 取 3 次后停止
 ticker = time.NewTicker(0.1)
 count = 0
-for t in ticker.C {
-    count++
-    if count >= 3 { ticker.Stop(); break }
-}
+
+	for t in ticker.C {
+	    count++
+	    if count >= 3 { ticker.Stop(); break }
+	}
 ``````````````
 
 ---
@@ -367,7 +370,7 @@ Sleep(i float64)
 **示例**
 
 ``````````````yak
-sleep(1.5) // 休眠1.5秒
+sleep(0.01) // 休眠10毫秒
 ``````````````
 
 ---
@@ -479,7 +482,7 @@ sleep(i float64)
 **示例**
 
 ``````````````yak
-sleep(1.5) // 休眠1.5秒
+sleep(0.01) // 休眠10毫秒
 ``````````````
 
 ---

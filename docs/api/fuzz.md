@@ -25,7 +25,7 @@ assert len(payloads) == 3, "int(1-3) should expand to 3 payloads"
 // }
 ```
 
-> 共 24 个函数
+> 共 32 个函数
 
 ## 函数索引
 
@@ -38,6 +38,8 @@ assert len(payloads) == 3, "int(1-3) should expand to 3 payloads"
 | [fuzz.ProtobufHex](#protobufhex) | `i any` | `*ProtobufRecords` | 解析十六进制字符串表示的 Protobuf 编码数据，返回可读取/变形的 Protobuf 记录集合对象 |
 | [fuzz.ProtobufJSON](#protobufjson) | `i any` | `*ProtobufRecords` | 从 JSON 描述还原 Protobuf 记录集合对象（与 ProtobufRecords.ToJSON 互逆） |
 | [fuzz.ProtobufYAML](#protobufyaml) | `i any` | `*ProtobufRecords` | 从 YAML 描述还原 Protobuf 记录集合对象（与 ProtobufRecords.ToYAML 互逆） |
+| [fuzz.RenderHTTPFields](#renderhttpfields) | `fields []string, variables map[string]any, limit int, ctx context.Context` | `[][]string, error` | expands related URL-mode fields together, so ::labels pair |
+| [fuzz.RenderHTTPTemplate](#renderhttptemplate) | `input string, variables map[string]any, limit int, ctx context.Context` | `[]string, error` | renders request data with the native FuzzTag engine. Unlike |
 | [fuzz.Strings](#strings) | `i any` | `[]string` | 使用 fuzztag 渲染规则，将一个模板字符串展开成一组字符串结果 |
 | [fuzz.StringsWithParam](#stringswithparam) | `i any, i2 any` | `[]string` | 使用 fuzztag 渲染模板，并允许传入额外的命名参数表参与渲染 |
 | [fuzz.UrlToHTTPRequest](#urltohttprequest) | `method string, i any` | `*mutate.FuzzHTTPRequest, error` | 根据请求方法与 URL 构造一个 HTTP Fuzz 请求对象，便于后续做参数变形与发包 |
@@ -45,6 +47,11 @@ assert len(payloads) == 3, "int(1-3) should expand to 3 payloads"
 | [fuzz.WithDelay](#withdelay) | `b float64` | `HttpPoolConfigOption` | delay 是一个 HTTP 连接池/批量请求配置选项，用于设置每个请求之间的固定延迟秒数 |
 | [fuzz.WithNamingContext](#withnamingcontext) | `invokerName string` | `HttpPoolConfigOption` | namingContext 是一个 HTTP 连接池/批量请求配置选项，用于设置命名调用上下文以便对并发任务进行分组限流 |
 | [fuzz.WithTimeOut](#withtimeout) | `f float64` | `HttpPoolConfigOption` | perRequestTimeout 是一个 HTTP 连接池/批量请求配置选项，用于设置单个请求的超时时间（单位：秒） |
+| [fuzz.renderAssertError](#renderasserterror) | `enabled bool` | `FuzzConfigOpt` | Fuzz_WithAssertError propagates tag handler errors instead of tolerating them. |
+| [fuzz.renderContext](#rendercontext) | `ctx context.Context` | `FuzzConfigOpt` |  |
+| [fuzz.renderFileTags](#renderfiletags) | - | `FuzzConfigOpt` |  |
+| [fuzz.renderLimit](#renderlimit) | `limit int` | `FuzzConfigOpt` |  |
+| [fuzz.renderParams](#renderparams) | `i any` | `FuzzConfigOpt` |  |
 
 ## 可变参数函数索引
 
@@ -52,6 +59,7 @@ assert len(payloads) == 3, "int(1-3) should expand to 3 payloads"
 |:--|:--|:--|:--|
 | [fuzz.HTTPRequest](#httprequest) | `i any, opts ...BuildFuzzHTTPRequestOption` | `*FuzzHTTPRequest, error` | 根据原始请求报文构造一个 HTTP Fuzz 请求对象，用于对请求各部分进行参数变形与发包 |
 | [fuzz.MustHTTPRequest](#musthttprequest) | `i any, opts ...BuildFuzzHTTPRequestOption` | `*FuzzHTTPRequest` | 根据原始请求报文构造一个 HTTP Fuzz 请求对象，构造失败时不返回错误（仅记录日志），便于链式调用 |
+| [fuzz.Render](#render) | `input any, opts ...FuzzConfigOpt` | `[]string, error` |  |
 | [fuzz.StringsFunc](#stringsfunc) | `i any, cb func(i *mutate.MutateResult), params ...any` | `error` | 使用 fuzztag 渲染模板，并为每个渲染结果回调一次，便于流式处理大量结果 |
 | [fuzz.UrlsToHTTPRequests](#urlstohttprequests) | `target ...any` | `*FuzzHTTPRequestBatch, error` | 将一个或多个 URL 转换成可批量变形发包的 HTTP Fuzz 请求批次对象 |
 
@@ -246,6 +254,65 @@ ProtobufYAML(i any) *ProtobufRecords
 records = fuzz.ProtobufYAML(yamlStr)
 println(records.ToHex())
 ``````````````
+
+---
+
+### RenderHTTPFields {#renderhttpfields}
+
+```go
+RenderHTTPFields(fields []string, variables map[string]any, limit int, ctx context.Context) ([][]string, error)
+```
+
+expands related URL-mode fields together, so ::labels pair
+across path/query/form/body/header values. Callers encode structured query and
+form values after rendering, exactly once. An opaque separator retains field
+boundaries without JSON-escaping template arguments or binary payloads.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| fields | `[]string` |  |
+| variables | `map[string]any` |  |
+| limit | `int` |  |
+| ctx | `context.Context` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[][]string` |  |
+| r2 | `error` |  |
+
+---
+
+### RenderHTTPTemplate {#renderhttptemplate}
+
+```go
+RenderHTTPTemplate(input string, variables map[string]any, limit int, ctx context.Context) ([]string, error)
+```
+
+renders request data with the native FuzzTag engine. Unlike
+permissive fuzzing, request construction rejects unknown/malformed tags and
+missing parameters, and refuses an oversized expansion instead of sending a
+silently truncated test. Variable values are never parsed as new templates.
+Bare {{name}} variables are retained for the batch HTTP tool&#39;s existing calls.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| input | `string` |  |
+| variables | `map[string]any` |  |
+| limit | `int` |  |
+| ctx | `context.Context` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]string` |  |
+| r2 | `error` |  |
 
 ---
 
@@ -473,6 +540,111 @@ res = httpool.Pool(reqs, httpool.perRequestTimeout(5))~
 
 ---
 
+### renderAssertError {#renderasserterror}
+
+```go
+renderAssertError(enabled bool) FuzzConfigOpt
+```
+
+Fuzz_WithAssertError propagates tag handler errors instead of tolerating them.
+Default rendering remains permissive for existing fuzzing callers.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| enabled | `bool` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `FuzzConfigOpt` |  |
+
+---
+
+### renderContext {#rendercontext}
+
+```go
+renderContext(ctx context.Context) FuzzConfigOpt
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| ctx | `context.Context` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `FuzzConfigOpt` |  |
+
+---
+
+### renderFileTags {#renderfiletags}
+
+```go
+renderFileTags() FuzzConfigOpt
+```
+
+暂无描述
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `FuzzConfigOpt` |  |
+
+---
+
+### renderLimit {#renderlimit}
+
+```go
+renderLimit(limit int) FuzzConfigOpt
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| limit | `int` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `FuzzConfigOpt` |  |
+
+---
+
+### renderParams {#renderparams}
+
+```go
+renderParams(i any) FuzzConfigOpt
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `FuzzConfigOpt` |  |
+
+---
+
 ## 可变参数函数详情
 
 ### HTTPRequest {#httprequest}
@@ -547,6 +719,35 @@ Host: www.example.com
 freq = fuzz.MustHTTPRequest(raw)
 freq.Show()
 ``````````````
+
+---
+
+### Render {#render}
+
+```go
+Render(input any, opts ...FuzzConfigOpt) (_ []string, err error)
+```
+
+暂无描述
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| input | `any` |  |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| opts | `...FuzzConfigOpt` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| _ | `[]string` |  |
+| err | `error` |  |
 
 ---
 

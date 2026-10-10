@@ -9,7 +9,7 @@
 
 与相邻库的关系：`liteforge` 处于 `ai`（底层对话）与 `aiagent`/`aim`（完整编排）之间，适合"只需一次结构化调用"的场景；输出 Schema 由 `jsonschema` 描述，知识库结果可入 `rag`。
 
-> 共 44 个函数
+> 共 45 个函数
 
 ## 函数索引
 
@@ -22,6 +22,7 @@
 | [liteforge.context](#context) | `ctx context.Context` | `LiteForgeExecOption` | liteforge.context is an option for liteforge.Execute |
 | [liteforge.id](#id) | `id string` | `LiteForgeExecOption` | liteforge.id is an option for liteforge.Execute |
 | [liteforge.imageExtraPrompt](#imageextraprompt) | `prompt string` | `AnalysisOption` | WithExtraPrompt 为图片/上下文分析追加额外提示词（导出名为 liteforge.imageExtraPrompt） |
+| [liteforge.instruction](#instruction) | `s string` | `LiteForgeExecOption` | LiteForgeExecWithStaticInstruction 设置稳定的业务指令（Yak: liteforge.instruction）。 |
 | [liteforge.knowledgeBaseDesc](#knowledgebasedesc) | `desc string` | `RefineOption` | RefineWithKnowledgeBaseDesc 设置生成知识库的描述（导出名为 liteforge.knowledgeBaseDesc） |
 | [liteforge.knowledgeBaseName](#knowledgebasename) | `name string` | `RefineOption` | RefineWithKnowledgeBaseName 设置生成知识库的名称（导出名为 liteforge.knowledgeBaseName） |
 | [liteforge.knowledgeBaseType](#knowledgebasetype) | `typ string` | `RefineOption` | RefineWithKnowledgeBaseType 设置生成知识库的类型（导出名为 liteforge.knowledgeBaseType） |
@@ -58,7 +59,7 @@
 |:--|:--|:--|:--|
 | [liteforge.AnalyzeVideoOmni](#analyzevideoomni) | `video string, options ...any` | `<-chan AnalysisResult, error` | 把视频切片送进 omni 模型做端到端理解，按段返回 AnalysisResult。 |
 | [liteforge.BuildVideoKnowledgeFromOmni](#buildvideoknowledgefromomni) | `kbName string, video string, options ...any` | `<-chan *schema.KnowledgeBaseEntry, error` | 复用 _buildKnowledge 的 RAG/ERM 入库链路， |
-| [liteforge.Execute](#execute) | `query string, opts ...any` | `*ForgeResult, error` | liteforge.Execute can create a temporary LiteForge instance and execute it with the given query. |
+| [liteforge.Execute](#execute) | `query string, opts ...any` | `*aicommon.ForgeResult, error` | liteforge.Execute can create a temporary LiteForge instance and execute it with the given query. |
 | [liteforge.forceImage](#forceimage) | `force ...bool` | `LiteForgeExecOption` | liteforge.forceImage is an option for liteforge.Execute |
 | [liteforge.image](#image) | `anyImageInput ...any` | `LiteForgeExecOption` | liteforge.image is an option for liteforge.Execute |
 | [liteforge.imageFile](#imagefile) | `filename ...string` | `LiteForgeExecOption` | liteforge.imageFile is an option for liteforge.Execute |
@@ -273,6 +274,29 @@ WithExtraPrompt 为图片/上下文分析追加额外提示词（导出名为 li
 opt = liteforge.imageExtraPrompt("focus on the error message in the screenshot")
 println(opt)
 ``````````````
+
+---
+
+### instruction {#instruction}
+
+```go
+instruction(s string) LiteForgeExecOption
+```
+
+LiteForgeExecWithStaticInstruction 设置稳定的业务指令（Yak: liteforge.instruction）。
+指令进入 semi-dynamic 段；查询资料留在 dynamic 段，不改变通用 high-static。
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `LiteForgeExecOption` |  |
 
 ---
 
@@ -1150,7 +1174,7 @@ AnalyzeVideoOmni(video string, options ...any) (<-chan AnalysisResult, error)
 
 ``````````````yak
 // 需要可用的 omni 模型与 API Key（示意性示例）
-ch = aiforge.AnalyzeVideoOmni("/tmp/demo.mp4", liteforge.omniPresetFlash(), liteforge.omniAPIKey("your-key"))~
+ch = liteforge.AnalyzeVideoOmni("/tmp/demo.mp4", liteforge.omniPresetFlash(), liteforge.omniAPIKey("your-key"))~
 
 	for result := range ch {
 	    dump(result)
@@ -1194,10 +1218,10 @@ BuildKnowledgeFromFile 等保持完全独立，纯增量。
 **示例**
 
 ``````````````yak
-ch, err := aiforge.BuildVideoKnowledgeFromOmni(
+ch, err := liteforgeapp.BuildVideoKnowledgeFromOmni(
     "xss-learn-omni-flash", "/path/to/xss-learn.mp4",
-    aiforge.VideoOmniPresetFlash(),
-    aiforge.WithVideoOmniAPIKey(key),
+    liteforgeapp.VideoOmniPresetFlash(),
+    liteforgeapp.WithVideoOmniAPIKey(key),
 )
 ``````````````
 
@@ -1206,7 +1230,7 @@ ch, err := aiforge.BuildVideoKnowledgeFromOmni(
 ### Execute {#execute}
 
 ```go
-Execute(query string, opts ...any) (*ForgeResult, error)
+Execute(query string, opts ...any) (*aicommon.ForgeResult, error)
 ```
 
 liteforge.Execute can create a temporary LiteForge instance and execute it with the given query.
@@ -1227,7 +1251,7 @@ liteforge.Execute can create a temporary LiteForge instance and execute it with 
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `*ForgeResult` | 执行结果对象（可通过 Get 读取字段） |
+| r1 | `*aicommon.ForgeResult` | 执行结果对象（可通过 Get 读取字段） |
 | r2 | `error` | 错误信息 |
 
 **示例**

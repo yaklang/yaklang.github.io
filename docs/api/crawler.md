@@ -1026,7 +1026,7 @@ aiJSExtract(opts ...AIJSExtractOption) ConfigOpt
 
  2. aireducer 按字节切片，DumpWithOverlap 跨切片折叠
 
- 3. aiforge.LiteForge SpeedPriority 抽取结构化路径列表
+ 3. liteforgeapp.LiteForge SpeedPriority 抽取结构化路径列表
 
 **可选参数**
 

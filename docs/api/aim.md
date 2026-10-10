@@ -12,7 +12,13 @@
 
 与相邻库的关系：`aim` 把 `ai`（模型对话）、`aiagent`（编排）、`rag`（知识检索）、`liteforge`/Forge（结构化任务）整合为统一引擎，适合需要"一行调用即可跑通一个带工具的智能体"的脚本。
 
-> 共 54 个函数
+> 共 57 个函数
+
+## 函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [aim.NewInputEvent](#newinputevent) | `fields map[string]any` | `*ypb.AIInputEvent, error` | constructs the same input envelope accepted by StartReAct. |
 
 ## 可变参数函数索引
 
@@ -21,6 +27,32 @@
 | [aim.InvokeReAct](#invokereact) | `input string, options ...AIEngineConfigOption` | `error` | 以 ReAct 模式执行一次 AI 任务并阻塞至完成（导出名为 aim.InvokeReAct） |
 | [aim.InvokeReActAsync](#invokereactasync) | `input string, options ...AIEngineConfigOption` | `*AIEngine, error` | 异步执行 ReAct 任务，并返回引擎实例（导出名为 aim.InvokeReActAsync） |
 | [aim.NewAIEngine](#newaiengine) | `options ...AIEngineConfigOption` | `*AIEngine, error` | 创建新的 AI 引擎实例（导出名为 aim.NewAIEngine） |
+
+## 函数详情
+
+### NewInputEvent {#newinputevent}
+
+```go
+NewInputEvent(fields map[string]any) (*ypb.AIInputEvent, error)
+```
+
+constructs the same input envelope accepted by StartReAct.
+Yak callers can use it to reply to a specific review endpoint without a Go bridge.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| fields | `map[string]any` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ypb.AIInputEvent` |  |
+| r2 | `error` |  |
+
+---
 
 ## 可变参数函数详情
 
@@ -42,7 +74,7 @@ InvokeReAct(input string, options ...AIEngineConfigOption) error
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 51 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 53 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -76,7 +108,7 @@ InvokeReActAsync(input string, options ...AIEngineConfigOption) (*AIEngine, erro
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 51 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 53 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -108,7 +140,7 @@ AI 引擎封装了 ReAct 等能力，可通过 SendMsg/SendMsgAsync 发送任务
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 51 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 53 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -150,6 +182,7 @@ engine.SendMsg("list files in current dir")
 | `aim.attachedFilePath` | `filePath string` | `AIEngineConfigOption` | WithAttachedFilePath 为引擎附加一个文件路径资源 |
 | `aim.attachedKnowledgeBase` | `knowledgeBaseName string` | `AIEngineConfigOption` | WithAttachedKnowledgeBase 为引擎附加一个知识库 |
 | `aim.attachedResource` | `typ string, key string, value string` | `AIEngineConfigOption` | WithAttachedResource 为引擎附加自定义资源 |
+| `aim.configOptions` | `opts ...aicommon.ConfigOption` | `AIEngineConfigOption` | WithExtOptions 设置扩展选项 |
 | `aim.context` | `ctx context.Context` | `AIEngineConfigOption` | WithContext 设置上下文，用于控制引擎的取消 |
 | `aim.debugMode` | `debug bool` | `AIEngineConfigOption` | WithDebugMode 设置调试模式 |
 | `aim.disableAIForge` | `disable bool` | `AIEngineConfigOption` | WithDisableAIForge 禁用 AI Forge 调用 |
@@ -178,6 +211,7 @@ engine.SendMsg("list files in current dir")
 | `aim.onStream` | `callback func(react aicommon.AIEngineOperator, event *schema.AiOutputEvent, NodeId string, data []byte)` | `AIEngineConfigOption` | WithOnStream 设置流式输出回调 |
 | `aim.onStreamContent` | `callback func(react aicommon.AIEngineOperator, event *schema.AiOutputEvent, NodeId string, totalContent []byte)` | `AIEngineConfigOption` | WithOnStreamContent 设置流式输出结束回调，并返回重组后的完整流内容 |
 | `aim.onStreamEnd` | `callback func(react aicommon.AIEngineOperator, event *schema.AiOutputEvent, NodeId string)` | `AIEngineConfigOption` | WithOnStreamEnd 设置流式输出结束回调 |
+| `aim.planEngine` | `engine string` | `AIEngineConfigOption` | WithPlanEngine is a compatibility alias for the top-level coordinator focus. |
 | `aim.qualityPriorityAICallback` | `callback aicommon.AICallbackType` | `AIEngineConfigOption` | WithQualityPriorityAICallback 设置质量优先的 AI 回调 |
 | `aim.qualityPriorityAIConfig` | `typeName string, opts ...aispec.AIConfigOption` | `AIEngineConfigOption` | WithQualityPriorityAIConfig 设置质量优先档使用的 AI |
 | `aim.reviewPolicy` | `policy string` | `AIEngineConfigOption` | WithReviewPolicy 设置审批策略 |

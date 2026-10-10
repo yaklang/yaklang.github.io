@@ -10,20 +10,20 @@
 
 与相邻库的关系：`aiagent` 是高层编排，底层模型对话由 `ai` 库提供，结构化输出与 schema 由 `liteforge` / `jsonschema` 支撑，知识检索可结合 `rag`，被编排的能力多来自 `hook`/yak 插件。它面向"让 AI 自己完成一串安全任务"的场景。
 
-> 共 57 个函数
+> 共 59 个函数
 
 ## 函数索引
 
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | [aiagent.AllYakScriptAiTools](#allyakscriptaitools) | - | `[]*aitool.Tool` | 获取数据库中保存的全部 Yak 脚本 AI 工具（导出名为 aiagent.AllYakScriptAiTools） |
-| [aiagent.ExtractPlan](#extractplan) | `c *Coordinator, rawResponse string` | `*PlanResponse, error` | 从 AI 原始响应中解析出任务计划（导出名为 aiagent.ExtractPlan） |
-| [aiagent.GetDefaultContextProvider](#getdefaultcontextprovider) | - | `*PromptContextProvider` | 返回默认的 Prompt 上下文提供器（导出名为 aiagent.GetDefaultContextProvider） |
+| [aiagent.ExtractPlan](#extractplan) | `_ any, text string` | `*PlanResponse, error` | keeps the Yak argument shape. Parsing never creates a runtime or |
+| [aiagent.GetDefaultContextProvider](#getdefaultcontextprovider) | - | `*ContextInput` |  |
 | [aiagent.ParseYakScriptToAiTools](#parseyakscripttoaitools) | `name string, content string` | `*schema.AIYakTool` | LoadYakScriptToAiTools 将一段 Yak 插件源码解析为 AI 工具描述（导出名为 aiagent.ParseYakScriptToAiTools） |
 | [aiagent.UpdateYakScriptMetaData](#updateyakscriptmetadata) | `name string, content string, forceUpdate bool` | `string, *metadata.YakScriptMetadata, error` | 解析并（按需借助 AI）补全 Yak 插件的元数据（导出名为 aiagent.UpdateYakScriptMetaData） |
 | [aiagent.context](#context) | `ctx context.Context` | `AIAgentOption` | WithContext 设置 AI Agent 的上下文，用于控制取消（导出名为 aiagent.context） |
 | [aiagent.forgeName](#forgename) | `forgeName string` | `AIAgentOption` | WithForgeName 设置 AI Agent 使用的 Forge 名称（导出名为 aiagent.forgeName） |
-| [aiagent.forgePlanMocker](#forgeplanmocker) | `plan func(config *aid.Coordinator) *aid.PlanResponse` | `Option` | WithPlanMocker 设置AI助手的计划生成器（导出名为 aiagent.forgePlanMocker） |
+| [aiagent.forgePlanMocker](#forgeplanmocker) | `plan func(config *coordinator.Session) *coordinator.PlanResponse` | `Option` | WithPlanMocker 设置AI助手的计划生成器（导出名为 aiagent.forgePlanMocker） |
 | [aiagent.initPrompt](#initprompt) | `prompt string` | `Option` | WithInitializePrompt 设置AI助手的初始化提示词（导出名为 aiagent.initPrompt） |
 | [aiagent.initializePrompt](#initializeprompt) | `prompt string` | `Option` | WithInitializePrompt 设置AI助手的初始化提示词（导出名为 aiagent.initPrompt） |
 | [aiagent.liteForgeOutputSchemaRaw](#liteforgeoutputschemaraw) | `actionName string, outputSchema string` | `LiteForgeOption` | WithLiteForge_OutputSchemaRaw 通过原始 JSON Schema 字符串设置输出结构（导出名为 aiagent.liteForgeOutputSchemaRaw） |
@@ -41,11 +41,11 @@
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | [aiagent.CreateForge](#createforge) | `name string, opts ...any` | `*aiforge.ForgeBlueprint` | NewForgeBlueprint 创建一个 Forge 蓝图（导出名为 aiagent.CreateForge） |
-| [aiagent.CreateLiteForge](#createliteforge) | `name string, opts ...any` | `*aiforge.LiteForge, error` | NewLiteForge 创建一个 LiteForge 实例（导出名为 aiagent.CreateLiteForge） |
+| [aiagent.CreateLiteForge](#createliteforge) | `name string, opts ...any` | `*liteforgeapp.LiteForge, error` | NewLiteForge 创建一个 LiteForge 实例（导出名为 aiagent.CreateLiteForge） |
 | [aiagent.ExecuteForge](#executeforge) | `forgeName string, i any, iopts ...any` | `any, error` | 执行一个已注册的 Forge 并返回结果（导出名为 aiagent.ExecuteForge） |
 | [aiagent.ExtractAction](#extractaction) | `i string, actionName string, alias ...string` | `*Action, error` | 从字符串中提取指定的 Action 对象，支持别名，这里隐含一个强校验行为，即会等待处理完毕之后检查是否有可用的Action（导出名为 aiagent.ExtractAction） |
-| [aiagent.NewExecutor](#newexecutor) | `name string, i any, opts ...any` | `*aid.Coordinator, error` | NewForgeExecutor 基于已注册的 Forge 名称创建执行器（导出名为 aiagent.NewExecutor） |
-| [aiagent.NewExecutorFromJson](#newexecutorfromjson) | `json string, i any, opts ...any` | `*aid.Coordinator, error` | 通过 JSON 描述的 Forge 蓝图创建执行器（导出名为 aiagent.NewExecutorFromJson） |
+| [aiagent.NewExecutor](#newexecutor) | `name string, i any, opts ...any` | `*aiforge.ForgeExecution, error` | NewForgeExecutor 基于已注册的 Forge 名称创建执行器（导出名为 aiagent.NewExecutor） |
+| [aiagent.NewExecutorFromJson](#newexecutorfromjson) | `json string, i any, opts ...any` | `*aiforge.ForgeExecution, error` | 通过 JSON 描述的 Forge 蓝图创建执行器（导出名为 aiagent.NewExecutorFromJson） |
 | [aiagent.extendAIDOptions](#extendaidoptions) | `opts ...aicommon.ConfigOption` | `AIAgentOption` | WithExtendAICommonOptions 追加底层 aicommon 配置选项（导出名为 aiagent.extendAIDOptions） |
 | [aiagent.forgeTools](#forgetools) | `tools ...*aitool.Tool` | `Option` | WithTools 为AI助手添加可用的工具（导出名为 aiagent.forgeTools） |
 | [aiagent.liteForgeOutputSchema](#liteforgeoutputschema) | `params ...aitool.ToolOption` | `LiteForgeOption` | WithLiteForge_OutputSchema 设置 LiteForge 的输出结构 schema（导出名为 aiagent.liteForgeOutputSchema） |
@@ -80,57 +80,41 @@ dump(tools)
 ### ExtractPlan {#extractplan}
 
 ```go
-ExtractPlan(c *Coordinator, rawResponse string) (*PlanResponse, error)
+ExtractPlan(_ any, text string) (*PlanResponse, error)
 ```
 
-从 AI 原始响应中解析出任务计划（导出名为 aiagent.ExtractPlan）
+keeps the Yak argument shape. Parsing never creates a runtime or
+asks a model to regenerate a supplied plan.
 
 **参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| c | `*Coordinator` | 协调器对象 |
-| rawResponse | `string` | AI 返回的原始文本 |
+| _ | `any` |  |
+| text | `string` |  |
 
 **返回值**
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `*PlanResponse` | 计划响应对象 |
-| r2 | `error` | 错误信息 |
-
-**示例**
-
-``````````````yak
-// 需要可用的协调器与响应（示意性示例）
-plan = aiagent.ExtractPlan(coordinator, rawResponse)~
-dump(plan)
-``````````````
+| r1 | `*PlanResponse` |  |
+| r2 | `error` |  |
 
 ---
 
 ### GetDefaultContextProvider {#getdefaultcontextprovider}
 
 ```go
-GetDefaultContextProvider() *PromptContextProvider
+GetDefaultContextProvider() *ContextInput
 ```
 
-返回默认的 Prompt 上下文提供器（导出名为 aiagent.GetDefaultContextProvider）
-
-上下文提供器持有计划历史、持久化数据、交互历史以及工具列表
+暂无描述
 
 **返回值**
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `*PromptContextProvider` | 默认上下文提供器对象 |
-
-**示例**
-
-``````````````yak
-provider = aiagent.GetDefaultContextProvider()
-dump(provider)
-``````````````
+| r1 | `*ContextInput` |  |
 
 ---
 
@@ -262,7 +246,7 @@ println(opt)
 ### forgePlanMocker {#forgeplanmocker}
 
 ```go
-forgePlanMocker(plan func(config *aid.Coordinator) *aid.PlanResponse) Option
+forgePlanMocker(plan func(config *coordinator.Session) *coordinator.PlanResponse) Option
 ```
 
 WithPlanMocker 设置AI助手的计划生成器（导出名为 aiagent.forgePlanMocker）
@@ -271,7 +255,7 @@ WithPlanMocker 设置AI助手的计划生成器（导出名为 aiagent.forgePlan
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| plan | `func(config *aid.Coordinator) *aid.PlanResponse` | 计划生成函数，参数为协调器，返回计划响应 |
+| plan | `func(config *coordinator.Session) *coordinator.PlanResponse` | 计划生成函数，参数为协调器，返回计划响应 |
 
 **返回值**
 
@@ -698,7 +682,7 @@ dump(forge)
 ### CreateLiteForge {#createliteforge}
 
 ```go
-CreateLiteForge(name string, opts ...any) (*aiforge.LiteForge, error)
+CreateLiteForge(name string, opts ...any) (*liteforgeapp.LiteForge, error)
 ```
 
 NewLiteForge 创建一个 LiteForge 实例（导出名为 aiagent.CreateLiteForge）
@@ -721,7 +705,7 @@ LiteForge 是轻量的一次性 AI 任务执行单元
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `*aiforge.LiteForge` | LiteForge 实例 |
+| r1 | `*liteforgeapp.LiteForge` | LiteForge 实例 |
 | r2 | `error` | 错误信息 |
 
 **示例**
@@ -815,7 +799,7 @@ dump(action)
 ### NewExecutor {#newexecutor}
 
 ```go
-NewExecutor(name string, i any, opts ...any) (*aid.Coordinator, error)
+NewExecutor(name string, i any, opts ...any) (*aiforge.ForgeExecution, error)
 ```
 
 NewForgeExecutor 基于已注册的 Forge 名称创建执行器（导出名为 aiagent.NewExecutor）
@@ -837,7 +821,7 @@ NewForgeExecutor 基于已注册的 Forge 名称创建执行器（导出名为 a
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `*aid.Coordinator` | 协调器对象（可调用 Run 执行） |
+| r1 | `*aiforge.ForgeExecution` | 协调器对象（可调用 Run 执行） |
 | r2 | `error` | 错误信息 |
 
 **示例**
@@ -853,7 +837,7 @@ dump(coordinator)
 ### NewExecutorFromJson {#newexecutorfromjson}
 
 ```go
-NewExecutorFromJson(json string, i any, opts ...any) (*aid.Coordinator, error)
+NewExecutorFromJson(json string, i any, opts ...any) (*aiforge.ForgeExecution, error)
 ```
 
 通过 JSON 描述的 Forge 蓝图创建执行器（导出名为 aiagent.NewExecutorFromJson）
@@ -875,7 +859,7 @@ NewExecutorFromJson(json string, i any, opts ...any) (*aid.Coordinator, error)
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `*aid.Coordinator` | 协调器对象（可调用 Run 执行） |
+| r1 | `*aiforge.ForgeExecution` | 协调器对象（可调用 Run 执行） |
 | r2 | `error` | 错误信息 |
 
 **示例**
@@ -898,7 +882,7 @@ WithExtendAICommonOptions 追加底层 aicommon 配置选项（导出名为 aiag
 
 **可选参数**
 
-可作为可变参数 `opts ...aicommon.ConfigOption` 传入选项；共 28 个可用选项，详见 [ConfigOption 选项列表](#option-configoption)。
+可作为可变参数 `opts ...aicommon.ConfigOption` 传入选项；共 30 个可用选项，详见 [ConfigOption 选项列表](#option-configoption)。
 
 **返回值**
 
@@ -1033,12 +1017,14 @@ println(opt)
 | `aiagent.disableToolUse` | `disable bool` | `ConfigOption` | WithDisableToolUse 禁用工具调用 |
 | `aiagent.disallowRequireForUserPrompt` | - | `ConfigOption` | WithDisallowRequireForUserPrompt 禁止向用户发起交互请求 |
 | `aiagent.extendedActionCallback` | `name string, callback func(config *Config, action *Action)` | `ConfigOption` | WithExtendedActionCallback 注册扩展 action 回调 |
+| `aiagent.functionCallMode` | `enable bool` | `ConfigOption` | WithEnableFunctionCallMode enables native functioncall (tool_calls) mode for |
 | `aiagent.manualAssistantCallback` | `cb func(context.Context, *Config) (aitool.InvokeParams, error)` | `ConfigOption` | WithManualAssistantCallback 设置人工审批回调 |
 | `aiagent.offsetSeq` | `seq int64` | `ConfigOption` | WithSequence 设置起始序列号并安装自增 id 生成器 |
 | `aiagent.omniSearchTool` | - | `ConfigOption` | WithOmniSearchTool 启用全网搜索工具 |
-| `aiagent.plan` | `i func(coordinator *Coordinator) *PlanResponse` | `aicommon.ConfigOption` | WithPlanMocker 设置协调器的计划生成器，用于自定义/模拟任务计划 |
+| `aiagent.onEvent` | `handler func(e *schema.AiOutputEvent)` | `ConfigOption` | Event / output |
+| `aiagent.plan` | `build func(*Session) *PlanResponse` | `aicommon.ConfigOption` | WithPlanMocker supplies a native preset task tree. It is called once for a new |
 | `aiagent.planAICallback` | `cb AICallbackType` | `ConfigOption` | WithQualityPriorityAICallback 设置质量优先档的 AI 回调 |
-| `aiagent.resultHandler` | `h func(c *Coordinator)` | `aicommon.ConfigOption` | WithResultHandler 设置协调器执行结束后的结果处理回调 |
+| `aiagent.resultHandler` | `handler func(*ForgeExecution)` | `aicommon.ConfigOption` |  |
 | `aiagent.systemFileOperator` | - | `ConfigOption` | WithSystemFileOperator 为 AI 启用系统文件操作工具集 |
 | `aiagent.taskAICallback` | `cb AICallbackType` | `ConfigOption` | WithSpeedPriorityAICallback 设置速度优先档的 AI 回调 |
 | `aiagent.timelineContentLimit` | `limit int` | `ConfigOption` | WithTimelineContentLimit 设置 timeline 内容大小上限 |

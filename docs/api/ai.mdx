@@ -2,45 +2,15 @@
 sidebar_label: ai
 slug: /api/ai
 title: ai
-description: "AI 模块集成多种大语言模型服务，提供统一的对话、函数调用和流式输出接口。"
+description: "AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。"
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 :::info
-AI 模块提供与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一接口调用不同服务，可实现对话、函数调用和流式输出。
+AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。
 :::
-
-模型配置选项可用于 `ai.Chat`，也可传给 `aim.aiConfig`、`aim.qualityPriorityAIConfig` 等 Agent 配置函数。以下选项复用前端模型配置使用的底层配置函数：
-
-| 选项 | 用途 |
-| --- | --- |
-| `ai.baseURL(string)` | API 基础地址 |
-| `ai.endpoint(string)`、`ai.enableEndpoint(bool)` | 设置并启用完整请求地址 |
-| `ai.apiType(string)` | API 协议，如 `chat_completions` 或 `responses` |
-| `ai.extraHeader(any)` | 自定义请求头，支持 map 或 `json.loads` 返回的有序映射，值必须是字符串 |
-| `ai.maxTokens(int)` | 最大输出 token 数 |
-| `ai.temperature(float)`、`ai.topP(float)`、`ai.topK(int)` | 采样参数 |
-| `ai.frequencyPenalty(float)` | 频率惩罚 |
-| `ai.reasoningEffort(string)`、`ai.thinkingLevel(string)` | 思考强度 |
-
-不传采样选项时保留未设置状态；显式传入 `0` 会保留零值。具体参数是否支持及如何发送由模型和 API 协议决定。
-
-```yak
-options = [
-	ai.apiKey("your-api-key"),
-	ai.model("your-model"),
-	ai.endpoint("https://example.com/v1/responses"),
-	ai.enableEndpoint(true),
-	ai.apiType("responses"),
-	ai.extraHeader({"X-Benchmark": "test-run"}),
-	ai.maxTokens(8192),
-	ai.temperature(0.7),
-	ai.reasoningEffort("high"),
-]
-qualityConfig = aim.qualityPriorityAIConfig("openai", options...)
-```
 
 ## 函数索引
 
@@ -70,6 +40,7 @@ qualityConfig = aim.qualityPriorityAIConfig("openai", options...)
 | [ai.enableEndpoint](#enableendpoint) |  |
 | [ai.endpoint](#endpoint) |  |
 | [ai.extraHeader](#extraheader) | WithExtraHeader 设置自定义请求头，支持 Yak map 和 json.loads 返回的有序映射。 |
+| [ai.finishReasonCallback](#finishreasoncallback) |  |
 | [ai.frequencyPenalty](#frequencypenalty) |  |
 | [ai.funcCallRetryTimes](#funccallretrytimes) | WithFunctionCallRetryTimes 设置函数调用失败时的重试次数。 |
 | [ai.imageAI](#imageai) | WithVisionPriority 设置视觉优先（使用视觉模型，导出名为 ai.visionPriority / ai.imageAI） |
@@ -105,6 +76,7 @@ qualityConfig = aim.qualityPriorityAIConfig("openai", options...)
 | [ai.videoRaw](#videoraw) | WithVideoRaw 传入视频原始字节，自动 base64 包装为 data URI。 |
 | [ai.videoUrl](#videourl) | WithVideoUrl 传入视频 URL（http(s) 或 data:video/...;base64,...），用于 Qwen Omni 类模型。 |
 | [ai.visionPriority](#visionpriority) | WithVisionPriority 设置视觉优先（使用视觉模型，导出名为 ai.visionPriority / ai.imageAI） |
+| [ai.withFunctionCallMode](#withfunctioncallmode) | WithFunctionCallMode selects native arguments or JSON text for structured |
 
 
 ## API 详情
@@ -1160,6 +1132,34 @@ extraHeader(headers any) aispec.AIConfigOption
 ``````````````yak
 option = ai.extraHeader({"X-Benchmark": "test-run"})
 ``````````````
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### finishReasonCallback {#finishreasoncallback}
+
+
+<Tabs>
+<TabItem value="finishReasonCallback-1" label="定义" default>
+
+```go
+finishReasonCallback(cb func(string, []byte)) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| cb | `func(string, []byte)` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
 
 </TabItem>
 </Tabs>
@@ -2574,6 +2574,38 @@ visionPriority() AIConfigOption
 response = ai.Chat("分析这张截图", ai.imageFile("/tmp/demo.png"), ai.imageAI())~
 println(response)
 ``````````````
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### withFunctionCallMode {#withfunctioncallmode}
+
+- 描述: WithFunctionCallMode selects native arguments or JSON text for structured
+
+- 详细描述: output.ItdoesnotalterordinaryChatrequests.
+
+
+<Tabs>
+<TabItem value="withFunctionCallMode-1" label="定义" default>
+
+```go
+withFunctionCallMode(enable bool) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
 
 </TabItem>
 </Tabs>

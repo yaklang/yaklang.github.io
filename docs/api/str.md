@@ -4781,8 +4781,13 @@ IsTLSServer(addr string, proxies ...string) bool
 **示例**
 
 ``````````````yak
-str.IsTLSServer("www.yaklang.com:443") // true
-str.IsTLSServer("www.yaklang.com:80") // false
+// 在本地启动 TLS 和明文服务，并把 host:port 写入以下环境变量；
+// 文档执行测试会提供这两个本地服务。
+tlsAddr = env.Get("YAK_DOC_MOCK_TLS")
+httpAddr = env.Get("YAK_DOC_MOCK_HTTP")
+assert tlsAddr != "" && httpAddr != "", "local service addresses are required"
+assert str.IsTLSServer(tlsAddr), "TLS endpoint should complete the handshake"
+assert !str.IsTLSServer(httpAddr), "plaintext endpoint should not speak TLS"
 ``````````````
 
 ---

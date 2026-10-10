@@ -316,7 +316,7 @@ die(err)
 ### ScanProject {#scanproject}
 
 ```go
-ScanProject(ctx context.Context, opts ...ssaconfig.Option) (ProjectResult, error)
+ScanProject(ctx context.Context, opts ...ssaconfig.Option) (result ProjectResult, err error)
 ```
 
 is the product pipeline for CLI and yak scripts.
@@ -330,7 +330,7 @@ code-scan runs all three modes by default:
   - struct: compile-time unit scan (-t) or intra application/library scan (-p, no compile)
   - ssa: always on a DB-loaded program (-t reloads after SaveToDatabase)
 
-Stages: 收集代码 → 代码检测 → 语义检测 → 深度分析.
+Stages: 收集代码 → 代码检测 → 语义检测(编译中) → 深度分析.
 Mode is selected by WithMode (stacked). An empty mode list is compile-only:
 it persists IR, reports StageCompile, and skips every rule set so platforms
 can reuse the program later. Callers that want rule sets (code-scan, gRPC)
@@ -355,8 +355,8 @@ callers render the outcome instead of re-deriving success from job state.
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `ProjectResult` |  |
-| r2 | `error` |  |
+| result | `ProjectResult` |  |
+| err | `error` |  |
 
 ---
 

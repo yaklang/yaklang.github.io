@@ -62,8 +62,8 @@
 | [rag.BuildCollectionFromReader](#buildcollectionfromreader) | `kbName string, reader io.Reader, option ...any` | `<-chan *schema.KnowledgeBaseEntry, error` | BuildKnowledgeFromReader 使用 AI 分析 reader 内容并构建知识库（导出名为 rag.BuildCollectionFromReader） |
 | [rag.BuildIndexKnowledgeFromFile](#buildindexknowledgefromfile) | `kbName string, path string, option ...any` | `error` | 从文件构建带索引的知识库条目（导出名为 rag.BuildIndexKnowledgeFromFile） |
 | [rag.BuildKnowledgeFromEntityRepos](#buildknowledgefromentityrepos) | `name string, option ...any` | `<-chan *schema.KnowledgeBaseEntry, error` | BuildKnowledgeFromEntityReposByName 基于已有的实体仓库构建知识库（导出名为 rag.BuildKnowledgeFromEntityRepos） |
-| [rag.BuildSearchIndexKnowledge](#buildsearchindexknowledge) | `kbName string, text string, option ...any` | `*aiforge.SearchIndexResult, error` | builds a search index for the given text content. |
-| [rag.BuildSearchIndexKnowledgeFromFile](#buildsearchindexknowledgefromfile) | `kbName string, filename string, option ...any` | `*aiforge.SearchIndexResult, error` | builds a search index from a file. |
+| [rag.BuildSearchIndexKnowledge](#buildsearchindexknowledge) | `kbName string, text string, option ...any` | `*liteforgeapp.SearchIndexResult, error` | builds a search index for the given text content. |
+| [rag.BuildSearchIndexKnowledgeFromFile](#buildsearchindexknowledgefromfile) | `kbName string, filename string, option ...any` | `*liteforgeapp.SearchIndexResult, error` | builds a search index from a file. |
 | [rag.Collection2DPoints](#collection2dpoints) | `collectionName string, opts ...DBQueryOption` | `[]*vectorstore.Embedding2DPoint, error` | _collection2DPoints 获取指定集合所有文档向量的二维投影（PCA 降维） |
 | [rag.DBQueryCountVectorsByEntry](#dbquerycountvectorsbyentry) | `entryID string, opts ...DBQueryOption` | `int, error` | _dbQueryCountVectorsByEntryID 根据 entry_id 计算向量文档数量 |
 | [rag.DBQueryEntity](#dbqueryentity) | `keyword string, opts ...DBQueryOption` | `[]*schema.ERModelEntity, error` | _dbQueryEntity 数据库直接查询实体 |
@@ -983,7 +983,7 @@ entries = rag.BuildKnowledgeFromEntityRepos("my-entity-repo")~
 ### BuildSearchIndexKnowledge {#buildsearchindexknowledge}
 
 ```go
-BuildSearchIndexKnowledge(kbName string, text string, option ...any) (*aiforge.SearchIndexResult, error)
+BuildSearchIndexKnowledge(kbName string, text string, option ...any) (*liteforgeapp.SearchIndexResult, error)
 ```
 
 builds a search index for the given text content.
@@ -1009,7 +1009,7 @@ and stores the original content as the knowledge entry.
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `*aiforge.SearchIndexResult` | 搜索索引结果（含生成的问题列表与 EntryID） |
+| r1 | `*liteforgeapp.SearchIndexResult` | 搜索索引结果（含生成的问题列表与 EntryID） |
 | r2 | `error` | 错误信息 |
 
 **示例**
@@ -1029,7 +1029,7 @@ println("Generated questions:", result.Questions)
 ### BuildSearchIndexKnowledgeFromFile {#buildsearchindexknowledgefromfile}
 
 ```go
-BuildSearchIndexKnowledgeFromFile(kbName string, filename string, option ...any) (*aiforge.SearchIndexResult, error)
+BuildSearchIndexKnowledgeFromFile(kbName string, filename string, option ...any) (*liteforgeapp.SearchIndexResult, error)
 ```
 
 builds a search index from a file.
@@ -1053,7 +1053,7 @@ It reads the file content and calls BuildSearchIndexKnowledge.
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `*aiforge.SearchIndexResult` | 搜索索引结果（含生成的问题列表与 EntryID） |
+| r1 | `*liteforgeapp.SearchIndexResult` | 搜索索引结果（含生成的问题列表与 EntryID） |
 | r2 | `error` | 错误信息 |
 
 **示例**
@@ -1697,7 +1697,7 @@ results, err = rag.QueryDocuments("my_collection", "query", 10)
 | `rag.queryType` | `documentType ...string` | `RAGSystemConfigOption` | 设置文档类型过滤 |
 | `rag.ragCosineDistance` | - | `RAGSystemConfigOption` | 使用余弦距离作为向量相似度度量 |
 | `rag.ragDescription` | `description string` | `RAGSystemConfigOption` | 设置 RAG 集合的描述信息 |
-| `rag.ragEmbeddingModel` | `model string` | `RAGSystemConfigOption` | 设置 RAG 使用的 embedding 模型名称 |
+| `rag.ragEmbeddingModel` | `model string` | `RAGSystemConfigOption` | 为旧调用保留的兼容选项，不参与当前集合模型配置。 |
 | `rag.ragForceNew` | `force bool` | `RAGSystemConfigOption` | 是否强制创建新集合 |
 | `rag.ragHNSWParameters` | `m int, ml float64, efSearch int, efConstruct int` | `RAGSystemConfigOption` | 设置 HNSW 索引参数 |
 | `rag.ragImportFile` | `importFile string` | `RAGSystemConfigOption` | 指定导入所用的 RAG 文件路径 |

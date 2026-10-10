@@ -10,7 +10,7 @@
 
 与相邻库的关系：`pcapx` 是底层数据包能力，`synscan`/`finscan` 在其之上做端口扫描，`netstack`/`netutils` 处理路由；分析 TLS 指纹可结合 `ja3`。
 
-> 共 64 个函数、66 个实例
+> 共 87 个函数、66 个实例
 
 ## 实例
 
@@ -87,8 +87,14 @@
 
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
+| [pcapx.CaptureContext](#capturecontext) | `seconds float64` | `context.Context, context.CancelFunc, error` | 创建支持 Ctrl-C 和可选超时的捕获上下文，需通过 pcap_context 传给捕获入口。 |
+| [pcapx.CompileDisplayFilter](#compiledisplayfilter) | `expr string` | `*DisplayFilter, error` |  |
 | [pcapx.FixPermission](#fixpermission) | - | `error` | 尝试修复 pcap 权限问题(SYN 扫描依赖原始套接字，需要相应权限) |
 | [pcapx.GetStatistics](#getstatistics) | - | `*Statistics` | 获取 pcapx 注入流量过程中累计的统计信息(链路层、网络层、传输层) |
+| [pcapx.ListDevices](#listdevices) | - | `[]pcap.Interface, error` | 列出当前可抓包设备，需要本机 libpcap/Npcap 支持。 |
+| [pcapx.NativeProtocolProfiles](#nativeprotocolprofiles) | - | `[]ProtocolProfile` |  |
+| [pcapx.NewBinParserInspector](#newbinparserinspector) | `messages int, bytes int` | `*BinParserInspector, error` |  |
+| [pcapx.ParseTLSKeyLog](#parsetlskeylog) | `text string` | `*TLSKeyLog, error` | parses a bounded, immutable key log. Conflicting duplicate |
 | [pcapx.WithPayload](#withpayload) | `payload []byte` | `BuilderConfigOption` | 为 pcapx.PacketBuilder 设置数据包的负载(Payload)内容 |
 | [pcapx.WithdrawPermission](#withdrawpermission) | - | `error` | 撤销 pcap 权限 |
 | [pcapx.arp_reply](#arp_reply) | `targetIp string, targetMac string` | `ArpConfig` | 构造一个 ARP 应答层，自动使用本机默认网卡的 IP 与 MAC 作为源 |
@@ -138,12 +144,75 @@
 | [pcapx.InjectIP](#injectip) | `raw []byte, opt ...ConfigOption` | - | InjectTCPIP 解析并注入一个 TCP/IP 数据包(在 yak 中对应 pcapx.InjectTCP 和 pcapx.InjectIP) |
 | [pcapx.InjectRaw](#injectraw) | `raw []byte, opt ...ConfigOption` | - | 将一个原始数据包(自链路层起的完整字节)直接注入到网卡发送 |
 | [pcapx.InjectTCP](#injecttcp) | `raw []byte, opt ...ConfigOption` | - | InjectTCPIP 解析并注入一个 TCP/IP 数据包(在 yak 中对应 pcapx.InjectTCP 和 pcapx.InjectIP) |
-| [pcapx.OpenPcapFile](#openpcapfile) | `filename string, opts ...CaptureOption` | `error` | 打开并解析一个 pcap 抓包文件，通过回调选项处理其中的流量 |
+| [pcapx.NewProtocolInspector](#newprotocolinspector) | `limits ...int` | `*ProtocolInspector, error` | 创建有界协议消息历史，用 OnEvent 接收 pcap_onProtocolMessage 的结果。 |
+| [pcapx.OpenPcapFile](#openpcapfile) | `filename string, opts ...CaptureOption` | `error` | 回放 pcap/pcapng 文件，与 StartSniff 共用协议消息、统计和输出选项。 |
 | [pcapx.PacketBuilder](#packetbuilder) | `opts ...any` | `[]byte, error` | 按照传入的各层配置选项组合并序列化出一个完整的数据包字节 |
-| [pcapx.StartSniff](#startsniff) | `iface string, opts ...CaptureOption` | `error` | 在指定网卡上开始抓包(嗅探),通过回调选项处理捕获到的流量 |
+| [pcapx.ReplayPcapFile](#replaypcapfile) | `filename string, options ...CaptureOption` | `error` | replays pcap or pcapng without opening a native capture handle. |
+| [pcapx.StartSniff](#startsniff) | `iface string, opts ...CaptureOption` | `error` | 在指定网卡上抓包，通过回调选项处理原始包、TCP 流或协议消息。 |
 | [pcapx.tcp_optionSACK](#tcp_optionsack) | `i ...any` | `TCPOption` | 设置 TCP 的 SACK(选择性确认)选项，可传入多个边界值 |
 
 ## 函数详情
+
+### CaptureContext {#capturecontext}
+
+```go
+CaptureContext(seconds float64) (context.Context, context.CancelFunc, error)
+```
+
+创建支持 Ctrl-C 和可选超时的捕获上下文，需通过 pcap_context 传给捕获入口。
+
+stop() 主动请求停止，同时释放定时器和信号订阅，应在成功创建后 defer stop()。
+
+StartSniff/OpenPcapFile 会处理完已接收任务再返回，因此截止时间不是强制返回时间。
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| seconds | `float64` | 持续秒数，可为小数；0 不设超时。必须非负、有限且不超过 time.Duration 范围。 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `context.Context` | 捕获上下文。 |
+| r2 | `context.CancelFunc` | 停止函数，可以重复调用。 |
+| r3 | `error` | 参数错误，使用 ~ 检查。 |
+
+**示例**
+
+``````````````yak
+ctx, stop = pcapx.CaptureContext(30)~
+defer stop()
+pcapx.StartSniff("en0", pcapx.pcap_context(ctx),
+
+	pcapx.pcap_onProtocolMessage(func(message) { println(message.Summary) }))~
+``````````````
+
+---
+
+### CompileDisplayFilter {#compiledisplayfilter}
+
+```go
+CompileDisplayFilter(expr string) (*DisplayFilter, error)
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| expr | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*DisplayFilter` |  |
+| r2 | `error` |  |
+
+---
 
 ### FixPermission {#fixpermission}
 
@@ -196,6 +265,95 @@ GetStatistics() (result *Statistics)
 stat = pcapx.GetStatistics()
 println(stat)
 ``````````````
+
+---
+
+### ListDevices {#listdevices}
+
+```go
+ListDevices() ([]pcap.Interface, error)
+```
+
+列出当前可抓包设备，需要本机 libpcap/Npcap 支持。
+
+返回设备的 Name 可直接传给 StartSniff；Description 是设备说明，列表下标不是设备名称。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]pcap.Interface` | 设备列表，每项包含 Name、Description 和 Addresses 等信息。 |
+| r2 | `error` | 枚举设备时的错误，使用 ~ 检查。 |
+
+**示例**
+
+``````````````yak
+for _, device = range pcapx.ListDevices()~ { println(device.Name, device.Description) }
+``````````````
+
+---
+
+### NativeProtocolProfiles {#nativeprotocolprofiles}
+
+```go
+NativeProtocolProfiles() []ProtocolProfile
+```
+
+暂无描述
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]ProtocolProfile` |  |
+
+---
+
+### NewBinParserInspector {#newbinparserinspector}
+
+```go
+NewBinParserInspector(messages int, bytes int) (*BinParserInspector, error)
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| messages | `int` |  |
+| bytes | `int` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*BinParserInspector` |  |
+| r2 | `error` |  |
+
+---
+
+### ParseTLSKeyLog {#parsetlskeylog}
+
+```go
+ParseTLSKeyLog(text string) (*TLSKeyLog, error)
+```
+
+parses a bounded, immutable key log. Conflicting duplicate
+entries are errors; secrets are never included in diagnostic messages.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| text | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*TLSKeyLog` |  |
+| r2 | `error` |  |
 
 ---
 
@@ -1603,25 +1761,62 @@ pcapx.InjectTCP(raw)
 
 ---
 
+### NewProtocolInspector {#newprotocolinspector}
+
+```go
+NewProtocolInspector(limits ...int) (*ProtocolInspector, error)
+```
+
+创建有界协议消息历史，用 OnEvent 接收 pcap_onProtocolMessage 的结果。
+
+Rows 返回摘要，Details 按消息 ID 返回独立字段。超出条数或原始字节上限时淘汰最早消息，
+
+Evicted 返回淘汰数；历史淘汰不等于抓包丢包。
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| limits | `...int` | 不传参数时保留最多 4096 条、32 MiB 原始字节；自定义时必须同时传入消息条数和原始字节数，均为正数，条数最多 1000000。 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ProtocolInspector` | 有界历史查看器。 |
+| r2 | `error` | 参数错误，使用 ~ 检查。 |
+
+**示例**
+
+``````````````yak
+history = pcapx.NewProtocolInspector()~
+pcapx.OpenPcapFile("session.pcap", pcapx.pcap_onProtocolMessage(history.OnEvent))~
+dump(history.Rows("http", 0)) // 0 表示所有会话
+``````````````
+
+---
+
 ### OpenPcapFile {#openpcapfile}
 
 ```go
 OpenPcapFile(filename string, opts ...CaptureOption) error
 ```
 
-打开并解析一个 pcap 抓包文件，通过回调选项处理其中的流量
+回放 pcap/pcapng 文件，与 StartSniff 共用协议消息、统计和输出选项。
 
-在 yak 中通过 pcapx.OpenPcapFile 调用
+默认使用纯 Go 文件读取器，不依赖抓包驱动；BPF 或原生句柄选项需要 libpcap/Npcap。
+
+到达文件末尾或上下文被取消后，处理完已接收任务再返回；不按包时间戳等待。
 
 **必填参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| filename | `string` | pcap 文件路径 |
+| filename | `string` | pcap 或 pcapng 文件路径 |
 
 **可选参数**
 
-可作为可变参数 `opts ...CaptureOption` 传入选项；共 14 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
+可作为可变参数 `opts ...CaptureOption` 传入选项；共 29 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
 
 **返回值**
 
@@ -1632,10 +1827,9 @@ OpenPcapFile(filename string, opts ...CaptureOption) error
 **示例**
 
 ``````````````yak
-// 该示例为示意性用法：读取并解析一个 pcap 文件
 pcapx.OpenPcapFile("/tmp/capture.pcap",
 
-	pcapx.pcap_onHTTPRequest(func(flow, req) { println("got a http request") }),
+	pcapx.pcap_onProtocolMessage(func(message) { println(message.Protocol, message.Summary) }),
 
 )~
 ``````````````
@@ -1680,15 +1874,47 @@ println(len(raw))
 
 ---
 
+### ReplayPcapFile {#replaypcapfile}
+
+```go
+ReplayPcapFile(filename string, options ...CaptureOption) error
+```
+
+replays pcap or pcapng without opening a native capture handle.
+It preserves nanosecond timestamps. BPF and native handle hooks require
+OpenPcapFile instead; they are never silently ignored here.
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| filename | `string` |  |
+
+**可选参数**
+
+可作为可变参数 `options ...CaptureOption` 传入选项；共 29 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` |  |
+
+---
+
 ### StartSniff {#startsniff}
 
 ```go
 StartSniff(iface string, opts ...CaptureOption) error
 ```
 
-在指定网卡上开始抓包(嗅探),通过回调选项处理捕获到的流量
+在指定网卡上抓包，通过回调选项处理原始包、TCP 流或协议消息。
 
-在 yak 中通过 pcapx.StartSniff 调用，需要相应的抓包权限
+需要本机 libpcap/Npcap 和抓包权限；设备名称可从 ListDevices 获取。
+
+使用 pcap_onProtocolMessage 即可订阅内置协议解析，无需额外启用开关。
+
+默认持续运行；传入 pcap_context 可以取消捕获，结束前会处理完已接收任务。
 
 **必填参数**
 
@@ -1698,7 +1924,7 @@ StartSniff(iface string, opts ...CaptureOption) error
 
 **可选参数**
 
-可作为可变参数 `opts ...CaptureOption` 传入选项；共 14 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
+可作为可变参数 `opts ...CaptureOption` 传入选项；共 29 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
 
 **返回值**
 
@@ -1709,11 +1935,13 @@ StartSniff(iface string, opts ...CaptureOption) error
 **示例**
 
 ``````````````yak
-// 该示例为示意性用法：在 eth0 上抓取 80 端口流量(需要抓包权限)
+ctx, stop = pcapx.CaptureContext(30)~
+defer stop()
 pcapx.StartSniff("eth0",
 
+	pcapx.pcap_context(ctx),
 	pcapx.pcap_bpfFilter("tcp port 80"),
-	pcapx.pcap_onHTTPFlow(func(flow, req, rsp) { println("got a http flow") }),
+	pcapx.pcap_onProtocolMessage(func(message) { println(message.Protocol, message.Summary) }),
 
 )~
 ``````````````
@@ -1758,11 +1986,18 @@ println(len(raw))
 
 ### 1. 类型：CaptureOption {#option-captureoption}
 
-涉及到的函数有：[pcapx.OpenPcapFile](#openpcapfile)、[pcapx.StartSniff](#startsniff)
+涉及到的函数有：[pcapx.OpenPcapFile](#openpcapfile)、[pcapx.ReplayPcapFile](#replaypcapfile)、[pcapx.StartSniff](#startsniff)
 
 |选项函数|参数|返回值|说明|
 |:--|:--|:--|:--|
+| `pcapx.pcap_binParser` | `callback func(*BinParserEvent)` | `CaptureOption` | WithBinParser enables full structured parsing after TCP framing and for |
+| `pcapx.pcap_binParserDeferred` | `deferred bool` | `CaptureOption` | These options compose with WithBinParser in either order. |
+| `pcapx.pcap_binParserStats` | `callback func(BinParserStats)` | `CaptureOption` |  |
 | `pcapx.pcap_bpfFilter` | `bpf string` | `CaptureOption` | 设置 BPF 过滤表达式，仅捕获匹配的流量 |
+| `pcapx.pcap_canDecodeAs` | `captureInterface int, protocol string` | `CaptureOption` | WithCANDecodeAs selects a bounded J1939 or DroneCAN classical profile on one |
+| `pcapx.pcap_captureBufferSize` | `size int` | `CaptureOption` | WithCaptureBufferSize requests a native buffer per live device before opening |
+| `pcapx.pcap_captureWriter` | `w io.Writer` | `CaptureOption` | WithCaptureWriter records packets before analysis without constructing public |
+| `pcapx.pcap_context` | `ctx context.Context` | `CaptureOption` |  |
 | `pcapx.pcap_debug` | `b bool` | `CaptureOption` | 设置是否开启抓包调试模式(输出更详细的调试日志) |
 | `pcapx.pcap_disableAssembly` | `b bool` | `CaptureOption` | 设置是否禁用 TCP 流重组 |
 | `pcapx.pcap_everyPacket` | `h func(packet gopacket.Packet)` | `CaptureOption` | 注册一个回调，对抓包过程中捕获到的每一个数据包执行处理 |
@@ -1772,8 +2007,16 @@ println(len(raw))
 | `pcapx.pcap_onFlowDataFrameNoReassembled` | `h func(flow *TrafficFlow, conn *TrafficConnection, frame *TrafficFrame)` | `CaptureOption` | 注册一个回调，当数据帧到达(未经流重组)时触发 |
 | `pcapx.pcap_onHTTPFlow` | `h func(flow *TrafficFlow, req *http.Request, rsp *http.Response)` | `CaptureOption` | 注册一个回调，当从流量中解析出完整的 HTTP 请求-响应对时触发 |
 | `pcapx.pcap_onHTTPRequest` | `h func(flow *TrafficFlow, req *http.Request)` | `CaptureOption` | 注册一个回调，当从流量中解析出 HTTP 请求时触发 |
+| `pcapx.pcap_onProtocolMessage` | `callback func(message *ProtocolEvent)` | `CaptureOption` | 注册协议消息回调，配合 StartSniff 或 OpenPcapFile 使用。 |
+| `pcapx.pcap_onProtocolStats` | `callback func(stats ProtocolStats)` | `CaptureOption` | 注册协议分析的最终统计回调，配合 StartSniff 或 OpenPcapFile 使用。 |
+| `pcapx.pcap_onTCPReassemblyStats` | `callback func(stats TCPReassemblyStats)` | `CaptureOption` | 注册捕获及 TCP 重组的最终统计回调，支持单 worker 和多 worker。 |
 | `pcapx.pcap_onTLSClientHello` | `h func(flow *TrafficFlow, hello *tlsutils.HandshakeClientHello)` | `CaptureOption` | 注册一个回调，当捕获到 TLS ClientHello 报文时触发 |
-| `pcapx.pcap_tcpReassemblyStats` | `h func(TCPReassemblyStats)` | `CaptureOption` | WithTCPReassemblyStats reports the final, drained multi-worker counters. |
+| `pcapx.pcap_outputFile` | `filename string` | `CaptureOption` | 将捕获到的原始包保存为新的 pcap 文件，配合 StartSniff 或 OpenPcapFile 使用。 |
+| `pcapx.pcap_protocolBudget` | `maxMessageBytes int, maxBufferedBytes int` | `CaptureOption` | 设置协议解析的单条消息和整次捕获的保留缓冲预算（字节）。 |
+| `pcapx.pcap_protocolDecodeAs` | `transport string, port uint16, protocol string` | `CaptureOption` | WithProtocolDecodeAs selects a native UDP codec on a port. Selection does not |
+| `pcapx.pcap_protocolDeferred` | `deferred bool` | `CaptureOption` | 设置是否延迟协议字段解码，配合协议消息或统计订阅使用。 |
+| `pcapx.pcap_tcpReassemblyStats` | `h func(TCPReassemblyStats)` | `CaptureOption` | WithTCPReassemblyStats reports final capture and reassembly counters. |
 | `pcapx.pcap_tcpReassemblyStream` | `chunkBytes int` | `CaptureOption` | WithTCPReassemblyStream enables bounded data callbacks for very large flows. |
 | `pcapx.pcap_tcpReassemblyWorkers` | `workers int` | `CaptureOption` | WithTCPReassemblyWorkers opts into concurrent callbacks across flows. Data |
+| `pcapx.pcap_tlsSecrets` | `provider TLSSecretProvider` | `CaptureOption` | WithTLSSecrets enables authenticated TLS decryption for the documented AES |
 
