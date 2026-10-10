@@ -85,11 +85,11 @@ for result = range results {
 
 ## Project facts
 
-- Latest Yakit release: v1.4.9-0925 (retrieved 2026-10-09 at site build time)
-- GitHub stars: yaklang/yakit 7,796
+- Latest Yakit release: v1.4.9-1010 (retrieved 2026-10-10 at site build time)
+- GitHub stars: yaklang/yakit 7,801
 - GitHub stars: yaklang/yaklang 639
 - GitHub forks: yaklang/yakit 829
-- Yakit v1.4.9-0925 installer sizes: macIntel 184.96 MB, macApple 175.47 MB, linux 176.64 MB, windows 152.72 MB, linuxArm64 173 MB
+- Yakit v1.4.9-1010 installer sizes: macIntel 189.48 MB, macApple 179.74 MB, linux 181.18 MB, windows 157.22 MB, linuxArm64 177.22 MB
 - Releases: https://github.com/yaklang/yakit/releases
 
 ## Documentation index (auto-generated at build time)
@@ -198,9 +198,11 @@ for result = range results {
 - [实战1: 扫端口/子域名+指纹识别](https://yaklang.com/docs/yakexamples/yak_misc): 本届我们将学习的知识量非常大，这可能是很多开源项目的核心功能，我们要做的就是要把这些功能的实现成本降低。之前我们要完成这些功能，可能需要一个语言的很多的库，然而在 Yak 中，这些全部被封装在了一个个的内置模块中。…
 - [Java 反序列化利用链: yso(ysoserial)](https://yaklang.com/docs/yakexamples/ysoserial-demo): Yak 通过非 Java 的方式实现了一整套 Java 反序列化协议。可以在一定容错限度内劫持绝大部分 Java 反序列化流。详情参考 java: java 反序列化协议的 Golang/Yak 实现 在实现了 Java 反序列化协议后，J
 - [__global__](https://yaklang.com/docs/api/__global__): append(a any, vals ...any) (ret any) doc:Append does append(a, vals...) assert(b bool, reason ...any) assertEmpty(any) a
-- [ai](https://yaklang.com/docs/api/ai): AI 模块集成多种大语言模型服务，提供统一的对话、函数调用和流式输出接口。
+- [ai](https://yaklang.com/docs/api/ai): AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。
 - [aiagent {#library-aiagent}](https://yaklang.com/docs/api/aiagent): aiagent 库是 yaklang 的 AI 智能体（Agent）编排入口，把"大模型 + 工具调用 + 计划执行"封装成可在脚本里驱动的自动化流程。它围绕 ReAct 式的"思考-行动-观察"循环，让 AI 自主拆解任务、调用 yak 
+- [aihistory {#library-aihistory}](https://yaklang.com/docs/api/aihistory): searches all original item rows in one AI session. Current live items are excluded before matching/pagination, using sta
 - [aim {#library-aim}](https://yaklang.com/docs/api/aim): aim 库是 yaklang 的 AI 引擎（AI Engine）封装，提供一个开箱即用的 ReAct 智能体运行时：给定一句自然语言输入，引擎自动规划、调用工具、与知识库/Forge 协作，并通过丰富的事件回调把过程实时吐出来。相比 ai
+- [aimemory {#library-aimemory}](https://yaklang.com/docs/api/aimemory): manages one exact memory ID in a namespace. Change deletes the old memory and its indexes, then writes a replacement wit
 - [aireducer {#library-aireducer}](https://yaklang.com/docs/api/aireducer): aireducer 库用于把大文本/大文件按块（chunk）切分，并对每一块逐步执行回调——这正是 "reduce" 的含义。它常用于配合 AI：把超长内容分段喂给模型处理（如逐段摘要、逐段分析），避免一次性超出上下文长度限制。…
 - [amap {#library-amap}](https://yaklang.com/docs/api/amap): amap 库是高德地图（AMap）开放平台 API 的封装，提供地理编码、逆地理编码、POI 检索、路径规划、IP 定位、天气查询等地理信息服务能力。使用前需要申请高德 API Key，通过 amap.apiKey 传入。…
 - [bin {#library-bin}](https://yaklang.com/docs/api/bin): bin 库是二进制结构解析工具，用声明式的"描述符（PartDescriptor）"定义一段二进制数据的字段布局，然后把原始字节按布局解析成结构化结果。它适合解析自定义协议报文、文件格式头、TLV 结构等场景。…
@@ -228,7 +230,6 @@ for result = range results {
 - [excel {#library-excel}](https://yaklang.com/docs/api/excel): excel 库基于 excelize 提供 Excel 文件的读写能力，用于把扫描/分析结果导出为表格，或解析已有表格作为输入数据源。- 读取解析：excel.Parse / excel.ParseTableOnly / excel.Par
 - [exec {#library-exec}](https://yaklang.com/docs/api/exec): exec 库用于在本机执行系统命令并获取输出，支持同步执行、上下文取消、流式监听输出与批量并发执行，是与操作系统交互、集成外部工具的入口。- 直接执行：exec.System 执行命令并返回输出，exec.SystemContext 带上下
 - [facades {#library-facades}](https://yaklang.com/docs/api/facades): facades 库提供一个多协议"恶意服务端"（Facade Server），同时监听 HTTP/RMI/LDAP 等协议，用于 Java 反序列化、JNDI 注入等漏洞的利用与带外验证：把恶意类/资源托管在该服务上，诱导目标回连加载。…
-- [ffmpeg {#library-ffmpeg}](https://yaklang.com/docs/api/ffmpeg): ffmpeg 库基于 ffmpeg 提供音视频处理能力，支持抽帧、抽音轨、切片、烧录字幕、屏幕截图等，常用于多媒体取证、视频内容分析与 AI 多模态预处理。- 抽取：ffmpeg.ExtractAudioFromVideo 抽音轨，ffmp
 
 ### Yakit user manual
 
