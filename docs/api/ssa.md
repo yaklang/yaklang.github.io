@@ -10,7 +10,7 @@
 
 与相邻库的关系：`ssa` 负责"把代码编译成可查询的程序"，`syntaxflow` 在其之上写规则做查询，`sfreport` 输出审计报告，`risk` 记录代码风险；常配合 `git`/`filesys` 提供源码。
 
-> 共 59 个函数、8 个实例
+> 共 60 个函数、8 个实例
 
 ## 实例
 
@@ -289,7 +289,7 @@ New 创建一个 SSA 配置对象（导出名为 ssa.NewConfig）
 
 **可选参数**
 
-可作为可变参数 `opts ...Option` 传入选项；共 46 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...Option` 传入选项；共 47 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -354,7 +354,7 @@ NewSSAProject(opts ...ssaconfig.Option) (*SSAProject, error)
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 46 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 47 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -390,7 +390,7 @@ Parse(code string, opts ...ssaconfig.Option) (*Program, error)
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 46 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 47 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -425,7 +425,7 @@ ParseProjectFromPath compiles a local directory into SSA programs (alias: ssa.Pa
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 46 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 47 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -446,7 +446,7 @@ compiles a project from options (local FS, git, etc.).
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 46 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 47 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -474,6 +474,7 @@ compiles a project from options (local FS, git, etc.).
 | `ssa.withCodeSourceAuthPassword` | `password string` | `Option` | 设置代码源认证密码或令牌 |
 | `ssa.withCodeSourceAuthUserName` | `userName string` | `Option` | 设置代码源认证用户名 |
 | `ssa.withCodeSourceBranch` | `branch string` | `Option` | 设置代码源的分支 |
+| `ssa.withCodeSourceCommit` | `commit string` | `Option` |  |
 | `ssa.withCodeSourceJarRecursiveParse` | `enable bool` | `Option` | 设置是否对 Jar 包进行递归解析 |
 | `ssa.withCodeSourceKind` | `kind CodeSourceKind` | `Option` | 设置代码源类型 |
 | `ssa.withCodeSourceLocalFile` | `localFile string` | `Option` | 设置代码源的本地文件/目录路径 |

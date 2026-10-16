@@ -18,6 +18,7 @@ AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、Chat
 |:------|:--------|
 | [ai.Chat](#chat) | Chat 快速调用 AI 服务进行对话，这是最简单的调用方式。 |
 | [ai.ChatGLM](#chatglm) | ChatGLM 创建一个 ChatGLM 客户端实例，用于调用智谱 AI 的 ChatGLM 系列模型。 |
+| [ai.Detach](#detach) |  |
 | [ai.FunctionCall](#functioncall) | FunctionCall 让 AI 根据用户输入自动调用预定义的函数，实现智能函数调用能力。 |
 | [ai.IntelligentChat](#intelligentchat) | IntelligentChat 使用智能（高质量）模型分层进行对话（导出名为 ai.IntelligentChat） |
 | [ai.IntelligentFunctionCall](#intelligentfunctioncall) | IntelligentFunctionCall 使用智能（高质量）模型进行函数调用（导出名为 ai.IntelligentFunctionCall） |
@@ -172,6 +173,29 @@ response, err = client.Chat("介绍一下你自己")
 die(err)
 println(response)
 ``````````````
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### Detach {#detach}
+
+
+<Tabs>
+<TabItem value="Detach-1" label="定义" default>
+
+```go
+Detach() (string, error)
+```
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |  |
+| r2 | `error` |  |
 
 </TabItem>
 </Tabs>
