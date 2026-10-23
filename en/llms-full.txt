@@ -85,11 +85,11 @@ for result = range results {
 
 ## Project facts
 
-- Latest Yakit release: v1.4.9-1016 (retrieved 2026-10-16 at site build time)
-- GitHub stars: yaklang/yakit 7,812
-- GitHub stars: yaklang/yaklang 643
-- GitHub forks: yaklang/yakit 830
-- Yakit v1.4.9-1016 installer sizes: macIntel 189.57 MB, macApple 179.83 MB, linux 181.25 MB, windows 157.32 MB, linuxArm64 177.26 MB
+- Latest Yakit release: v1.4.9-1023 (retrieved 2026-10-23 at site build time)
+- GitHub stars: yaklang/yakit 7,825
+- GitHub stars: yaklang/yaklang 644
+- GitHub forks: yaklang/yakit 832
+- Yakit v1.4.9-1023 installer sizes: macIntel 191.56 MB, macApple 181.64 MB, linux 183.24 MB, windows 159.47 MB, linuxArm64 179.04 MB
 - Releases: https://github.com/yaklang/yakit/releases
 
 ## Documentation index (auto-generated at build time)
@@ -201,6 +201,7 @@ for result = range results {
 - [ai](https://yaklang.com/docs/api/ai): AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。
 - [aiagent {#library-aiagent}](https://yaklang.com/docs/api/aiagent): aiagent 库是 yaklang 的 AI 智能体（Agent）编排入口，把"大模型 + 工具调用 + 计划执行"封装成可在脚本里驱动的自动化流程。它围绕 ReAct 式的"思考-行动-观察"循环，让 AI 自主拆解任务、调用 yak 
 - [aihistory {#library-aihistory}](https://yaklang.com/docs/api/aihistory): searches all original item rows in one AI session. Current live items are excluded before matching/pagination, using sta
+- [aiknowledge {#library-aiknowledge}](https://yaklang.com/docs/api/aiknowledge): serializes a business failure for AI tools without raising a YakVM panic. A completed tool invocation can still report s
 - [aim {#library-aim}](https://yaklang.com/docs/api/aim): aim 库是 yaklang 的 AI 引擎（AI Engine）封装，提供一个开箱即用的 ReAct 智能体运行时：给定一句自然语言输入，引擎自动规划、调用工具、与知识库/Forge 协作，并通过丰富的事件回调把过程实时吐出来。相比 ai
 - [aimemory {#library-aimemory}](https://yaklang.com/docs/api/aimemory): manages one exact memory ID in a namespace. Change deletes the old memory and its indexes, then writes a replacement wit
 - [aireducer {#library-aireducer}](https://yaklang.com/docs/api/aireducer): aireducer 库用于把大文本/大文件按块（chunk）切分，并对每一块逐步执行回调——这正是 "reduce" 的含义。它常用于配合 AI：把超长内容分段喂给模型处理（如逐段摘要、逐段分析），避免一次性超出上下文长度限制。…
@@ -229,7 +230,6 @@ for result = range results {
 - [env {#library-env}](https://yaklang.com/docs/api/env): env 库提供对进程环境变量的读写，用于在脚本中获取配置（如代理、API Key、路径）或临时设置环境。- 读取：env.Get(key) 获取环境变量值。 - 设置：env.Set(key, value) 设置当前进程的环境变量。与相邻库
 - [excel {#library-excel}](https://yaklang.com/docs/api/excel): excel 库基于 excelize 提供 Excel 文件的读写能力，用于把扫描/分析结果导出为表格，或解析已有表格作为输入数据源。- 读取解析：excel.Parse / excel.ParseTableOnly / excel.Par
 - [exec {#library-exec}](https://yaklang.com/docs/api/exec): exec 库用于在本机执行系统命令并获取输出，支持同步执行、上下文取消、流式监听输出与批量并发执行，是与操作系统交互、集成外部工具的入口。- 直接执行：exec.System 执行命令并返回输出，exec.SystemContext 带上下
-- [facades {#library-facades}](https://yaklang.com/docs/api/facades): facades 库提供一个多协议"恶意服务端"（Facade Server），同时监听 HTTP/RMI/LDAP 等协议，用于 Java 反序列化、JNDI 注入等漏洞的利用与带外验证：把恶意类/资源托管在该服务上，诱导目标回连加载。…
 
 ### Yakit user manual
 
