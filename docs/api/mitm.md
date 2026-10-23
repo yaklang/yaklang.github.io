@@ -10,7 +10,7 @@
 
 与相邻库的关系：`mitm` 是流量入口，常与 `hook`（驱动插件链处理流量）、`fuzz`/`poc`（对劫持到的请求做测试）、`db`（流量入库）协同，构成被动扫描与交互测试流水线。
 
-> 共 30 个函数、1 个实例
+> 共 31 个函数、1 个实例
 
 ## 实例
 
@@ -31,6 +31,7 @@
 | [mitm.WithdrawMITMRootCertFromSystem](#withdrawmitmrootcertfromsystem) | - | `error` | 从 Linux 系统信任库中移除 MITM 根证书 |
 | [mitm.callback](#callback) | `f func(bool, string, *http.Request, *http.Response)` | `MitmConfigOpt` | 是一个选项函数，用于指定中间人代理服务器的回调函数，当接收到请求和响应后会调用该回调函数 |
 | [mitm.context](#context) | `ctx context.Context` | `MitmConfigOpt` | 是一个选项函数，用于指定中间人代理服务器的上下文，可通过取消上下文来停止服务 |
+| [mitm.emudhra](#emudhra) | `enabled bool` | `MitmConfigOpt` | 使用已公开泄露的 eMudhra 中间 CA 进行 TLS 信任测试，默认关闭。 |
 | [mitm.extraIncomingConn](#extraincomingconn) | `ch any` | `MitmConfigOpt` | 是一个选项函数，用于指定中间人代理服务器接受外部传入的连接通道 |
 | [mitm.gmRootCA](#gmrootca) | `cert []byte, key []byte` | `MitmConfigOpt` | 是一个选项函数，用于指定中间人代理服务器的国密根证书和私钥 |
 | [mitm.gmtls](#gmtls) | `b bool` | `MitmConfigOpt` | 是一个选项参数，用于指定中间人代理服务器是否开启 GMTLS 劫持模式，默认为false |
@@ -263,6 +264,38 @@ context(ctx context.Context) MitmConfigOpt
 
 ``````````````yak
 mitm.Start(8080, mitm.context(context.Background()))
+``````````````
+
+---
+
+### emudhra {#emudhra}
+
+```go
+emudhra(enabled bool) MitmConfigOpt
+```
+
+使用已公开泄露的 eMudhra 中间 CA 进行 TLS 信任测试，默认关闭。
+
+已更新吊销信息或强制证书透明度的客户端会拒绝此证书。
+
+不可与 mitm.rootCA 同时使用；不会覆盖本地保存的默认 CA。
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| enabled | `bool` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `MitmConfigOpt` |  |
+
+**示例**
+
+``````````````yak
+mitm.Start(8080, mitm.emudhra(true))
 ``````````````
 
 ---

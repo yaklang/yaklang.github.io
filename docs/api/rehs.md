@@ -74,7 +74,7 @@ MatchAny(patterns any, data any) (bool, error)
 |序号|类型|说明|
 |:--|:--|:--|
 | r1 | `bool` | 是否至少命中一条正则 |
-| r2 | `error` | patterns 无效或编译失败时返回错误 |
+| r2 | `error` | patterns 无效、编译失败或执行失败时返回错误 |
 
 **示例：一次性存在性判定**
 

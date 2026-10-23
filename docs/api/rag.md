@@ -11,7 +11,7 @@
 
 与相邻库的关系：`rag` 是知识层，与 `ai`/`liteforge`（模型与 Embedding 来源）、`aiagent`/`aim`（把知识库作为工具挂载）、`aireducer`（长文分块）协同，构成"带私有知识的 AI"能力。
 
-> 共 100 个函数、5 个实例
+> 共 105 个函数、5 个实例
 
 ## 实例
 
@@ -27,6 +27,7 @@
 
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
+| [rag.CheckOnlineEmbedding](#checkonlineembedding) | - | `int, error` | shares the same on-demand sync.Once initialization as |
 | [rag.DeleteAllKnowledgeBase](#deleteallknowledgebase) | - | `error` | _deleteAllKnowledgeBase 删除所有知识库及其关联的 RAG 内容 |
 | [rag.DeleteCollection](#deletecollection) | `name string` | `error` | _deleteCollection 删除指定的 RAG 集合 |
 | [rag.DeleteKnowledgeBase](#deleteknowledgebase) | `name string` | `error` | _deleteKnowledgeBase 删除指定的知识库及其关联的 RAG 内容 |
@@ -41,6 +42,7 @@
 | [rag.NewRagDatabase](#newragdatabase) | `path string` | `*gorm.DB, error` | NewVectorStoreDatabase 在指定路径创建（或打开）一个向量存储数据库（导出名为 rag.NewRagDatabase） |
 | [rag.NewTempRagDatabase](#newtempragdatabase) | - | `*gorm.DB, error` | _newTempRagDatabase 创建临时 RAG 数据库 |
 | [rag.OnlineEmbedding](#onlineembedding) | `text string` | `[]float32, error` | _onlineEmbedding 使用在线嵌入服务生成文本的向量表示 |
+| [rag.ProbeLocalEmbedding](#probelocalembedding) | `text string` | `[]float32, error` | checks the running local service once within one three-second |
 | [rag.analyzeConcurrency](#analyzeconcurrency) | `concurrency int` | `AnalysisOption` | 控制知识构建分析的并发数（在 rag 中导出名为 rag.analyzeConcurrency） |
 | [rag.chunkSize](#chunksize) | `size int64` | `Option` | 设置文本分块的大小（在 rag 中导出名为 rag.chunkSize），单位为字符数 |
 | [rag.ctx](#ctx) | `ctx context.Context` | `AnalysisOption` | WithAnalyzeContext 设置分析使用的上下文，用于控制取消（导出名为 liteforge.analyzeCtx） |
@@ -50,6 +52,8 @@
 | [rag.extraPrompt](#extraprompt) | `prompt string` | `AnalysisOption` | WithExtraPrompt 为图片/上下文分析追加额外提示词（导出名为 liteforge.imageExtraPrompt） |
 | [rag.getEntityFilter](#getentityfilter) | `reposName string, entityTypes []string, names []string, HiddenIndex []string, keywords []string` | `*ypb.EntityFilter` | 构建一个实体过滤器（在 rag 中导出名为 rag.getEntityFilter），用于 k-hop 查询等场景 |
 | [rag.log](#log) | `handler func(format string, args ...any)` | `AnalysisOption` | WithAnalyzeLog 设置分析过程的日志回调（导出名为 liteforge.analyzeLog） |
+| [rag.omniMode](#omnimode) | `mode string` | `AnalysisOption` | WithOmniMediaMode selects auto (probe the local Omni configuration, falling back |
+| [rag.onError](#onerror) | `handler func(error)` | `AnalysisOption` | WithAnalyzeErrorHandler receives asynchronous extraction and indexing failures. |
 | [rag.statusCard](#statuscard) | `handler func(id string, data any, tags ...string)` | `AnalysisOption` | WithAnalyzeStatusCard 设置分析过程的状态卡片回调（导出名为 liteforge.analyzeStatusCard） |
 
 ## 可变参数函数索引
@@ -78,8 +82,27 @@
 | [rag.Import](#import) | `inputPath string, optFuncs ...RAGSystemConfigOption` | `error` | ImportRAG 从 .rag 二进制文件导入 RAG 集合到数据库（导出名为 rag.Import） |
 | [rag.Query](#query) | `query string, opts ...rag.RAGSystemConfigOption` | `<-chan *rag.RAGSearchResult, error` | _query 统一的查询/搜索接口 |
 | [rag.QueryDocuments](#querydocuments) | `knowledgeBaseName string, query string, limit int, opts ...rag.RAGSystemConfigOption` | `[]*rag.SearchResult, error` | _queryDocuments 在指定集合中查询文档 |
+| [rag.omniConfig](#omniconfig) | `opts ...aispec.AIConfigOption` | `AnalysisOption` | WithOmniMediaAIOptions overrides the locally configured Omni provider. Provider |
 
 ## 函数详情
+
+### CheckOnlineEmbedding {#checkonlineembedding}
+
+```go
+CheckOnlineEmbedding() (int, error)
+```
+
+shares the same on-demand sync.Once initialization as
+actual vector writes. Repeated diagnostics do not send extra test requests.
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `int` |  |
+| r2 | `error` |  |
+
+---
 
 ### DeleteAllKnowledgeBase {#deleteallknowledgebase}
 
@@ -465,6 +488,32 @@ if err != nil {
 
 ---
 
+### ProbeLocalEmbedding {#probelocalembedding}
+
+```go
+ProbeLocalEmbedding(text string) ([]float32, error)
+```
+
+checks the running local service once within one three-second
+budget, including HTTP retries and response reads. Diagnostics must not start
+a model process or wait for model installation/loading. Subsequent calls reuse
+the cached probe result; use LocalEmbedding to embed actual new input.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| text | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]float32` |  |
+| r2 | `error` |  |
+
+---
+
 ### analyzeConcurrency {#analyzeconcurrency}
 
 ```go
@@ -723,6 +772,53 @@ WithAnalyzeLog 设置分析过程的日志回调（导出名为 liteforge.analyz
 opt = liteforge.analyzeLog(func(format, args...) { println(sprintf(format, args...)) })
 println(opt)
 ``````````````
+
+---
+
+### omniMode {#omnimode}
+
+```go
+omniMode(mode string) AnalysisOption
+```
+
+WithOmniMediaMode selects auto (probe the local Omni configuration, falling back
+on failure), required (report failures), or disabled (the original media path).
+Exported as rag.omniMode and liteforge.omniMode.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| mode | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `AnalysisOption` |  |
+
+---
+
+### onError {#onerror}
+
+```go
+onError(handler func(error)) AnalysisOption
+```
+
+WithAnalyzeErrorHandler receives asynchronous extraction and indexing failures.
+Drain the build channel before inspecting errors. Exported as rag.onError.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| handler | `func(error)` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `AnalysisOption` |  |
 
 ---
 
@@ -1630,6 +1726,30 @@ _queryDocuments 在指定集合中查询文档
 ``````````````yak
 results, err = rag.QueryDocuments("my_collection", "query", 10)
 ``````````````
+
+---
+
+### omniConfig {#omniconfig}
+
+```go
+omniConfig(opts ...aispec.AIConfigOption) AnalysisOption
+```
+
+WithOmniMediaAIOptions overrides the locally configured Omni provider. Provider
+
+credentials, endpoint, proxy and headers are inherited unless explicitly set.
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| opts | `...aispec.AIConfigOption` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `AnalysisOption` |  |
 
 ---
 

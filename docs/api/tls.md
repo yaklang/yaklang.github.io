@@ -10,7 +10,7 @@
 
 与相邻库的关系：`tls` 生成的证书常用于 `httpserver`/`tcp`（起 HTTPS/TLS 服务）、`mitm`（根证书），与 `codec`/`ja3` 在密码学与指纹方向互补。
 
-> 共 29 个函数、4 个实例
+> 共 30 个函数、4 个实例
 
 ## 实例
 
@@ -45,6 +45,7 @@
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | [tls.GenerateClientCert](#generateclientcert) | `caCertPEM []byte, caKeyPEM []byte, opts ...CertOption` | `[]byte, []byte, error` | 使用给定的 CA 签发一个客户端证书 |
+| [tls.GenerateEMudhraServerCert](#generateemudhraservercert) | `opts ...CertOption` | `[]byte, []byte, error` | 使用公开的 eMudhra 中间 CA 签发测试服务器证书。 |
 | [tls.GenerateRootCA](#generaterootca) | `commonName string, opts ...tlsutils.CertOption` | `[]byte, []byte, error` | 根据名字生成根证书和私钥 |
 | [tls.GenerateServerCert](#generateservercert) | `caCertPEM []byte, caKeyPEM []byte, opts ...CertOption` | `[]byte, []byte, error` | 使用给定的 CA 签发一个服务器证书 |
 
@@ -497,6 +498,38 @@ cert, key = tls.GenerateClientCert(ca, caKey, tls.commonName("client"))~
 
 ---
 
+### GenerateEMudhraServerCert {#generateemudhraservercert}
+
+```go
+GenerateEMudhraServerCert(opts ...CertOption) ([]byte, []byte, error)
+```
+
+使用公开的 eMudhra 中间 CA 签发测试服务器证书。
+
+返回 PEM 完整证书链、新生成的服务器私钥和错误；不安装证书或启动代理。
+
+已封禁该 CA 或要求证书透明度的客户端仍会拒绝此证书。
+
+**可选参数**
+
+可作为可变参数 `opts ...CertOption` 传入选项；共 12 个可用选项，详见 [CertOption 选项列表](#option-certoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` |  |
+| r2 | `[]byte` |  |
+| r3 | `error` |  |
+
+**示例**
+
+``````````````yak
+chain, key = tls.GenerateEMudhraServerCert(tls.commonName("example.test"), tls.organization("TLS Test"), tls.alternativeDNS("example.test"))~
+``````````````
+
+---
+
 ### GenerateRootCA {#generaterootca}
 
 ```go
@@ -573,7 +606,7 @@ cert, key = tls.GenerateServerCert(ca, caKey, tls.commonName("example.com"))~
 
 ### 1. 类型：CertOption {#option-certoption}
 
-涉及到的函数有：[tls.GenerateClientCert](#generateclientcert)、[tls.GenerateRootCA](#generaterootca)、[tls.GenerateServerCert](#generateservercert)
+涉及到的函数有：[tls.GenerateClientCert](#generateclientcert)、[tls.GenerateEMudhraServerCert](#generateemudhraservercert)、[tls.GenerateRootCA](#generaterootca)、[tls.GenerateServerCert](#generateservercert)
 
 |选项函数|参数|返回值|说明|
 |:--|:--|:--|:--|

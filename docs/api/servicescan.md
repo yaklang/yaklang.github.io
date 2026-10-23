@@ -6,7 +6,13 @@ servicescan 是服务指纹识别(全连接扫描)模块：对目标主机的端
 
 模块支持服务(nmap)指纹与 Web 指纹两套规则：用 service() 仅跑服务指纹、web() 仅跑 Web 指纹、all() 同时启用；并提供并发(concurrent)、探测超时(probeTimeout)、主动发包(active)、代理(proxy)、可取消上下文(context) 等大量可选项。可与 synscan、ping、spacengine(网络空间测绘) 等模块联动，是资产发现阶段的核心工具。
 
-> 共 32 个函数
+> 共 33 个函数
+
+## 函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [servicescan.ParseProtocolFields](#parseprotocolfields) | `raw []byte, transport TransportProto, port int` | `map[string]any` | inspects application response bytes, without Ethernet, |
 
 ## 可变参数函数索引
 
@@ -14,9 +20,43 @@ servicescan 是服务指纹识别(全连接扫描)模块：对目标主机的端
 |:--|:--|:--|:--|
 | [servicescan.Scan](#scan) | `target string, port string, opts ...fp.ConfigOption` | `chan *fp.MatchResult, error` | servicescan 库使用的端口扫描类型的方式为全连接扫描，用于对连接目标进行精准的扫描，相比 synscan 库的单纯扫描，servicescan 库会尝试获取精确指纹信息以及 CPE 信息 |
 | [servicescan.ScanFromPing](#scanfromping) | `res chan *pingutil.PingResult, ports string, opts ...fp.ConfigOption` | `chan *fp.MatchResult, error` | 从 ping.Scan 的结果中进行指纹识别 |
-| [servicescan.ScanFromSpaceEngine](#scanfromspaceengine) | `res any, opts ...fp.ConfigOption` | `chan *fp.MatchResult, error` | ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query 的结果中进行指纹识别 |
-| [servicescan.ScanFromSynResult](#scanfromsynresult) | `res any, opts ...fp.ConfigOption` | `chan *fp.MatchResult, error` | / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query 的结果中进行指纹识别 |
+| [servicescan.ScanFromSpaceEngine](#scanfromspaceengine) | `res any, opts ...fp.ConfigOption` | `chan *fp.MatchResult, error` | Context 契约 (重要): |
+| [servicescan.ScanFromSynResult](#scanfromsynresult) | `res any, opts ...fp.ConfigOption` | `chan *fp.MatchResult, error` | Context 契约 (重要): |
 | [servicescan.ScanOne](#scanone) | `target string, port int, opts ...fp.ConfigOption` | `*fp.MatchResult, error` | servicescan 单体扫描，同步扫描一个目标，主机+端口 |
+
+## 函数详情
+
+### ParseProtocolFields {#parseprotocolfields}
+
+```go
+ParseProtocolFields(raw []byte, transport TransportProto, port int) map[string]any
+```
+
+inspects application response bytes, without Ethernet,
+IP or TCP headers. A UDP input must be exactly one datagram. Port is only a
+hint; protocol admission and framing are validated by the bin-parser session.
+
+Each protocol key contains a []any of message maps with fields, profile,
+status and completeness. Header-only observations retain their actual status;
+unknown, malformed and incomplete messages never become successful fields.
+No extra network requests are made. The returned map is always initialized
+and owns its data, so callers may reuse raw after return.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `[]byte` |  |
+| transport | `TransportProto` |  |
+| port | `int` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `map[string]any` |  |
+
+---
 
 ## 可变参数函数详情
 
@@ -52,12 +92,13 @@ servicescan 库使用的端口扫描类型的方式为全连接扫描，用于�
 // 全连接扫描本机常见端口，对开放端口打印指纹与 CPE 信息
 ch, err = servicescan.Scan("127.0.0.1", "22,80,443,3306")
 die(err) // 启动失败时停止脚本
-for result := range ch {
-    if result.IsOpen() { // IsOpen 判断端口是否开放
-        println(result.String())  // 可读摘要，含服务名与版本
-        println(result.GetCPEs()) // CPE 列表
-    }
-}
+
+	for result := range ch {
+	    if result.IsOpen() { // IsOpen 判断端口是否开放
+	        println(result.String())  // 可读摘要，含服务名与版本
+	        println(result.GetCPEs()) // CPE 列表
+	    }
+	}
 ``````````````
 
 **示例：控制并发与探测超时**
@@ -65,15 +106,18 @@ for result := range ch {
 ``````````````yak
 // 目标端口较多时调大并发，并设置单个探测包超时
 ch, err = servicescan.Scan("192.168.1.1/24", "1-1000",
-    servicescan.concurrent(50),   // 50 个并发
-    servicescan.probeTimeout(5),  // 单个探测包 5 秒超时
+
+	servicescan.concurrent(50),   // 50 个并发
+	servicescan.probeTimeout(5),  // 单个探测包 5 秒超时
+
 )
 die(err)
-for result := range ch {
-    if result.IsOpen() {
-        println(result.String())
-    }
-}
+
+	for result := range ch {
+	    if result.IsOpen() {
+	        println(result.String())
+	    }
+	}
 ``````````````
 
 **示例：仅识别 Web 指纹**
@@ -82,11 +126,12 @@ for result := range ch {
 // 只跑 Web 指纹规则，扫描常见 Web 端口
 ch, err = servicescan.Scan("127.0.0.1", "80,443,8080,8443", servicescan.web())
 die(err)
-for result := range ch {
-    if result.IsOpen() {
-        println(result.String())
-    }
-}
+
+	for result := range ch {
+	    if result.IsOpen() {
+	        println(result.String())
+	    }
+	}
 ``````````````
 
 ---
@@ -125,11 +170,12 @@ pingResult, err = ping.Scan("192.168.1.1/24")
 die(err)
 fpResults, err = servicescan.ScanFromPing(pingResult, "22,80,443,3389")
 die(err)
-for result := range fpResults {
-    if result.IsOpen() {
-        println(result.String())
-    }
-}
+
+	for result := range fpResults {
+	    if result.IsOpen() {
+	        println(result.String())
+	    }
+	}
 ``````````````
 
 ---
@@ -140,13 +186,21 @@ for result := range fpResults {
 ScanFromSpaceEngine(res any, opts ...fp.ConfigOption) (chan *fp.MatchResult, error)
 ```
 
-ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query 的结果中进行指纹识别
+Context 契约 (重要):
+  - 通过 servicescan.ctx() 注入的 ctx 会被本函数下游 inner goroutine 用作
+    &#34;发送结果时的退出信号&#34;. 调用方在停止 range outC 之前应当 cancel ctx,
+    否则 inner goroutine 会通过 sendMatchResultOrDrop 的 ctx.Done() 分支
+    退出, 结果会被丢弃 (首次丢弃会有一条 log.Warn, 后续静默).
+  - ctx 缺省 (config.Ctx == nil) 时退化为 context.Background(), 仅依赖
+    fp 内部超时托底, 这种情况下 cancel 路径不存在, 建议生产环境显式注入 ctx.
+
+关键词: _scanFromTargetStream ctx 契约, outC goroutine 泄漏防护
 
 **必填参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| res | `any` | synscan.Scan 或者 spacengine.Query 的结果 |
+| res | `any` |  |
 
 **可选参数**
 
@@ -156,34 +210,8 @@ ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `chan *fp.MatchResult` | chan *MatchResult: 指纹识别结果管道，逐个产出扫描结果 |
-| r2 | `error` | 启动失败时返回错误 |
-
-**示例：与 synscan 联动(先快速探活, 再精准识别指纹)**
-
-``````````````yak
-// 先用 synscan 快速探活开放端口，再交给 servicescan 做精准指纹识别，兼顾速度与精度
-synResult, err = synscan.Scan("127.0.0.1", "1-65535")
-die(err)
-fpResults, err = servicescan.ScanFromSynResult(synResult)
-die(err)
-for result := range fpResults {
-    println(result.String())
-}
-``````````````
-
-**示例：与网络空间测绘(spacengine)联动复核指纹**
-
-``````````````yak
-// 把网络空间测绘(如 shodan)查询到的资产交给 servicescan 复核服务指纹
-res, err = spacengine.ShodanQuery("YOUR_API_KEY", "apache")
-die(err)
-fpResults, err = servicescan.ScanFromSpaceEngine(res)
-die(err)
-for result := range fpResults {
-    println(result.String())
-}
-``````````````
+| r1 | `chan *fp.MatchResult` |  |
+| r2 | `error` |  |
 
 ---
 
@@ -193,13 +221,21 @@ for result := range fpResults {
 ScanFromSynResult(res any, opts ...fp.ConfigOption) (chan *fp.MatchResult, error)
 ```
 
-/ ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query 的结果中进行指纹识别
+Context 契约 (重要):
+  - 通过 servicescan.ctx() 注入的 ctx 会被本函数下游 inner goroutine 用作
+    &#34;发送结果时的退出信号&#34;. 调用方在停止 range outC 之前应当 cancel ctx,
+    否则 inner goroutine 会通过 sendMatchResultOrDrop 的 ctx.Done() 分支
+    退出, 结果会被丢弃 (首次丢弃会有一条 log.Warn, 后续静默).
+  - ctx 缺省 (config.Ctx == nil) 时退化为 context.Background(), 仅依赖
+    fp 内部超时托底, 这种情况下 cancel 路径不存在, 建议生产环境显式注入 ctx.
+
+关键词: _scanFromTargetStream ctx 契约, outC goroutine 泄漏防护
 
 **必填参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| res | `any` | synscan.Scan 或者 spacengine.Query 的结果 |
+| res | `any` |  |
 
 **可选参数**
 
@@ -209,34 +245,8 @@ ScanFromSynResult(res any, opts ...fp.ConfigOption) (chan *fp.MatchResult, error
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `chan *fp.MatchResult` | chan *MatchResult: 指纹识别结果管道，逐个产出扫描结果 |
-| r2 | `error` | 启动失败时返回错误 |
-
-**示例：与 synscan 联动(先快速探活, 再精准识别指纹)**
-
-``````````````yak
-// 先用 synscan 快速探活开放端口，再交给 servicescan 做精准指纹识别，兼顾速度与精度
-synResult, err = synscan.Scan("127.0.0.1", "1-65535")
-die(err)
-fpResults, err = servicescan.ScanFromSynResult(synResult)
-die(err)
-for result := range fpResults {
-    println(result.String())
-}
-``````````````
-
-**示例：与网络空间测绘(spacengine)联动复核指纹**
-
-``````````````yak
-// 把网络空间测绘(如 shodan)查询到的资产交给 servicescan 复核服务指纹
-res, err = spacengine.ShodanQuery("YOUR_API_KEY", "apache")
-die(err)
-fpResults, err = servicescan.ScanFromSpaceEngine(res)
-die(err)
-for result := range fpResults {
-    println(result.String())
-}
-``````````````
+| r1 | `chan *fp.MatchResult` |  |
+| r2 | `error` |  |
 
 ---
 
@@ -272,10 +282,11 @@ servicescan 单体扫描，同步扫描一个目标，主机+端口
 // 同步扫描单个 host:port，直接拿到一个结果(端口关闭也会返回结果、不报错)
 result, err = servicescan.ScanOne("127.0.0.1", 80, servicescan.probeTimeout(5))
 die(err)
-if result.IsOpen() {
-    println(result.String())  // 可读摘要
-    println(result.GetCPEs()) // CPE 列表
-}
+
+	if result.IsOpen() {
+	    println(result.String())  // 可读摘要
+	    println(result.GetCPEs()) // CPE 列表
+	}
 ``````````````
 
 ---
@@ -302,8 +313,8 @@ if result.IsOpen() {
 | `servicescan.disableWebScanConnPool` | `b bool` | `fp.ConfigOption` | servicescan 的配置选项，用于禁用 web 扫描的连接池 |
 | `servicescan.excludeHosts` | `hosts string` | `ConfigOption` | servicescan 的配置选项，设置本次扫描排除的主机 |
 | `servicescan.excludePorts` | `ports string` | `ConfigOption` | servicescan 的配置选项，设置本次扫描排除的端口 |
-| `servicescan.maxProbes` | `m int` | `ConfigOption` | servicescan 的配置选项，在主动模式发包的基础上设置本次扫描使用的最大探测包数量，默认值为 5 |
-| `servicescan.maxProbesConcurrent` | `m int` | `ConfigOption` | servicescan 的配置选项，设置本次扫描发送 Probe 的并发量，默认值为 5 |
+| `servicescan.maxProbes` | `m int` | `ConfigOption` | servicescan 的配置选项，在主动模式发包的基础上设置本次扫描使用的通用探测包数量上限，默认值为 10 |
+| `servicescan.maxProbesConcurrent` | `m int` | `ConfigOption` | servicescan 的配置选项，设置本次扫描发送 Probe 的并发量，默认值为 10 |
 | `servicescan.nmapRarityMax` | `rarity int` | `ConfigOption` | servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹稀有度，在主动模式发包的基础上进行探测控制 |
 | `servicescan.nmapRule` | `i any` | `ConfigOption` | servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹规则 |
 | `servicescan.onFinish` | `cb func(*MatchResult)` | `ConfigOption` | servicescan 的配置选项，设置本次扫描完成单个目标时的回调函数 |

@@ -480,7 +480,7 @@ compiles a project from options (local FS, git, etc.).
 | `ssa.withCodeSourceLocalFile` | `localFile string` | `Option` | 设置代码源的本地文件/目录路径 |
 | `ssa.withCodeSourcePath` | `path string` | `Option` | 设置代码源在仓库内的子路径 |
 | `ssa.withCodeSourceURL` | `url string` | `Option` | 设置代码源的远程地址 |
-| `ssa.withConcurrency` | `concurrency int` | `Option` | WithCompileConcurrency 设置编译并发数 |
+| `ssa.withConcurrency` | `concurrency int` | `Option` | WithCompileConcurrency sets the compile worker cap (ssa.withConcurrency). |
 | `ssa.withConfigInfo` | `input map[string]any` | `Option` | WithCodeSourceMap 以 map 形式批量设置代码源配置 |
 | `ssa.withContext` | `ctx context.Context` | `Option` | 为 SSA 编译/查询设置上下文 |
 | `ssa.withDebugDir` | `dir string` | `Option` | sets the debug/pprof output directory. |

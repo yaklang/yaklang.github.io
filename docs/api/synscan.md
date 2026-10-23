@@ -6,7 +6,7 @@ synscan 是 SYN 半开放端口扫描模块：自行构造并发送 TCP 三次�
 
 注意：SYN 扫描使用原始套接字，需要 root/管理员权限，可先用 synscan.FixPermission() 修复权限；高速发包可能造成短暂网络拥塞或被防火墙拦截，且丢包会带来误差，需谨慎使用。synscan 常作为扫描链路的第一步，配合 servicescan.ScanFromSynResult 做"先探活、再识别指纹"的高效组合。
 
-> 共 18 个函数
+> 共 19 个函数
 
 ## 函数索引
 
@@ -70,7 +70,7 @@ Scan(targets string, ports string, opts ...synscanx.SynxConfigOption) (chan *syn
 
 **可选参数**
 
-可作为可变参数 `opts ...synscanx.SynxConfigOption` 传入选项；共 15 个可用选项，详见 [SynxConfigOption 选项列表](#option-synxconfigoption)。
+可作为可变参数 `opts ...synscanx.SynxConfigOption` 传入选项；共 16 个可用选项，详见 [SynxConfigOption 选项列表](#option-synxconfigoption)。
 
 **返回值**
 
@@ -93,7 +93,7 @@ for result := range res {
 **示例：自定义发包后的等待时间**
 
 ``````````````yak
-// SYN 扫描是批量发包后统一等待回包，wait 设置等待秒数(网络差可调大以减少漏报)
+// wait 是每个 UDP 探测等待应答的最长时间。TCP 半开探测使用自己的超时。
 res, err = synscan.Scan("192.168.1.1/24", "1-65535", synscan.wait(5))
 die(err)
 for result := range res {
@@ -106,7 +106,7 @@ for result := range res {
 ``````````````yak
 // 控制发包速率，并把开放端口写入文件，每行带 tcp:// 前缀便于后续处理
 res, err = synscan.Scan("10.0.0.0/24", "80,443",
-    synscan.rateLimit(1, 1000),          // 每 1 毫秒最多发送 1000 个包
+    synscan.rateLimit(1, 1000),          // 每 1 毫秒发送 1000 个包，上限每秒 100000
     synscan.outputFile("open_ports.txt"),
     synscan.outputPrefix("tcp://"),
 )
@@ -135,7 +135,7 @@ ScanFromPing(res chan *pingutil.PingResult, ports string, opts ...synscanx.SynxC
 
 **可选参数**
 
-可作为可变参数 `opts ...synscanx.SynxConfigOption` 传入选项；共 15 个可用选项，详见 [SynxConfigOption 选项列表](#option-synxconfigoption)。
+可作为可变参数 `opts ...synscanx.SynxConfigOption` 传入选项；共 16 个可用选项，详见 [SynxConfigOption 选项列表](#option-synxconfigoption)。
 
 **返回值**
 
@@ -183,5 +183,6 @@ for result := range res {
 | `synscan.rateLimit` | `ms int, count int` | `SynxConfigOption` | syn scan 的配置选项，设置 syn 扫描的速率 |
 | `synscan.shuffle` | `s bool` | `SynxConfigOption` | syn scan 的配置选项，设置是否打乱扫描顺序 |
 | `synscan.submitTaskCallback` | `callback func(i string)` | `SynxConfigOption` | syn scan 的配置选项，设置一个回调函数，每提交一个探测数据包的时候，这个回调会执行一次 |
-| `synscan.wait` | `sec float64` | `SynxConfigOption` | syn scan 的配置选项，设置等待扫描目标回包的最大时间 |
+| `synscan.tcpTimeout` | `sec float64` | `SynxConfigOption` | sets the total TCP probe budget in seconds, including retries. |
+| `synscan.wait` | `sec float64` | `SynxConfigOption` | syn scan 的配置选项，设置 UDP 应答等待时间，并作为 TCP 探测的总时间预算。TCP 的重试间隔会按这个预算拉开，高延迟链路上的 SYN-ACK 不会被固定的 2 秒上限截掉。已经设置过 tcpTimeout 时，这里不再覆盖它。 |
 

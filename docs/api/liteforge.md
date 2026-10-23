@@ -9,7 +9,7 @@
 
 与相邻库的关系：`liteforge` 处于 `ai`（底层对话）与 `aiagent`/`aim`（完整编排）之间，适合"只需一次结构化调用"的场景；输出 Schema 由 `jsonschema` 描述，知识库结果可入 `rag`。
 
-> 共 45 个函数
+> 共 50 个函数
 
 ## 函数索引
 
@@ -33,6 +33,7 @@
 | [liteforge.omniMaxBase64Bytes](#omnimaxbase64bytes) | `n int64` | `VideoOmniOption` | WithVideoOmniMaxBase64Bytes 设置每段视频 base64 编码后的字节上限（导出名为 liteforge.omniMaxBase64Bytes） |
 | [liteforge.omniMaxHeight](#omnimaxheight) | `h int` | `VideoOmniOption` | WithVideoOmniMaxHeight 设置视频切片的最大高度（导出名为 liteforge.omniMaxHeight） |
 | [liteforge.omniMaxSegments](#omnimaxsegments) | `n int` | `VideoOmniOption` | WithVideoOmniMaxSegments 设置最多分析的视频段数（导出名为 liteforge.omniMaxSegments） |
+| [liteforge.omniMode](#omnimode) | `mode string` | `AnalysisOption` | WithOmniMediaMode selects auto (probe the local Omni configuration, falling back |
 | [liteforge.omniModel](#omnimodel) | `m string` | `VideoOmniOption` | WithVideoOmniModel 设置 omni 视频分析使用的模型（导出名为 liteforge.omniModel） |
 | [liteforge.omniPresetFlash](#omnipresetflash) | - | `VideoOmniOption` | VideoOmniPresetFlash 使用 flash 预设（qwen3-omni-flash 模型，导出名为 liteforge.omniPresetFlash） |
 | [liteforge.omniPresetPlus](#omnipresetplus) | - | `VideoOmniOption` | VideoOmniPresetPlus 使用 plus 预设（qwen3.5-omni-plus 模型，导出名为 liteforge.omniPresetPlus） |
@@ -49,6 +50,7 @@
 | [liteforge.omniType](#omnitype) | `t string` | `VideoOmniOption` | WithVideoOmniType 设置 omni 视频分析使用的 AI 类型（导出名为 liteforge.omniType） |
 | [liteforge.omniZipDir](#omnizipdir) | `dir string` | `VideoOmniOption` | WithVideoOmniZipDir 指定 zip 输出目录，运行时自动按 |
 | [liteforge.omniZipFile](#omnizipfile) | `p string` | `VideoOmniOption` | WithVideoOmniZipFile 指定 zip 文件完整输出路径。 |
+| [liteforge.onAnalyzeError](#onanalyzeerror) | `handler func(error)` | `AnalysisOption` | WithAnalyzeErrorHandler receives asynchronous extraction and indexing failures. |
 | [liteforge.output](#output) | `output string` | `LiteForgeExecOption` | liteforge.output is an option for liteforge.Execute |
 | [liteforge.refinePrompt](#refineprompt) | `prompt string` | `RefineOption` | _refine_WithRefinePrompt 设置知识提炼使用的提示词（导出名为 liteforge.refinePrompt） |
 | [liteforge.strictRefine](#strictrefine) | `strict bool` | `RefineOption` | _refine_WithStrict 设置知识提炼是否使用严格模式（导出名为 liteforge.strictRefine） |
@@ -57,12 +59,15 @@
 
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
+| [liteforge.AnalyzeFile](#analyzefile) | `path string, option ...any` | `<-chan AnalysisResult, error` |  |
 | [liteforge.AnalyzeVideoOmni](#analyzevideoomni) | `video string, options ...any` | `<-chan AnalysisResult, error` | 把视频切片送进 omni 模型做端到端理解，按段返回 AnalysisResult。 |
 | [liteforge.BuildVideoKnowledgeFromOmni](#buildvideoknowledgefromomni) | `kbName string, video string, options ...any` | `<-chan *schema.KnowledgeBaseEntry, error` | 复用 _buildKnowledge 的 RAG/ERM 入库链路， |
+| [liteforge.CheckOmniAvailable](#checkomniavailable) | `options ...any` | `*OmniModelInfo, error` | probes the local Omni configuration with a small image. |
 | [liteforge.Execute](#execute) | `query string, opts ...any` | `*aicommon.ForgeResult, error` | liteforge.Execute can create a temporary LiteForge instance and execute it with the given query. |
 | [liteforge.forceImage](#forceimage) | `force ...bool` | `LiteForgeExecOption` | liteforge.forceImage is an option for liteforge.Execute |
 | [liteforge.image](#image) | `anyImageInput ...any` | `LiteForgeExecOption` | liteforge.image is an option for liteforge.Execute |
 | [liteforge.imageFile](#imagefile) | `filename ...string` | `LiteForgeExecOption` | liteforge.imageFile is an option for liteforge.Execute |
+| [liteforge.omniConfig](#omniconfig) | `opts ...aispec.AIConfigOption` | `AnalysisOption` | WithOmniMediaAIOptions overrides the locally configured Omni provider. Provider |
 | [liteforge.speedPriority](#speedpriority) | `b ...bool` | `LiteForgeExecOption` | liteforge.speedPriority uses a faster/cheaper AI model for distillation tasks |
 | [liteforge.verboseName](#verbosename) | `opts ...aicommon.ConfigOption` | `LiteForgeExecOption` | liteforge.verboseName is an option for liteforge.Execute |
 
@@ -590,6 +595,30 @@ println(opt)
 
 ---
 
+### omniMode {#omnimode}
+
+```go
+omniMode(mode string) AnalysisOption
+```
+
+WithOmniMediaMode selects auto (probe the local Omni configuration, falling back
+on failure), required (report failures), or disabled (the original media path).
+Exported as rag.omniMode and liteforge.omniMode.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| mode | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `AnalysisOption` |  |
+
+---
+
 ### omniModel {#omnimodel}
 
 ```go
@@ -1051,6 +1080,29 @@ println(opt)
 
 ---
 
+### onAnalyzeError {#onanalyzeerror}
+
+```go
+onAnalyzeError(handler func(error)) AnalysisOption
+```
+
+WithAnalyzeErrorHandler receives asynchronous extraction and indexing failures.
+Drain the build channel before inspecting errors. Exported as rag.onError.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| handler | `func(error)` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `AnalysisOption` |  |
+
+---
+
 ### output {#output}
 
 ```go
@@ -1143,6 +1195,35 @@ println(opt)
 
 ## 可变参数函数详情
 
+### AnalyzeFile {#analyzefile}
+
+```go
+AnalyzeFile(path string, option ...any) (<-chan AnalysisResult, error)
+```
+
+暂无描述
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| path | `string` |  |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| option | `...any` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `<-chan AnalysisResult` |  |
+| r2 | `error` |  |
+
+---
+
 ### AnalyzeVideoOmni {#analyzevideoomni}
 
 ```go
@@ -1224,6 +1305,31 @@ ch, err := liteforgeapp.BuildVideoKnowledgeFromOmni(
     liteforgeapp.WithVideoOmniAPIKey(key),
 )
 ``````````````
+
+---
+
+### CheckOmniAvailable {#checkomniavailable}
+
+```go
+CheckOmniAvailable(options ...any) (*OmniModelInfo, error)
+```
+
+probes the local Omni configuration with a small image.
+
+Its return value contains provider/model identifiers, never credentials.
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| options | `...any` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*OmniModelInfo` |  |
+| r2 | `error` |  |
 
 ---
 
@@ -1358,6 +1464,30 @@ liteforge.Execute(<<<PROMPT
 SOME_CONTENT
 PROMPT, liteforge.imageFile("path/to/image.jpg"))
 ``````````````
+
+---
+
+### omniConfig {#omniconfig}
+
+```go
+omniConfig(opts ...aispec.AIConfigOption) AnalysisOption
+```
+
+WithOmniMediaAIOptions overrides the locally configured Omni provider. Provider
+
+credentials, endpoint, proxy and headers are inherited unless explicitly set.
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| opts | `...aispec.AIConfigOption` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `AnalysisOption` |  |
 
 ---
 
