@@ -10,7 +10,7 @@
 
 与相邻库的关系：`aiagent` 是高层编排，底层模型对话由 `ai` 库提供，结构化输出与 schema 由 `liteforge` / `jsonschema` 支撑，知识检索可结合 `rag`，被编排的能力多来自 `hook`/yak 插件。它面向"让 AI 自己完成一串安全任务"的场景。
 
-> 共 59 个函数
+> 共 60 个函数
 
 ## 函数索引
 
@@ -882,7 +882,7 @@ WithExtendAICommonOptions 追加底层 aicommon 配置选项（导出名为 aiag
 
 **可选参数**
 
-可作为可变参数 `opts ...aicommon.ConfigOption` 传入选项；共 30 个可用选项，详见 [ConfigOption 选项列表](#option-configoption)。
+可作为可变参数 `opts ...aicommon.ConfigOption` 传入选项；共 31 个可用选项，详见 [ConfigOption 选项列表](#option-configoption)。
 
 **返回值**
 
@@ -1019,6 +1019,7 @@ println(opt)
 | `aiagent.extendedActionCallback` | `name string, callback func(config *Config, action *Action)` | `ConfigOption` | WithExtendedActionCallback 注册扩展 action 回调 |
 | `aiagent.functionCallMode` | `enable bool` | `ConfigOption` | WithEnableFunctionCallMode enables native functioncall (tool_calls) mode for |
 | `aiagent.manualAssistantCallback` | `cb func(context.Context, *Config) (aitool.InvokeParams, error)` | `ConfigOption` | WithManualAssistantCallback 设置人工审批回调 |
+| `aiagent.networkDebug` | `enabled bool` | `ConfigOption` |  |
 | `aiagent.offsetSeq` | `seq int64` | `ConfigOption` | WithSequence 设置起始序列号并安装自增 id 生成器 |
 | `aiagent.omniSearchTool` | - | `ConfigOption` | WithOmniSearchTool 启用全网搜索工具 |
 | `aiagent.onEvent` | `handler func(e *schema.AiOutputEvent)` | `ConfigOption` | Event / output |
