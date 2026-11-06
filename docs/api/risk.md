@@ -89,7 +89,7 @@ assert r.Severity == "high", "severity should be set"
 | [risk.CreateRisk](#createrisk) | `u string, opts ...RiskParamsOpt` | `*schema.Risk` |  |
 | [risk.NewHTTPLog](#newhttplog) | `i ...any` | `string, string, error` | 返回一个公网 Bridge 的 HTTPLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误 |
 | [risk.NewRandomPortTrigger](#newrandomporttrigger) | `opt ...RiskParamsOpt` | `string, string, error` | 返回一个公网 Bridge 的随机端口反连检测地址，返回的第一个值是 token，第二个值是检测地址，第三个值是错误 |
-| [risk.NewRisk](#newrisk) | `target string, opts ...yakit.RiskParamsOpt` | - | 创建一条漏洞记录并保存到数据库（导出名为 risk.NewRisk） |
+| [risk.NewRisk](#newrisk) | `target string, opts ...yakit.RiskParamsOpt` | - |  |
 | [risk.NewUnverifiedRisk](#newunverifiedrisk) | `u string, token string, opts ...RiskParamsOpt` | `*schema.Risk, error` | 创建一条&#34;待验证&#34;风险记录并保存，常用于反连(reverse)类漏洞先记录、后由回连验证 |
 | [risk.QueryRiskInDatabase](#queryriskindatabase) | `filter map[string]any, opts ...DBHistoryOption` | `*RiskDatabasePage, error` | 分页搜索已保存的风险（导出名为 risk.QueryRiskInDatabase）。 |
 | [risk.QueryRisksByKeyword](#queryrisksbykeyword) | `keyword string, opts ...yakit.RiskParamsOpt` | `chan *schema.Risk` | 根据关键字查询风险记录，返回风险记录的管道 |
@@ -1664,32 +1664,19 @@ token, addr = risk.NewRandomPortTrigger()~ // 申请一个随机端口反连检�
 NewRisk(target string, opts ...yakit.RiskParamsOpt)
 ```
 
-创建一条漏洞记录并保存到数据库（导出名为 risk.NewRisk）
-
-第一个参数为目标，后面可传入零个或多个选项用于描述该 risk（标题、类型、严重程度、描述、解决方案等）
+暂无描述
 
 **必填参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| target | `string` | 漏洞目标，通常为 URL 或 IP |
+| target | `string` |  |
 
 **可选参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| opts | `...yakit.RiskParamsOpt` | 可选项，如 risk.title / risk.type / risk.severity / risk.description / risk.solution 等 |
-
-**示例**
-
-``````````````yak
-risk.NewRisk("http://example.com",
-    risk.title("SQL Injection"),
-    risk.type("sqli"),
-    risk.severity("high"),
-)
-// 写入后可用 risk.YieldRiskByTarget 等查询（示意性示例）
-``````````````
+| opts | `...yakit.RiskParamsOpt` |  |
 
 ---
 

@@ -10,7 +10,7 @@
 
 与相邻库的关系：`pcapx` 是底层数据包能力，`synscan`/`finscan` 在其之上做端口扫描，`netstack`/`netutils` 处理路由；分析 TLS 指纹可结合 `ja3`。
 
-> 共 87 个函数、66 个实例
+> 共 89 个函数、66 个实例
 
 ## 实例
 
@@ -92,9 +92,11 @@
 | [pcapx.FixPermission](#fixpermission) | - | `error` | 尝试修复 pcap 权限问题(SYN 扫描依赖原始套接字，需要相应权限) |
 | [pcapx.GetStatistics](#getstatistics) | - | `*Statistics` | 获取 pcapx 注入流量过程中累计的统计信息(链路层、网络层、传输层) |
 | [pcapx.ListDevices](#listdevices) | - | `[]pcap.Interface, error` | 列出当前可抓包设备，需要本机 libpcap/Npcap 支持。 |
+| [pcapx.LookupDisplayField](#lookupdisplayfield) | `name string` | `DisplayFieldDescriptor, bool` |  |
 | [pcapx.NativeProtocolProfiles](#nativeprotocolprofiles) | - | `[]ProtocolProfile` |  |
 | [pcapx.NewBinParserInspector](#newbinparserinspector) | `messages int, bytes int` | `*BinParserInspector, error` |  |
 | [pcapx.ParseTLSKeyLog](#parsetlskeylog) | `text string` | `*TLSKeyLog, error` | parses a bounded, immutable key log. Conflicting duplicate |
+| [pcapx.RegisteredDisplayFields](#registereddisplayfields) | - | `[]DisplayFieldDescriptor` |  |
 | [pcapx.WithPayload](#withpayload) | `payload []byte` | `BuilderConfigOption` | 为 pcapx.PacketBuilder 设置数据包的负载(Payload)内容 |
 | [pcapx.WithdrawPermission](#withdrawpermission) | - | `error` | 撤销 pcap 权限 |
 | [pcapx.arp_reply](#arp_reply) | `targetIp string, targetMac string` | `ArpConfig` | 构造一个 ARP 应答层，自动使用本机默认网卡的 IP 与 MAC 作为源 |
@@ -293,6 +295,29 @@ for _, device = range pcapx.ListDevices()~ { println(device.Name, device.Descrip
 
 ---
 
+### LookupDisplayField {#lookupdisplayfield}
+
+```go
+LookupDisplayField(name string) (DisplayFieldDescriptor, bool)
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| name | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `DisplayFieldDescriptor` |  |
+| r2 | `bool` |  |
+
+---
+
 ### NativeProtocolProfiles {#nativeprotocolprofiles}
 
 ```go
@@ -354,6 +379,22 @@ entries are errors; secrets are never included in diagnostic messages.
 |:--|:--|:--|
 | r1 | `*TLSKeyLog` |  |
 | r2 | `error` |  |
+
+---
+
+### RegisteredDisplayFields {#registereddisplayfields}
+
+```go
+RegisteredDisplayFields() []DisplayFieldDescriptor
+```
+
+暂无描述
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]DisplayFieldDescriptor` |  |
 
 ---
 
@@ -2018,5 +2059,5 @@ println(len(raw))
 | `pcapx.pcap_tcpReassemblyStats` | `h func(TCPReassemblyStats)` | `CaptureOption` | WithTCPReassemblyStats reports final capture and reassembly counters. |
 | `pcapx.pcap_tcpReassemblyStream` | `chunkBytes int` | `CaptureOption` | WithTCPReassemblyStream enables bounded data callbacks for very large flows. |
 | `pcapx.pcap_tcpReassemblyWorkers` | `workers int` | `CaptureOption` | WithTCPReassemblyWorkers opts into concurrent callbacks across flows. Data |
-| `pcapx.pcap_tlsSecrets` | `provider TLSSecretProvider` | `CaptureOption` | WithTLSSecrets enables authenticated TLS decryption for the documented AES |
+| `pcapx.pcap_tlsSecrets` | `provider TLSSecretProvider` | `CaptureOption` | WithTLSSecrets enables authenticated TLS decryption for the documented AEAD |
 

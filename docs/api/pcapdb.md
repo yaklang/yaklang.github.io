@@ -1,6 +1,6 @@
 # pcapdb {#library-pcapdb}
 
-> 共 38 个函数
+> 共 40 个函数
 
 ## 函数索引
 
@@ -221,7 +221,7 @@ GetOrCreatePCAPDatabase(filename string, options ...ImportOption) (*Database, er
 
 **可选参数**
 
-可作为可变参数 `options ...ImportOption` 传入选项；共 6 个可用选项，详见 [ImportOption 选项列表](#option-importoption)。
+可作为可变参数 `options ...ImportOption` 传入选项；共 7 个可用选项，详见 [ImportOption 选项列表](#option-importoption)。
 
 **返回值**
 
@@ -242,7 +242,7 @@ ListPCAPDatabasesPage(options ...QueryOption) (*ResultPage[CatalogSummary], erro
 
 **可选参数**
 
-可作为可变参数 `options ...QueryOption` 传入选项；共 20 个可用选项，详见 [QueryOption 选项列表](#option-queryoption)。
+可作为可变参数 `options ...QueryOption` 传入选项；共 21 个可用选项，详见 [QueryOption 选项列表](#option-queryoption)。
 
 **返回值**
 
@@ -269,7 +269,7 @@ RebuildPCAPDatabase(identifier string, options ...ImportOption) (*Database, erro
 
 **可选参数**
 
-可作为可变参数 `options ...ImportOption` 传入选项；共 6 个可用选项，详见 [ImportOption 选项列表](#option-importoption)。
+可作为可变参数 `options ...ImportOption` 传入选项；共 7 个可用选项，详见 [ImportOption 选项列表](#option-importoption)。
 
 **返回值**
 
@@ -325,6 +325,7 @@ ValidatePCAPDatabase(identifier string, deep ...bool) (*ValidationResult, error)
 | `pcapdb.withFieldIndex` | `path string` | `ImportOption` | creates a scalar expression index for one frequently searched |
 | `pcapdb.withProtocols` | `enabled bool` | `ImportOption` | enables BIN Parser messages and full structured JSONB fields. |
 | `pcapdb.withStreams` | `enabled bool` | `ImportOption` | controls session indexing and bounded TCP/datagram stream BLOBs. |
+| `pcapdb.withTLSKeyLog` | `text string` | `ImportOption` | enables authorized NSS key-log decryption during protocol |
 
 ### 2. 类型：QueryOption {#option-queryoption}
 
@@ -347,6 +348,7 @@ ValidatePCAPDatabase(identifier string, deep ...bool) (*ValidationResult, error)
 | `pcapdb.resultBytes` | `size int` | `QueryOption` | QueryResultBytes bounds the complete JSON envelope, including escaping and |
 | `pcapdb.session` | `id uint` | `QueryOption` | QuerySession/QueryStream select indexed associations, not endpoint guesses. |
 | `pcapdb.sourceIP` | `value string` | `QueryOption` |  |
+| `pcapdb.sourceMAC` | `value string` | `QueryOption` |  |
 | `pcapdb.sourcePort` | `value int` | `QueryOption` |  |
 | `pcapdb.stream` | `id uint` | `QueryOption` |  |
 | `pcapdb.timeRange` | `start int64, end int64` | `QueryOption` |  |

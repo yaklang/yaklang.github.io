@@ -475,7 +475,7 @@ compiles a project from options (local FS, git, etc.).
 | `ssa.withCodeSourceAuthUserName` | `userName string` | `Option` | 设置代码源认证用户名 |
 | `ssa.withCodeSourceBranch` | `branch string` | `Option` | 设置代码源的分支 |
 | `ssa.withCodeSourceCommit` | `commit string` | `Option` |  |
-| `ssa.withCodeSourceJarRecursiveParse` | `enable bool` | `Option` | 设置是否对 Jar 包进行递归解析 |
+| `ssa.withCodeSourceJarRecursiveParse` | `enable bool` | `Option` | 设置是否解析 Jar 文件 |
 | `ssa.withCodeSourceKind` | `kind CodeSourceKind` | `Option` | 设置代码源类型 |
 | `ssa.withCodeSourceLocalFile` | `localFile string` | `Option` | 设置代码源的本地文件/目录路径 |
 | `ssa.withCodeSourcePath` | `path string` | `Option` | 设置代码源在仓库内的子路径 |
