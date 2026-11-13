@@ -10,7 +10,7 @@
 
 与相邻库的关系：`pcapx` 是底层数据包能力，`synscan`/`finscan` 在其之上做端口扫描，`netstack`/`netutils` 处理路由；分析 TLS 指纹可结合 `ja3`。
 
-> 共 89 个函数、66 个实例
+> 共 90 个函数、66 个实例
 
 ## 实例
 
@@ -235,10 +235,12 @@ FixPermission() error
 ``````````````yak
 // SYN 扫描需要原始套接字权限，扫描前先修复一次
 err = synscan.FixPermission()
-if err != nil {
-    log.error("fix pcap permission failed: %v", err)
-    return
-}
+
+	if err != nil {
+	    log.error("fix pcap permission failed: %v", err)
+	    return
+	}
+
 log.info("pcap permission is ready for syn scan")
 ``````````````
 
@@ -1857,7 +1859,7 @@ OpenPcapFile(filename string, opts ...CaptureOption) error
 
 **可选参数**
 
-可作为可变参数 `opts ...CaptureOption` 传入选项；共 29 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
+可作为可变参数 `opts ...CaptureOption` 传入选项；共 30 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
 
 **返回值**
 
@@ -1933,7 +1935,7 @@ OpenPcapFile instead; they are never silently ignored here.
 
 **可选参数**
 
-可作为可变参数 `options ...CaptureOption` 传入选项；共 29 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
+可作为可变参数 `options ...CaptureOption` 传入选项；共 30 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
 
 **返回值**
 
@@ -1965,7 +1967,7 @@ StartSniff(iface string, opts ...CaptureOption) error
 
 **可选参数**
 
-可作为可变参数 `opts ...CaptureOption` 传入选项；共 29 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
+可作为可变参数 `opts ...CaptureOption` 传入选项；共 30 个可用选项，详见 [CaptureOption 选项列表](#option-captureoption)。
 
 **返回值**
 
@@ -2056,6 +2058,7 @@ println(len(raw))
 | `pcapx.pcap_protocolBudget` | `maxMessageBytes int, maxBufferedBytes int` | `CaptureOption` | 设置协议解析的单条消息和整次捕获的保留缓冲预算（字节）。 |
 | `pcapx.pcap_protocolDecodeAs` | `transport string, port uint16, protocol string` | `CaptureOption` | WithProtocolDecodeAs selects a native UDP codec on a port. Selection does not |
 | `pcapx.pcap_protocolDeferred` | `deferred bool` | `CaptureOption` | 设置是否延迟协议字段解码，配合协议消息或统计订阅使用。 |
+| `pcapx.pcap_suricata` | `engine CaptureOptionProvider` | `pcaputil.CaptureOption` | WithSuricataEngine binds a stateful Suricata engine to a capture. The engine |
 | `pcapx.pcap_tcpReassemblyStats` | `h func(TCPReassemblyStats)` | `CaptureOption` | WithTCPReassemblyStats reports final capture and reassembly counters. |
 | `pcapx.pcap_tcpReassemblyStream` | `chunkBytes int` | `CaptureOption` | WithTCPReassemblyStream enables bounded data callbacks for very large flows. |
 | `pcapx.pcap_tcpReassemblyWorkers` | `workers int` | `CaptureOption` | WithTCPReassemblyWorkers opts into concurrent callbacks across flows. Data |

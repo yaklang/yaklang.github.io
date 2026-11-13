@@ -10,7 +10,7 @@
 
 与相邻库的关系：`suricata` 与 `pcapx`（抓包/造包）配合做流量层匹配与生成，是流量侧检测与红蓝对抗的工具。
 
-> 共 10 个函数
+> 共 18 个函数
 
 ## 函数索引
 
@@ -26,6 +26,9 @@
 
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
+| [suricata.LoadStatefulRules](#loadstatefulrules) | `path string, envs ...string` | `*StatefulRuleSet, error` | parses one .rules file or a directory, then compiles every |
+| [suricata.LoadSuricataRules](#loadsuricatarules) | `path string, envs ...string` | `[]*surirule.Rule, error` | reads one .rules file or every .rules file under a |
+| [suricata.NewStatefulEngine](#newstatefulengine) | `rules []*surirule.Rule, opts ...StatefulEngineOption` | `*engine.StatefulEngine, error` | compiles rules for the stateful TCP inspection engine. |
 | [suricata.NewSuricataMatcherGroup](#newsuricatamatchergroup) | `opt ...match.GroupOption` | `*match.Group` | 创建一个 Suricata 规则匹配器组，可批量加载规则并对数据包进行匹配 |
 | [suricata.ParseSuricata](#parsesuricata) | `raw string, envs ...string` | `[]*surirule.Rule, error` | 解析 Suricata 规则文本，返回结构化的规则对象列表 |
 | [suricata.YieldRulesByKeyword](#yieldrulesbykeyword) | `keywords string, protos ...string` | `chan *rule.Storage` | 按关键词(以及可选协议)从本地规则库中检索匹配的规则，以 channel 形式返回 |
@@ -104,6 +107,8 @@ NewSuricataMatcher(r *surirule.Rule) *match.Matcher
 基于单条 Suricata 规则创建一个流量匹配器，用于判断数据包是否命中该规则
 
 在 yak 中通过 suricata.NewSuricataMatcher 调用
+
+兼容接口：新代码应使用 suricata.NewStatefulEngine，它包含完整的 matcher 能力并支持状态规则。
 
 **参数**
 
@@ -184,6 +189,99 @@ YieldRules() chan *rule.Storage
 
 ## 可变参数函数详情
 
+### LoadStatefulRules {#loadstatefulrules}
+
+```go
+LoadStatefulRules(path string, envs ...string) (*StatefulRuleSet, error)
+```
+
+parses one .rules file or a directory, then compiles every
+rule independently. Unsupported rules and duplicate identities are reported
+in Rejected instead of aborting the whole ruleset, which is what real ET
+corpora require. Rules that are returned are known to compile in M1.
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| path | `string` |  |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| envs | `...string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*StatefulRuleSet` |  |
+| r2 | `error` |  |
+
+---
+
+### LoadSuricataRules {#loadsuricatarules}
+
+```go
+LoadSuricataRules(path string, envs ...string) ([]*surirule.Rule, error)
+```
+
+reads one .rules file or every .rules file under a
+directory. Files are parsed in lexical order so rule order and flowbits
+writers stay deterministic. Tolerant parsing is available directly through
+ParseSuricata; this helper surfaces parse failures instead of silently
+dropping a file.
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| path | `string` |  |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| envs | `...string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*surirule.Rule` |  |
+| r2 | `error` |  |
+
+---
+
+### NewStatefulEngine {#newstatefulengine}
+
+```go
+NewStatefulEngine(rules []*surirule.Rule, opts ...StatefulEngineOption) (*engine.StatefulEngine, error)
+```
+
+compiles rules for the stateful TCP inspection engine.
+In Yak, call it as suricata.NewStatefulEngine(rules, opts...).
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| rules | `[]*surirule.Rule` |  |
+
+**可选参数**
+
+可作为可变参数 `opts ...StatefulEngineOption` 传入选项；共 5 个可用选项，详见 [StatefulEngineOption 选项列表](#option-statefulengineoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*engine.StatefulEngine` |  |
+| r2 | `error` |  |
+
+---
+
 ### NewSuricataMatcherGroup {#newsuricatamatchergroup}
 
 ```go
@@ -193,6 +291,8 @@ NewSuricataMatcherGroup(opt ...match.GroupOption) *match.Group
 创建一个 Suricata 规则匹配器组，可批量加载规则并对数据包进行匹配
 
 在 yak 中通过 suricata.NewSuricataMatcherGroup 调用
+
+兼容接口：新代码应使用 suricata.NewStatefulEngine，它包含完整的 matcher 能力并支持状态规则。
 
 **可选参数**
 
@@ -350,4 +450,16 @@ YieldSuricataRulesByKeywords(keywords string, protos ...string) chan *rule.Stora
 |选项函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | `suricata.groupCallback` | `cb func(packet gopacket.Packet, match *surirule.Rule)` | `match.GroupOption` | 设置规则匹配器组在命中规则时触发的回调函数 |
+
+### 2. 类型：StatefulEngineOption {#option-statefulengineoption}
+
+涉及到的函数有：[suricata.NewStatefulEngine](#newstatefulengine)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `suricata.engineEpoch` | `epoch int` | `StatefulEngineOption` | isolates flowbits, thresholds and xbits between ruleset |
+| `suricata.engineLimits` | `values map[string]int64` | `StatefulEngineOption` | bounds aggregate engine resources. Recognized keys: |
+| `suricata.engineOnAlert` | `callback func(StatefulAlert)` | `StatefulEngineOption` | installs the alert callback. The callback runs synchronously |
+| `suricata.engineOnDiagnostic` | `callback func(StatefulDiagnostic)` | `StatefulEngineOption` | installs the diagnostic callback. |
+| `suricata.engineStateLimits` | `values map[string]int64` | `StatefulEngineOption` | overrides state-store limits. Recognized keys: |
 

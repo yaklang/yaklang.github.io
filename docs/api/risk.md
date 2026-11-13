@@ -26,7 +26,7 @@ assert r.Severity == "high", "severity should be set"
 // 无回显漏洞可用反连验证: domain, token = risk.NewDNSLogDomain()~ ; risk.CheckDNSLogByToken(token)
 ```
 
-> 共 56 个函数
+> 共 58 个函数
 
 ## 函数索引
 
@@ -87,12 +87,14 @@ assert r.Severity == "high", "severity should be set"
 | [risk.CheckDNSLogByToken](#checkdnslogbytoken) | `token string, timeout ...float64` | `[]*tpb.DNSLogEvent, error` | 通过 token 查询 DNSLog 平台上是否收到对应的 DNS 解析触发（导出名为 risk.CheckDNSLogByToken） |
 | [risk.CheckHTTPLogByToken](#checkhttplogbytoken) | `token string, timeout ...float64` | `[]*tpb.HTTPRequestTriggerNotification, error` | 通过 token 查询是否收到对应的 HTTP 带外请求（导出名为 risk.CheckHTTPLogByToken） |
 | [risk.CreateRisk](#createrisk) | `u string, opts ...RiskParamsOpt` | `*schema.Risk` |  |
+| [risk.GetRiskEvidenceInDatabase](#getriskevidenceindatabase) | `ids []int64, packetLimit int, opts ...DBHistoryOption` | `*RiskEvidenceResult, error` | loads bounded Risk evidence for review workflows. |
 | [risk.NewHTTPLog](#newhttplog) | `i ...any` | `string, string, error` | 返回一个公网 Bridge 的 HTTPLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误 |
 | [risk.NewRandomPortTrigger](#newrandomporttrigger) | `opt ...RiskParamsOpt` | `string, string, error` | 返回一个公网 Bridge 的随机端口反连检测地址，返回的第一个值是 token，第二个值是检测地址，第三个值是错误 |
 | [risk.NewRisk](#newrisk) | `target string, opts ...yakit.RiskParamsOpt` | - |  |
 | [risk.NewUnverifiedRisk](#newunverifiedrisk) | `u string, token string, opts ...RiskParamsOpt` | `*schema.Risk, error` | 创建一条&#34;待验证&#34;风险记录并保存，常用于反连(reverse)类漏洞先记录、后由回连验证 |
 | [risk.QueryRiskInDatabase](#queryriskindatabase) | `filter map[string]any, opts ...DBHistoryOption` | `*RiskDatabasePage, error` | 分页搜索已保存的风险（导出名为 risk.QueryRiskInDatabase）。 |
 | [risk.QueryRisksByKeyword](#queryrisksbykeyword) | `keyword string, opts ...yakit.RiskParamsOpt` | `chan *schema.Risk` | 根据关键字查询风险记录，返回风险记录的管道 |
+| [risk.TriageRiskInDatabase](#triageriskindatabase) | `ids []int64, disposition string, duplicateOf int64, reason string, opts ...DBHistoryOption` | `*RiskDispositionResult, error` | updates recoverable risk dispositions in the current |
 
 ## 函数详情
 
@@ -1597,6 +1599,38 @@ CreateRisk(u string, opts ...RiskParamsOpt) *schema.Risk
 
 ---
 
+### GetRiskEvidenceInDatabase {#getriskevidenceindatabase}
+
+```go
+GetRiskEvidenceInDatabase(ids []int64, packetLimit int, opts ...DBHistoryOption) (*RiskEvidenceResult, error)
+```
+
+loads bounded Risk evidence for review workflows.
+Raw packets are written to files so callers can replay exact bytes without
+relying on potentially truncated prompt content.
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| ids | `[]int64` |  |
+| packetLimit | `int` |  |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| opts | `...DBHistoryOption` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*RiskEvidenceResult` |  |
+| r2 | `error` |  |
+
+---
+
 ### NewHTTPLog {#newhttplog}
 
 ```go
@@ -1734,7 +1768,7 @@ QueryRiskInDatabase(filter map[string]any, opts ...DBHistoryOption) (*RiskDataba
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| filter | `map[string]any` | 过滤字典；type 精确匹配风险类型或中文类型，支持逗号列表；severity 支持逗号列表；title 为标题关键词；runtime_id 为精确运行 ID；ids 为正整数 ID 列表；waiting_verified 默认 false，查询未处于等待验证状态的记录，true 仅查待验证记录。nil 或空字典使用默认过滤。 |
+| filter | `map[string]any` | 过滤字典；type 精确匹配风险类型或中文类型，支持逗号列表；severity 支持逗号列表；title 为标题关键词；runtime_id 为精确运行 ID；ids 为正整数 ID 列表；disposition 支持 active/duplicate/false_positive/ignored/all；waiting_verified 默认 false，查询未处于等待验证状态的记录，true 仅查待验证记录。nil 或空字典使用默认过滤。 |
 
 **可选参数**
 
@@ -1791,6 +1825,39 @@ for risk := range risk.QueryRisksByKeyword("SQL注入", risk.severity("high")) {
 println(risk)
 }
 ``````````````
+
+---
+
+### TriageRiskInDatabase {#triageriskindatabase}
+
+```go
+TriageRiskInDatabase(ids []int64, disposition string, duplicateOf int64, reason string, opts ...DBHistoryOption) (*RiskDispositionResult, error)
+```
+
+updates recoverable risk dispositions in the current
+project database. It never deletes risks or changes their evidence fields.
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| ids | `[]int64` |  |
+| disposition | `string` |  |
+| duplicateOf | `int64` |  |
+| reason | `string` |  |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| opts | `...DBHistoryOption` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*RiskDispositionResult` |  |
+| r2 | `error` |  |
 
 ---
 

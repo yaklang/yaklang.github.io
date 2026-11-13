@@ -42,10 +42,12 @@ FixPermission() error
 ``````````````yak
 // SYN 扫描需要原始套接字权限，扫描前先修复一次
 err = synscan.FixPermission()
-if err != nil {
-    log.error("fix pcap permission failed: %v", err)
-    return
-}
+
+	if err != nil {
+	    log.error("fix pcap permission failed: %v", err)
+	    return
+	}
+
 log.info("pcap permission is ready for syn scan")
 ``````````````
 

@@ -10,7 +10,7 @@
 
 与相邻库的关系：`aiagent` 是高层编排，底层模型对话由 `ai` 库提供，结构化输出与 schema 由 `liteforge` / `jsonschema` 支撑，知识检索可结合 `rag`，被编排的能力多来自 `hook`/yak 插件。它面向"让 AI 自己完成一串安全任务"的场景。
 
-> 共 60 个函数
+> 共 61 个函数
 
 ## 函数索引
 
@@ -24,6 +24,7 @@
 | [aiagent.context](#context) | `ctx context.Context` | `AIAgentOption` | WithContext 设置 AI Agent 的上下文，用于控制取消（导出名为 aiagent.context） |
 | [aiagent.forgeName](#forgename) | `forgeName string` | `AIAgentOption` | WithForgeName 设置 AI Agent 使用的 Forge 名称（导出名为 aiagent.forgeName） |
 | [aiagent.forgePlanMocker](#forgeplanmocker) | `plan func(config *coordinator.Session) *coordinator.PlanResponse` | `Option` | WithPlanMocker 设置AI助手的计划生成器（导出名为 aiagent.forgePlanMocker） |
+| [aiagent.forgeSubForge](#forgesubforge) | `alias string, description string, childBlueprint *ForgeBlueprint` | `Option` | WithSubForge offers a child blueprint to the parent&#39;s execution workers as |
 | [aiagent.initPrompt](#initprompt) | `prompt string` | `Option` | WithInitializePrompt 设置AI助手的初始化提示词（导出名为 aiagent.initPrompt） |
 | [aiagent.initializePrompt](#initializeprompt) | `prompt string` | `Option` | WithInitializePrompt 设置AI助手的初始化提示词（导出名为 aiagent.initPrompt） |
 | [aiagent.liteForgeOutputSchemaRaw](#liteforgeoutputschemaraw) | `actionName string, outputSchema string` | `LiteForgeOption` | WithLiteForge_OutputSchemaRaw 通过原始 JSON Schema 字符串设置输出结构（导出名为 aiagent.liteForgeOutputSchemaRaw） |
@@ -269,6 +270,31 @@ WithPlanMocker 设置AI助手的计划生成器（导出名为 aiagent.forgePlan
 opt = aiagent.forgePlanMocker(func(coordinator) { return nil })
 println(opt)
 ``````````````
+
+---
+
+### forgeSubForge {#forgesubforge}
+
+```go
+forgeSubForge(alias string, description string, childBlueprint *ForgeBlueprint) Option
+```
+
+WithSubForge offers a child blueprint to the parent&#39;s execution workers as
+sub_forge_&lt;alias&gt;. The description explains when the model should call it.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| alias | `string` |  |
+| description | `string` |  |
+| childBlueprint | `*ForgeBlueprint` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `Option` |  |
 
 ---
 

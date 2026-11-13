@@ -27,3 +27,4 @@
 1.4.9-beta4	2026-10-23T21:10:06Z	https://aliyun-oss.yaklang.com/yak/1.4.9-beta4/yaklang-docs-1.4.9-beta4.zip
 1.4.9-beta5	2026-10-30T22:02:59Z	https://aliyun-oss.yaklang.com/yak/1.4.9-beta5/yaklang-docs-1.4.9-beta5.zip
 1.4.9-beta6	2026-11-06T22:52:48Z	https://aliyun-oss.yaklang.com/yak/1.4.9-beta6/yaklang-docs-1.4.9-beta6.zip
+1.4.9-beta7	2026-11-13T23:23:18Z	https://aliyun-oss.yaklang.com/yak/1.4.9-beta7/yaklang-docs-1.4.9-beta7.zip
