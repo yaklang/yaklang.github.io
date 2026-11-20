@@ -10,7 +10,7 @@
 
 与相邻库的关系：`aiagent` 是高层编排，底层模型对话由 `ai` 库提供，结构化输出与 schema 由 `liteforge` / `jsonschema` 支撑，知识检索可结合 `rag`，被编排的能力多来自 `hook`/yak 插件。它面向"让 AI 自己完成一串安全任务"的场景。
 
-> 共 61 个函数
+> 共 65 个函数
 
 ## 函数索引
 
@@ -19,6 +19,8 @@
 | [aiagent.AllYakScriptAiTools](#allyakscriptaitools) | - | `[]*aitool.Tool` | 获取数据库中保存的全部 Yak 脚本 AI 工具（导出名为 aiagent.AllYakScriptAiTools） |
 | [aiagent.ExtractPlan](#extractplan) | `_ any, text string` | `*PlanResponse, error` | keeps the Yak argument shape. Parsing never creates a runtime or |
 | [aiagent.GetDefaultContextProvider](#getdefaultcontextprovider) | - | `*ContextInput` |  |
+| [aiagent.ImageResult](#imageresult) | `raw []byte, mimeType string, result any` | `*aitool.MediaResult, error` |  |
+| [aiagent.MCPResult](#mcpresult) | `client *mcpclient.Client, server string, result *mcp.CallToolResult` | `any, error` |  |
 | [aiagent.ParseYakScriptToAiTools](#parseyakscripttoaitools) | `name string, content string` | `*schema.AIYakTool` | LoadYakScriptToAiTools 将一段 Yak 插件源码解析为 AI 工具描述（导出名为 aiagent.ParseYakScriptToAiTools） |
 | [aiagent.UpdateYakScriptMetaData](#updateyakscriptmetadata) | `name string, content string, forceUpdate bool` | `string, *metadata.YakScriptMetadata, error` | 解析并（按需借助 AI）补全 Yak 插件的元数据（导出名为 aiagent.UpdateYakScriptMetaData） |
 | [aiagent.context](#context) | `ctx context.Context` | `AIAgentOption` | WithContext 设置 AI Agent 的上下文，用于控制取消（导出名为 aiagent.context） |
@@ -116,6 +118,56 @@ GetDefaultContextProvider() *ContextInput
 |序号|类型|说明|
 |:--|:--|:--|
 | r1 | `*ContextInput` |  |
+
+---
+
+### ImageResult {#imageresult}
+
+```go
+ImageResult(raw []byte, mimeType string, result any) (*aitool.MediaResult, error)
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `[]byte` |  |
+| mimeType | `string` |  |
+| result | `any` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*aitool.MediaResult` |  |
+| r2 | `error` |  |
+
+---
+
+### MCPResult {#mcpresult}
+
+```go
+MCPResult(client *mcpclient.Client, server string, result *mcp.CallToolResult) (any, error)
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| client | `*mcpclient.Client` |  |
+| server | `string` |  |
+| result | `*mcp.CallToolResult` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` |  |
+| r2 | `error` |  |
 
 ---
 
@@ -908,7 +960,7 @@ WithExtendAICommonOptions 追加底层 aicommon 配置选项（导出名为 aiag
 
 **可选参数**
 
-可作为可变参数 `opts ...aicommon.ConfigOption` 传入选项；共 31 个可用选项，详见 [ConfigOption 选项列表](#option-configoption)。
+可作为可变参数 `opts ...aicommon.ConfigOption` 传入选项；共 33 个可用选项，详见 [ConfigOption 选项列表](#option-configoption)。
 
 **返回值**
 
@@ -1044,6 +1096,8 @@ println(opt)
 | `aiagent.disallowRequireForUserPrompt` | - | `ConfigOption` | WithDisallowRequireForUserPrompt 禁止向用户发起交互请求 |
 | `aiagent.extendedActionCallback` | `name string, callback func(config *Config, action *Action)` | `ConfigOption` | WithExtendedActionCallback 注册扩展 action 回调 |
 | `aiagent.functionCallMode` | `enable bool` | `ConfigOption` | WithEnableFunctionCallMode enables native functioncall (tool_calls) mode for |
+| `aiagent.imageInput` | `config *ypb.AIImageInputConfig` | `ConfigOption` |  |
+| `aiagent.imageInputMode` | `mode string, supportsImages ...bool` | `ConfigOption` |  |
 | `aiagent.manualAssistantCallback` | `cb func(context.Context, *Config) (aitool.InvokeParams, error)` | `ConfigOption` | WithManualAssistantCallback 设置人工审批回调 |
 | `aiagent.networkDebug` | `enabled bool` | `ConfigOption` |  |
 | `aiagent.offsetSeq` | `seq int64` | `ConfigOption` | WithSequence 设置起始序列号并安装自增 id 生成器 |

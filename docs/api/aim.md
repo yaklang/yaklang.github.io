@@ -12,7 +12,7 @@
 
 与相邻库的关系：`aim` 把 `ai`（模型对话）、`aiagent`（编排）、`rag`（知识检索）、`liteforge`/Forge（结构化任务）整合为统一引擎，适合需要"一行调用即可跑通一个带工具的智能体"的脚本。
 
-> 共 57 个函数
+> 共 58 个函数
 
 ## 函数索引
 
@@ -74,7 +74,7 @@ InvokeReAct(input string, options ...AIEngineConfigOption) error
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 53 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 54 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -108,7 +108,7 @@ InvokeReActAsync(input string, options ...AIEngineConfigOption) (*AIEngine, erro
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 53 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 54 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -140,7 +140,7 @@ AI 引擎封装了 ReAct 等能力，可通过 SendMsg/SendMsgAsync 发送任务
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 53 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 54 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -197,6 +197,7 @@ engine.SendMsg("list files in current dir")
 | `aim.goalAcceptanceCriteria` | `criteria string` | `AIEngineConfigOption` | WithGoalAcceptanceCriteria 设置目标模式验收条件 |
 | `aim.goalDurationSeconds` | `seconds int64` | `AIEngineConfigOption` | WithGoalDurationSeconds 设置目标模式时间窗口 |
 | `aim.goalMinIterations` | `iterations int64` | `AIEngineConfigOption` | WithGoalMinIterations 设置目标模式允许 finish 前的最少迭代数 |
+| `aim.imageInputMode` | `mode string, supportsImages ...bool` | `AIEngineConfigOption` | WithImageInputMode selects auto/native/describe. An optional capability |
 | `aim.includeToolNames` | `names ...string` | `AIEngineConfigOption` | WithIncludeToolNames 设置包含的工具名称白名单 |
 | `aim.keywords` | `keywords ...string` | `AIEngineConfigOption` | WithKeywords 设置工具搜索关键词 |
 | `aim.language` | `lang string` | `AIEngineConfigOption` | WithLanguage 设置引擎响应语言偏好 |
