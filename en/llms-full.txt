@@ -85,10 +85,10 @@ for result = range results {
 
 ## Project facts
 
-- Latest Yakit release: v1.4.9-1120 (retrieved 2026-11-20 at site build time)
-- GitHub stars: yaklang/yakit 7,908
-- GitHub stars: yaklang/yaklang 658
-- GitHub forks: yaklang/yakit 837
+- Latest Yakit release: v1.4.9-1120 (retrieved 2026-11-25 at site build time)
+- GitHub stars: yaklang/yakit 7,911
+- GitHub stars: yaklang/yaklang 661
+- GitHub forks: yaklang/yakit 841
 - Yakit v1.4.9-1120 installer sizes: macIntel 221.92 MB, macApple 213.23 MB, linux 223 MB, windows 195.93 MB, linuxArm64 218.87 MB
 - Releases: https://github.com/yaklang/yakit/releases
 
