@@ -995,8 +995,7 @@ const HomeDownload: React.FC = () => {
                   {activePlatforms.map((row) => (
                     <div
                       key={row.key}
-                      className="flex items-center border-0 border-solid border-t border-[var(--Colors-Use-Main---Gold-Focus)] min-h-[56px] sm:min-h-0 sm:h-[48px] hover:bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] cursor-pointer group"
-                      onClick={() => onDownload(row.url)}
+                      className="flex items-center border-0 border-solid border-t border-[var(--Colors-Use-Main---Gold-Focus)] min-h-[56px] sm:min-h-0 sm:h-[48px] hover:bg-[var(--Colors-Use-Main---Gold-Bg-Hover)]"
                     >
                       {/* 小屏：图标 + 名称/大小纵向；大屏：安装包列 */}
                       <div className="flex items-center gap-[10px] sm:gap-[8px] px-[16px] sm:px-[20px] py-[10px] sm:py-[12px] flex-1 min-w-0 sm:border-0 sm:border-solid sm:border-r sm:border-r-[var(--Colors-Use-Main---Gold-Focus)]">
@@ -1025,11 +1024,14 @@ const HomeDownload: React.FC = () => {
                           : "-"}
                       </div>
 
-                      {/* 下载按钮 */}
+                      {/* 下载按钮：仅此按钮触发下载，点击范围填满整个下载列 */}
                       <div className="flex items-center justify-center px-[12px] sm:py-[18px] w-[48px] sm:w-[72px] sm:border-0 sm:border-solid sm:border-l sm:border-l-[var(--Colors-Use-Main---Gold-Focus)]">
                         <button
                           type="button"
-                          className="flex items-center justify-center w-[28px] h-[28px] border-none bg-transparent p-0 text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
+                          onClick={() => onDownload(row.url)}
+                          aria-label={`${t("HomeDownload.table.download")} ${row.os}${row.arch}`}
+                          title={`${t("HomeDownload.table.download")} ${row.os}${row.arch}`}
+                          className="flex items-center justify-center w-full h-full min-h-[48px] cursor-pointer border-none bg-transparent p-0 text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
                         >
                           {DownloadIcon}
                         </button>
