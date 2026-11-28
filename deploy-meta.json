@@ -1,8 +1,8 @@
 {
   "project": "yaklang.github.io",
-  "version": "0.430.0",
-  "commit": "35eb364f73506796df51edf2f4976861f6d86f26",
-  "ref": "refs/tags/v0.431.0",
-  "runId": "45539549339",
-  "generatedAt": "2026-11-25T03:38:33.301Z"
+  "version": "0.432.0",
+  "commit": "c6a0c2801d3a92a72b1de1822899c6310f3769bb",
+  "ref": "refs/tags/v0.432.0",
+  "runId": "46092206837",
+  "generatedAt": "2026-11-28T01:28:33.124Z"
 }
