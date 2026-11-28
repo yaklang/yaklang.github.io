@@ -9,7 +9,7 @@
 
 与相邻库的关系：`syntaxflow` 依赖 `ssa`（提供编译后的程序），查询结果经 `sfreport` 出报告、`risk` 记录代码风险，构成完整的代码审计流水线。
 
-> 共 41 个函数、10 个实例
+> 共 42 个函数、10 个实例
 
 ## 实例
 
@@ -285,7 +285,7 @@ ResumeScan(ctx context.Context, taskId string, opts ...ssaconfig.Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 25 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -349,7 +349,7 @@ callers render the outcome instead of re-deriving success from job state.
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 25 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -379,7 +379,7 @@ JSON/options and call ScanProject. It returns the same ProjectResult.
 
 **可选参数**
 
-可作为可变参数 `extra ...ssaconfig.Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `extra ...ssaconfig.Option` 传入选项；共 25 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -406,7 +406,7 @@ StartScan(ctx context.Context, opts ...ssaconfig.Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 25 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -465,6 +465,7 @@ die(err)
 
 |选项函数|参数|返回值|说明|
 |:--|:--|:--|:--|
+| `syntaxflow.withAllLanguages` | `value TValue` | `Option` |  |
 | `syntaxflow.withCompiledSource` | `value TValue` | `Option` |  |
 | `syntaxflow.withMode` | `modes ...string` | `ssaconfig.Option` | selects product scan stages. Values stack: calling it again or |
 | `syntaxflow.withProcessRuleDetail` | `value TValue` | `Option` |  |

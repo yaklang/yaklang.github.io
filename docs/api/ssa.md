@@ -10,20 +10,28 @@
 
 与相邻库的关系：`ssa` 负责"把代码编译成可查询的程序"，`syntaxflow` 在其之上写规则做查询，`sfreport` 输出审计报告，`risk` 记录代码风险；常配合 `git`/`filesys` 提供源码。
 
-> 共 60 个函数、9 个实例
+> 共 60 个函数、17 个实例
 
 ## 实例
 
 |实例名|类型|说明|
 |:--|:--|:--|
 | Bash | `ssaconfig.Language` | &#34;bash&#34; |
+| C | `ssaconfig.Language` | &#34;c&#34; |
+| CPP | `ssaconfig.Language` | &#34;cpp&#34; |
+| CSharp | `ssaconfig.Language` | &#34;csharp&#34; |
 | GO | `ssaconfig.Language` | &#34;golang&#34; |
 | Java | `ssaconfig.Language` | &#34;java&#34; |
-| Javascript | `ssaconfig.Language` | &#34;js&#34; |
+| Javascript | `ssaconfig.Language` | &#34;typescript&#34; |
+| Kotlin | `ssaconfig.Language` | &#34;kotlin&#34; |
+| Lua | `ssaconfig.Language` | &#34;lua&#34; |
 | ModeAll | `ssaconfig.Mode` | 127 |
 | ModeProjectCompile | `ssaconfig.Mode` | 35 |
 | PHP | `ssaconfig.Language` | &#34;php&#34; |
 | Python | `ssaconfig.Language` | &#34;python&#34; |
+| Rust | `ssaconfig.Language` | &#34;rust&#34; |
+| Scala | `ssaconfig.Language` | &#34;scala&#34; |
+| TypeScript | `ssaconfig.Language` | &#34;typescript&#34; |
 | Yak | `ssaconfig.Language` | &#34;yak&#34; |
 
 ## 函数索引
